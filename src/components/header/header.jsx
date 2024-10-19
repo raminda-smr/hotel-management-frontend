@@ -1,10 +1,11 @@
-import UserTag from "./UserTag"
+import UserTag from '../userdata'
+import './header.css'
 
 function Header(){
     return(
         <header>
             <h1>Hotel Management System</h1>
-            <UserTag imageLink="" name="Testing" />
+            <UserTag />
         </header>
     )
 }

@@ -1,3 +1,5 @@
+import "./userData.css"
+
 function UserTag(props){
     console.log(props)
     return(
