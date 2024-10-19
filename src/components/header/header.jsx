@@ -1,11 +1,9 @@
-
 import UserTag from '../userData/userdata'
-import './header.css'
 
 function Header(){
     return(
-        <header>
-            <h1 className='text-red-500 text-[30px]'>Hotel Management System</h1>
+        <header className='w-full bg-blue-500 flex height-[100px] relative items-center p-2'>
+            <h1 className='text-white text-[30px] '>Lionine Villa</h1>
             <UserTag />
         </header>
     )

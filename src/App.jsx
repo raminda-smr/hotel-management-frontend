@@ -11,6 +11,7 @@ function App() {
   return (
     <>
       <Header />
+      <div className='w-full h-[100vh] bg-blue-900'></div>
     </>
   )
 }
