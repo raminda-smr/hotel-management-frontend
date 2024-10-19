@@ -3,10 +3,10 @@ import "./userData.css"
 function UserTag(props){
     console.log(props)
     return(
-        <>
-            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" style={{width:"50px"}} />
-            <h4>John Doe</h4>
-        </>
+        <div className="user-data-div">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
+            <span>John Doe</span>
+        </div>
     )
 }
 
