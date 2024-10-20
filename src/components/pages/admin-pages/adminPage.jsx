@@ -3,6 +3,7 @@ import SidebarUserData from './parts/sidebarUserData'
 import TopMenu from './parts/topMenu'
 import Sidebar from './parts/sideBar'
 import Dashboard from './dashboard/Dashboard'
+import Bookings from './bookings/Bookings'
 
 export function AdminPage() {
 
@@ -23,11 +24,7 @@ export function AdminPage() {
                         <Routes path="/*" >
                             <Route path="/" element={<Dashboard />} />
 
-                            <Route path="/bookings" element={
-                                <div>
-                                    <h1>Bookings</h1>
-                                </div>
-                            }></Route>
+                            <Route path="/bookings" element={<Bookings />} />
 
                             <Route path="/rooms" element={
                                 <div>
