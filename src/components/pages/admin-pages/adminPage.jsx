@@ -1,11 +1,15 @@
-import {  Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 
 export function AdminPage() {
 
     return (
         <>
-            <div className="w-full h-screen bg-red-900">
-                <div>Admin Page</div>
+            <div className="w-full h-screen bg-red-100">
+                <div>
+                    <Link className='mr-2' to="/admin/bookings" >Bookings </Link>
+                    <Link className='mr-2' to="/admin/rooms" >Rooms </Link>
+                    <Link className='mr-2' to="/admin/categories" >Categories </Link>
+                </div>
 
                 <Routes path="/*" >
                     <Route path="/bookings" element={
@@ -26,7 +30,7 @@ export function AdminPage() {
                         </div>
                     }></Route>
 
-<Route path="/*" element={
+                    <Route path="/*" element={
                         <div>
                             <h1>404</h1>
                         </div>
