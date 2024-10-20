@@ -1,5 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import SidebarUserData from './parts/sidebarUserData'
+import TopMenu from './parts/topMenu'
 
 export function AdminPage() {
 
@@ -17,9 +18,10 @@ export function AdminPage() {
 
                 </div>
 
-                <div className='flex-1 p-4'>
-                    <div className="top-menu"></div>
-                    <div className="content-area">
+                <div className='flex-1 '>
+                    <TopMenu/>
+
+                    <div className="content-area p-4">
                         <Routes path="/*" >
                             <Route path="/bookings" element={
                                 <div>
