@@ -8,7 +8,7 @@ function Login() {
 
 
             <div className="container w-[400px] mx-auto  bg-white flex flex-col p-4 rounded-lg">
-                <img className='w-[200px] mx-auto mb-5' src="https://cdn-icons-png.freepik.com/512/6681/6681204.png" alt="" />
+                <img className='w-[100px] mx-auto mb-5' src="https://cdn-icons-png.freepik.com/512/6681/6681204.png" alt="" />
     
 
                 <input className='bg-gray-100 border border-gray-300 mb-2 px-4 py-3 rounded-lg ' type="emai" name='email' placeholder='Email' />

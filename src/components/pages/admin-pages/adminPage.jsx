@@ -1,4 +1,5 @@
 import { Routes, Route, Link } from 'react-router-dom'
+import SidebarUserData from './parts/sidebarUserData'
 
 export function AdminPage() {
 
@@ -7,7 +8,7 @@ export function AdminPage() {
             <div className="w-full h-screen flex">
 
                 <div className='sidebar w-64 bg-gray-900 p-4'>
-
+                    <SidebarUserData />
                     <div className="sidebar-menu flex flex-col">
                         <Link className='mb-2 text-white bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700' to="/admin/bookings" >Bookings </Link>
                         <Link className='mb-2 text-white bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700' to="/admin/rooms" >Rooms </Link>
