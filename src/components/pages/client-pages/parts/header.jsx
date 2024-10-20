@@ -14,7 +14,7 @@ function Header() {
                 <Link className="pl-3 text-gray-200 hover:text-white" to="/contact-us">Contact Us</Link>
                 <Link className="pl-3 text-gray-200 hover:text-white" to="/login">Login</Link>
                 <Link className="pl-3 text-gray-200 hover:text-white" to="/register">Register</Link>
-                
+                 
             </div>
 
 
