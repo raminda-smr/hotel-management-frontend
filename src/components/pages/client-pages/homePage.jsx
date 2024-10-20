@@ -1,6 +1,7 @@
-import Header from "../../header/Header";
+import Header from "./parts/header";
 
-export function HomePage() {
+
+function HomePage() {
 
     return (
         <>
@@ -28,3 +29,5 @@ export function HomePage() {
         </>
     )
 }
+
+export default HomePage
