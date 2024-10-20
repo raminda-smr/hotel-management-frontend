@@ -1,38 +1,20 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Header from './components/header/Header'
+import { HomePage } from './components/pages/client-pages/homePage'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AdminPage } from './components/pages/admin-pages/adminPage'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <Header />
-      <div className='w-full h-screen bg-blue-900 flex flex-col items-center'>
-
-        <div className='border border-white bg-white w-[700px] h-[100px] flex rounded-lg justify-center items-center'>
-
-          <input type="date" name='start-date' />
-
-          <input type="date" name='end-date' />
-
-          <select name="room-category" id="">
-            <option value="Standard">Standard</option>
-            <option value="Luxuary">Luxuary</option>
-            <option value="Supreme">Supreme</option>
-          </select>
-
-          <button>Book Now</button>
-        </div>
-
-        <h1 className='text-white text-5xl'>Welcome to the Lionine Villa</h1>
-
-      </div>
-    </>
-  )
+    return (
+        <BrowserRouter>
+            <Routes path="/*">
+                <Route path="/" element={<HomePage />} />
+                <Route path="/admin" element={<AdminPage />} />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App
