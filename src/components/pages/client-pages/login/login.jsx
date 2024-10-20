@@ -17,7 +17,7 @@ function Login() {
 
               
 
-                <button className='bg-blue-600 text-white px-10 py-3 inline-block  mx-auto rounded-full hover:bg-blue-500'>
+                <button className='bg-blue-600 text-white px-10 py-3 inline-block  mx-auto mt-5 rounded-full hover:bg-blue-500'>
                     Login
                 </button>
 
