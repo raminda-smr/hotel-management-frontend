@@ -4,6 +4,9 @@ import TopMenu from './parts/topMenu'
 import Sidebar from './parts/sideBar'
 import Dashboard from './dashboard/Dashboard'
 import Bookings from './bookings/Bookings'
+import Rooms from './rooms/rooms'
+import Categories from './categories/categories'
+import PageNotFound from '../error-pages/pageNotFound'
 
 export function AdminPage() {
 
@@ -26,23 +29,11 @@ export function AdminPage() {
 
                             <Route path="/bookings" element={<Bookings />} />
 
-                            <Route path="/rooms" element={
-                                <div>
-                                    <h1>Rooms</h1>
-                                </div>
-                            }></Route>
+                            <Route path="/rooms" element={<Rooms />} />
 
-                            <Route path="/categories" element={
-                                <div>
-                                    <h1>Categories</h1>
-                                </div>
-                            }></Route>
+                            <Route path="/categories" element={<Categories />} />
 
-                            <Route path="/*" element={
-                                <div>
-                                    <h1>404</h1>
-                                </div>
-                            }></Route>
+                            <Route path="/*" element={<PageNotFound />} />
 
                         </Routes>
                     </div>

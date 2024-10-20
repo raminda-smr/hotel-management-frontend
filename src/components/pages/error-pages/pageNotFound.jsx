@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export function PageNotFound() {
+function PageNotFound() {
 
     return (
         <>
@@ -17,3 +17,5 @@ export function PageNotFound() {
         </>
     )
 }
+
+export default PageNotFound

@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AdminPage } from './components/pages/admin-pages/adminPage'
-import { PageNotFound } from './components/pages/error-pages/pageNotFound'
 import HomePage from './components/pages/client-pages/homePage'
-import SearchRooms from './components/pages/client-pages/search-rooms/searchRooms'
+import PageNotFound from './components/pages/error-pages/pageNotFound'
 
 
 function App() {
