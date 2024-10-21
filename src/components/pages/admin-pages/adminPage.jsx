@@ -23,7 +23,7 @@ export function AdminPage() {
                 <div className='flex-1  '>
                     <TopMenu/>
 
-                    <div className="content-area p-4 overflow-y-scroll h-screen">
+                    <div className="content-area p-4 pt-2 overflow-y-scroll h-screen">
                         <Routes path="/*" >
                             <Route path="/" element={<Dashboard />} />
 
