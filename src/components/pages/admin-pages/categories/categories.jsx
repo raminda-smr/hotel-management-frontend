@@ -80,7 +80,7 @@ function Categories() {
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.name}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.price}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">{category.description}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{category.description.substring(0,50)}...</td>
 
                                             <td className="px-6 py-4 text-sm text-gray-700">View Edit Delete</td>
                                         </tr>

@@ -7,6 +7,7 @@ import Bookings from './bookings/Bookings'
 import Rooms from './rooms/rooms'
 import Categories from './categories/categories'
 import PageNotFound from '../error-pages/pageNotFound'
+import Users from './users/users'
 
 export function AdminPage() {
 
@@ -32,6 +33,8 @@ export function AdminPage() {
                             <Route path="/rooms" element={<Rooms />} />
 
                             <Route path="/categories" element={<Categories />} />
+
+                            <Route path="/users" element={<Users />} />
 
                             <Route path="/*" element={<PageNotFound />} />
 
