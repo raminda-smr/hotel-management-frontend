@@ -56,17 +56,17 @@ function Bookings() {
 
 
             <div className="booking-data">
-                <table class="min-w-full bg-white border border-gray-200">
+                <table className="min-w-full bg-white border border-gray-200">
                     <thead>
-                        <tr class="bg-gray-50 border-b">
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        <tr className="bg-gray-50 border-b">
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking ID</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room ID</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,15 +74,15 @@ function Bookings() {
                             bookings.map(
                                 (booking, index) => {
                                     return (
-                                        <tr key={index}  class="border-b">
-                                            <td class="px-6 py-4 text-sm text-gray-700">{booking.bookingId}</td>
-                                            <td class="px-6 py-4 text-sm text-gray-700">{booking.roomId}</td>
-                                            <td class="px-6 py-4 text-sm text-gray-700">{booking.email}</td>
-                                            <td class="px-6 py-4 text-sm text-gray-700">{booking.phone}</td>
-                                            <td class="px-6 py-4 text-sm text-gray-700">{booking.status}</td>
-                                            <td class="px-6 py-4 text-sm text-gray-700">{booking.start}</td>
-                                            <td class="px-6 py-4 text-sm text-gray-700">{booking.end}</td>
-                                            <td class="px-6 py-4 text-sm text-gray-700">Edit</td>
+                                        <tr key={index}  className="border-b">
+                                            <td className="px-6 py-4 text-sm text-gray-700">{booking.bookingId}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{booking.roomId}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{booking.email}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{booking.phone}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{booking.status}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{new Date(booking.start).toDateString()}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{new Date(booking.end).toDateString()}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">Edit</td>
                                         </tr>
                                     )
                                 }
