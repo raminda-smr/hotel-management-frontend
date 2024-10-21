@@ -8,6 +8,8 @@ import Rooms from './rooms/rooms'
 import Categories from './categories/categories'
 import PageNotFound from '../error-pages/pageNotFound'
 import Users from './users/users'
+import Gallery from './gallery/gallery'
+import Feedbacks from './feedbacks/feedbacks'
 
 export function AdminPage() {
 
@@ -35,6 +37,10 @@ export function AdminPage() {
                             <Route path="/categories" element={<Categories />} />
 
                             <Route path="/users" element={<Users />} />
+
+                            <Route path="/feedbacks" element={<Feedbacks />} />
+
+                            <Route path="/gallery" element={<Gallery />} />
 
                             <Route path="/*" element={<PageNotFound />} />
 
