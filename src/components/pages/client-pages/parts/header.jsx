@@ -7,14 +7,17 @@ function Header() {
             <div className="logo">
                 <h1 className='text-white text-[30px] '>Lionine Villa</h1>
             </div>
-            <div className="main-menu">
-                <Link className="pl-3 text-gray-200 hover:text-white" to="/">Home</Link>
-                <Link className="pl-3 text-gray-200 hover:text-white" to="/search-rooms">Search Rooms</Link>
-                <Link className="pl-3 text-gray-200 hover:text-white" to="/about-us">About Us</Link>
-                <Link className="pl-3 text-gray-200 hover:text-white" to="/contact-us">Contact Us</Link>
-                <Link className="pl-3 text-gray-200 hover:text-white" to="/login">Login</Link>
-                <Link className="pl-3 text-gray-200 hover:text-white" to="/register">Register</Link>
-                 
+            <div className="main-menu flex items-center">
+                <Link className="text-gray-200 hover:text-white hover:bg-blue-700 rounded-lg px-4 py-2" to="/">Home</Link>
+                <Link className="text-gray-200 hover:text-white hover:bg-blue-700 rounded-lg px-4 py-2" to="/search-rooms">Search Rooms</Link>
+                <Link className="text-gray-200 hover:text-white hover:bg-blue-700 rounded-lg px-4 py-2" to="/about-us">About Us</Link>
+                <Link className="text-gray-200 hover:text-white hover:bg-blue-700 rounded-lg px-4 py-2" to="/contact-us">Contact Us</Link>
+                <Link className="text-gray-200 hover:text-white hover:bg-blue-700 rounded-lg px-4 py-2" to="/login">Login</Link>
+                <Link className="text-gray-200 hover:text-white hover:bg-blue-700 rounded-lg px-4 py-2" to="/register">Register</Link>
+                <Link to="/admin">
+                    <UserTag />
+                </Link>
+                
             </div>
 
 

@@ -1,11 +1,9 @@
-function UserTag(props){
-    console.log(props)
+export default function UserTag(){
     return(
-        <div className="absolute right-0 flex items-center cursor-pointer">
-            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" className="rounded-full w-[50px] h-[50px]"/>
-            <span className="text-white mr-2 text-xl">John Doe</span>
+        <div className="flex items-center cursor-pointer ml-2 bg-gray-100 rounded-lg px-3 py-2">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" className="rounded-full w-[30px] h-[30px]"/>
+            <span className="ml-2 ">Raminda</span>
         </div>
     )
 }
 
-export default UserTag
