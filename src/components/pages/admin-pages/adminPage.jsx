@@ -12,7 +12,7 @@ export function AdminPage() {
 
     return (
         <>
-            <div className="w-full h-screen flex">
+            <div className="w-full h-screen flex overflow-hidden">
 
                 <div className='sidebar w-64 bg-gray-900 p-4'>
                     <SidebarUserData />
@@ -20,10 +20,10 @@ export function AdminPage() {
 
                 </div>
 
-                <div className='flex-1 '>
+                <div className='flex-1  '>
                     <TopMenu/>
 
-                    <div className="content-area p-4">
+                    <div className="content-area p-4 overflow-y-scroll h-screen">
                         <Routes path="/*" >
                             <Route path="/" element={<Dashboard />} />
 
