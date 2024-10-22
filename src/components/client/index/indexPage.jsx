@@ -1,4 +1,4 @@
-function IndexPage() {
+export default function IndexPage() {
 
     return (
         <div className='w-full h-screen bg-blue-900 flex flex-col items-center'>
@@ -25,4 +25,3 @@ function IndexPage() {
 }
 
 
-export default IndexPage

@@ -1,17 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
-import SidebarUserData from './parts/sidebarUserData'
-import TopMenu from './parts/topMenu'
-import Sidebar from './parts/sideBar'
-import Dashboard from './dashboard/Dashboard'
-import Bookings from './bookings/Bookings'
-import Rooms from './rooms/rooms'
-import Categories from './categories/categories'
-import PageNotFound from '../error-pages/pageNotFound'
-import Users from './users/users'
-import Gallery from './gallery/gallery'
-import Feedbacks from './feedbacks/feedbacks'
+import SidebarUserData from "../../components/admin/sidebar-user-data/sidebarUserData"
+import Sidebar from "../../components/admin/sidebar/sideBar"
+import TopMenu from "../../components/admin/top-menubar/topMenu"
+import Dashboard from "../../components/admin/dashboard/dashboard"
+import Bookings from "../../components/admin/bookings/bookings"
+import Rooms from "../../components/admin/rooms/rooms"
+import Categories from "../../components/admin/categories/categories"
+import Users from "../../components/admin/users/users"
+import Feedbacks from "../../components/admin/feedbacks/feedbacks"
+import Gallery from "../../components/admin/gallery/gallery"
+import PageNotFound from "../404-page/pageNotFound"
 
-export function AdminPage() {
+
+export default function AdminPage() {
 
     return (
         <>
