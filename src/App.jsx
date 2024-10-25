@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AdminPage from './pages/admin-page/adminPage'
 import HomePage from './pages/client-page/homePage'
 import PageNotFound from './pages/404-page/pageNotFound'
+import LoginPage from './pages/login-page/LoginPage'
 
 
 function App() {
@@ -13,8 +14,8 @@ function App() {
             <Routes path="/*">
                 <Route path="/*" element={<HomePage />} />
                 <Route path="/admin/*" element={<AdminPage />} />
+                <Route path="/login" element={<LoginPage />} />
 
-                <Route path="/*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
     )
