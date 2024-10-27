@@ -12,17 +12,29 @@ function Categories() {
         const token = localStorage.getItem('token')
 
         if(token != null){
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories',{})
-                .then(
-                    (res)=>{
-                        console.log(res)
-                        setCategories(res.data.list)
-                        
-                    }
-                )
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories',{}).then(
+                (res)=>{
+                    console.log(res)
+                    setCategories(res.data.list)
+                    
+                }
+            )
         }
-
     },[])
+
+    function deleteItem(name){
+        const token = localStorage.getItem('token')
+
+        if(token != null){
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/'+ name,{}).then(
+                (res)=>{
+                                            
+                }
+            )
+        }
+    }
+
+    
 
     return (
         <>
@@ -60,7 +72,9 @@ function Categories() {
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.price}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.description.substring(0,50)}...</td>
 
-                                            <td className="px-6 py-4 text-sm text-gray-700">View Edit Delete</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ deleteItem(category.name)} }>Delete</button>
+                                            </td>
                                         </tr>
                                     )
                                 }
