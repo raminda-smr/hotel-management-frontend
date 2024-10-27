@@ -1,48 +1,48 @@
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { CiHome } from "react-icons/ci"
 import { TfiAngleRight } from "react-icons/tfi"
-
-const rooms = [
-    {
-        "roomNumber": 101,
-        "category": "Deluxe Room",
-        "description": "A comfortable room with modern amenities and a view of the city.",
-        "maxGuests": 2,
-        "disabled": false,
-        "images": [
-            "https://example.com/images/room101-1.jpg",
-            "https://example.com/images/room101-2.jpg"
-        ],
-        "notes": "Recently renovated, includes a minibar."
-    },
-    {
-        "roomNumber": 102,
-        "category": "Standard Room",
-        "description": "A budget-friendly room suitable for solo travelers.",
-        "maxGuests": 1,
-        "disabled": false,
-        "images": [
-            "https://example.com/images/room102-1.jpg"
-        ],
-        "notes": ""
-    },
-    {
-        "roomNumber": 201,
-        "category": "Suite",
-        "description": "Spacious suite with a separate living area and luxury amenities.",
-        "maxGuests": 4,
-        "disabled": true,
-        "images": [
-            "https://example.com/images/room201-1.jpg",
-            "https://example.com/images/room201-2.jpg",
-            "https://example.com/images/room201-3.jpg"
-        ],
-        "notes": "Under maintenance until next month."
-    }
-]
 
 
 
 function Rooms(){
+
+    const[rooms, setRooms] = useState([])
+    const[isRoomsLoaded, setIsRoomsLoaded] = useState(false)
+
+    useEffect(()=>{
+        const token = localStorage.getItem('token')
+
+        if(token != null && !isRoomsLoaded){
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/rooms',{}).then(
+                (res)=>{
+                    // console.log(cats)
+                    setRooms(res.data.list)
+                    setIsRoomsLoaded(true)
+                }
+            )
+        }
+
+    },[isRoomsLoaded])
+
+
+    function deleteItem(roomNumber){
+        const token = localStorage.getItem('token')
+
+        if(token != null){
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/rooms/'+ roomNumber,{
+                headers:{
+                    "Authorization" : 'Bearer ' + token,
+                    "Content-Type" : "application/json"
+                }
+            }).then(
+                (res)=>{
+                    setIsRoomsLoaded(false)                  
+                }
+            )
+        }
+    }
+
 
     return (
         <>
@@ -80,7 +80,9 @@ function Rooms(){
                                         <td className="px-6 py-4 text-sm text-gray-700">{room.disabled? "Yes": "No"}</td>
                                         <td className="px-6 py-4 text-sm text-gray-700">{room.description.substring(0,50)}</td>
                                         
-                                        <td className="px-6 py-4 text-sm text-gray-700">View Edit Delete</td>
+                                        <td className="px-6 py-4 text-sm text-gray-700">
+                                            <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ deleteItem(room.roomNumber)} }>Delete</button>
+                                        </td>
                                     </tr>
                                 )
                             }

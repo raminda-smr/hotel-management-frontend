@@ -13,10 +13,15 @@ function Categories() {
         const token = localStorage.getItem('token')
 
         if(token != null && !isCategoriesLoaded){
-            console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories',{}).then(
+            // console.log("started")
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories',{
+                headers:{
+                    "Authorization" : 'Bearer ' + token,
+                    "Content-Type" : "application/json"
+                }
+            }).then(
                 (cats)=>{
-                    console.log(cats)
+                    // console.log(cats)
                     setCategories(cats.data.list)
                     setIsCategoriesLoaded(true)
                 }
