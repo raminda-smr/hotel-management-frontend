@@ -1,50 +1,28 @@
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { CiHome } from "react-icons/ci"
 import { TfiAngleRight } from "react-icons/tfi"
 
-const categories = [
-    {
-        "name": "Deluxe Room",
-        "description": "A spacious room with a king-size bed, sea view, and modern amenities.",
-        "price": 150,
-        "features": [
-            "King-size bed",
-            "Sea view",
-            "Air conditioning",
-            "Free Wi-Fi",
-            "Complimentary breakfast"
-        ],
-        "image": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg"
-    },
-    {
-        "name": "Standard Room",
-        "description": "A cozy room with a queen-size bed, ideal for budget-conscious travelers.",
-        "price": 80,
-        "features": [
-            "Queen-size bed",
-            "Air conditioning",
-            "Free Wi-Fi",
-            "Flat-screen TV"
-        ],
-        "image": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Superior-Room1-e1464286461356.jpg"
-    },
-    {
-        "name": "Suite",
-        "description": "Luxurious suite with a separate living area, perfect for families or special occasions.",
-        "price": 250,
-        "features": [
-            "King-size bed",
-            "Living room",
-            "Private balcony",
-            "Jacuzzi",
-            "Mini-bar",
-            "Complimentary breakfast"
-        ],
-        "image": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Grand-Superior3-e1464286239555.jpg"
-    }
-]
-
-
 function Categories() {
+
+    const [categories, setCategories] = useState([])
+
+    useEffect(()=>{
+        // read categories
+        const token = localStorage.getItem('token')
+
+        if(token != null){
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories',{})
+                .then(
+                    (res)=>{
+                        console.log(res)
+                        setCategories(res.data.list)
+                        
+                    }
+                )
+        }
+
+    },[])
 
     return (
         <>
