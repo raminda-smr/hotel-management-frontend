@@ -75,9 +75,7 @@ function Categories() {
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.description.substring(0,50)}...</td>
 
                                             <td className="px-6 py-4 text-sm text-gray-700">
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ 
-                                                   deleteItem(category.name)
-                                                } }>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ deleteItem(category.name)} }>Delete</button>
                                             </td>
                                         </tr>
                                     )
