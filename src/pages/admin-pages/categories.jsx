@@ -6,21 +6,23 @@ import { TfiAngleRight } from "react-icons/tfi"
 function Categories() {
 
     const [categories, setCategories] = useState([])
+    const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false)
 
     useEffect(()=>{
         // read categories
         const token = localStorage.getItem('token')
 
-        if(token != null){
+        if(token != null && !isCategoriesLoaded){
+            console.log("started")
             axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories',{}).then(
-                (res)=>{
-                    console.log(res)
-                    setCategories(res.data.list)
-                    
+                (cats)=>{
+                    console.log(cats)
+                    setCategories(cats.data.list)
+                    setIsCategoriesLoaded(true)
                 }
             )
         }
-    },[])
+    },[isCategoriesLoaded])
 
     function deleteItem(name){
         const token = localStorage.getItem('token')
@@ -28,7 +30,7 @@ function Categories() {
         if(token != null){
             axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/'+ name,{}).then(
                 (res)=>{
-                                            
+                    setIsCategoriesLoaded(false)                  
                 }
             )
         }
@@ -66,14 +68,16 @@ function Categories() {
                                     return (
                                         <tr key={index} className="border-b">
                                             <td className="px-6 py-4 text-sm text-gray-700">
-                                                <img className="w-[100px]" src={category.image} alt="" />
+                                                <img className="w-[100px]" src={category.image} alt="Image" />
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.name}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.price}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.description.substring(0,50)}...</td>
 
                                             <td className="px-6 py-4 text-sm text-gray-700">
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ deleteItem(category.name)} }>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ 
+                                                   deleteItem(category.name)
+                                                } }>Delete</button>
                                             </td>
                                         </tr>
                                     )
