@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import PageHeader from "../../components/admin/page-header/pageHeader"
 import AdminTable from "../../components/admin/admin-table/adminTable"
+import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 
 function Categories() {
 
@@ -50,7 +51,7 @@ function Categories() {
             <div className="booking-data">
                 <AdminTable>
 
-                    <thead>
+                    <AdminTableHead>
                         <tr className="bg-gray-50 border-b">
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
@@ -58,7 +59,7 @@ function Categories() {
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
-                    </thead>
+                    </AdminTableHead>
                     <tbody>
                         {
                             categories.map(
