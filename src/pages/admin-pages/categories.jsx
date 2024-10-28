@@ -6,6 +6,7 @@ import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
 import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
+import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
 
 function Categories() {
 
@@ -71,16 +72,16 @@ function Categories() {
                                 (category, index) => {
                                     return (
                                         <AdminTableRow key={index}>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                            <AdminTableTD>
                                                 <img className="w-[100px]" src={category.image} alt="Image" />
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">{category.name}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">{category.price}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">{category.description.substring(0, 50)}...</td>
+                                            </AdminTableTD>
+                                            <AdminTableTD>{category.name}</AdminTableTD>
+                                            <AdminTableTD>{category.price}</AdminTableTD>
+                                            <AdminTableTD>{category.description.substring(0, 50)}...</AdminTableTD>
 
-                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                            <AdminTableTD>
                                                 <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(category.name) }}>Delete</button>
-                                            </td>
+                                            </AdminTableTD>
                                         </AdminTableRow>
                                     )
                                 }
