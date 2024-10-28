@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { CiHome } from "react-icons/ci"
-import { TfiAngleRight } from "react-icons/tfi"
+import PageHeader from "../../components/admin/page-header/pageHeader"
 
 function Categories() {
 
@@ -45,15 +44,7 @@ function Categories() {
 
     return (
         <>
-            <div className="page-header mb-6 ">
-                <h2 className="text-gray-700 text-2xl mb-2">Categories</h2>
-                <div className="path flex items-center text-sm border-b border-gray-300 pb-3 text-gray-500">
-                    <span ><CiHome /></span> <TfiAngleRight />
-                    <span >Admin</span><TfiAngleRight />
-                    <span >Categories</span>
-                </div>
-            </div>
-
+            <PageHeader to="/admin/categories" name="Categories" title="Category list" />
 
             <div className="booking-data">
                 <table className="min-w-full bg-white border border-gray-200">
