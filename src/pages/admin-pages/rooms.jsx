@@ -1,21 +1,28 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { CiHome } from "react-icons/ci"
-import { TfiAngleRight } from "react-icons/tfi"
+import PageHeader from "../../components/admin/page-header/pageHeader"
+import AdminTable from "../../components/admin/admin-table/adminTable"
+import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
+import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
+import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
+import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
+import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
 
 
 
-function Rooms(){
+function Rooms() {
 
-    const[rooms, setRooms] = useState([])
-    const[isRoomsLoaded, setIsRoomsLoaded] = useState(false)
+    const [rooms, setRooms] = useState([])
+    const [isRoomsLoaded, setIsRoomsLoaded] = useState(false)
 
-    useEffect(()=>{
+    const tableFields = ['Room', 'Category', 'Max Guests', 'Disabled', 'Description', 'Actions']
+
+    useEffect(() => {
         const token = localStorage.getItem('token')
 
-        if(token != null && !isRoomsLoaded){
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/rooms',{}).then(
-                (res)=>{
+        if (token != null && !isRoomsLoaded) {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/rooms', {}).then(
+                (res) => {
                     // console.log(cats)
                     setRooms(res.data.list)
                     setIsRoomsLoaded(true)
@@ -23,21 +30,21 @@ function Rooms(){
             )
         }
 
-    },[isRoomsLoaded])
+    }, [isRoomsLoaded])
 
 
-    function deleteItem(roomNumber){
+    function deleteItem(roomNumber) {
         const token = localStorage.getItem('token')
 
-        if(token != null){
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/rooms/'+ roomNumber,{
-                headers:{
-                    "Authorization" : 'Bearer ' + token,
-                    "Content-Type" : "application/json"
+        if (token != null) {
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/rooms/' + roomNumber, {
+                headers: {
+                    "Authorization": 'Bearer ' + token,
+                    "Content-Type": "application/json"
                 }
             }).then(
-                (res)=>{
-                    setIsRoomsLoaded(false)                  
+                (res) => {
+                    setIsRoomsLoaded(false)
                 }
             )
         }
@@ -46,54 +53,47 @@ function Rooms(){
 
     return (
         <>
-        <div className="page-header mb-6 ">
-            <h2 className="text-gray-700 text-2xl mb-2">Rooms</h2>
-            <div className="path flex items-center text-sm border-b border-gray-300 pb-3 text-gray-500">
-                <span ><CiHome /></span> <TfiAngleRight />
-                <span >Admin</span><TfiAngleRight />
-                <span >Rooms</span>
-            </div>
-        </div>
+            <PageHeader to="/admin/rooms" name="Rooms" title="Room list" />
 
 
-        <div className="booking-data">
-            <table className="min-w-full bg-white border border-gray-200">
-                <thead>
-                    <tr className="bg-gray-50 border-b">
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room Number</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Max Guests</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disabled</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        rooms.map(
-                            (room, index) => {
-                                return (
-                                    <tr key={index}  className="border-b">
-                                        <td className="px-6 py-4 text-sm text-gray-700">{room.roomNumber}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-700">{room.category}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-700">{room.maxGuests}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-700">{room.disabled? "Yes": "No"}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-700">{room.description.substring(0,50)}</td>
-                                        
-                                        <td className="px-6 py-4 text-sm text-gray-700">
-                                            <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ deleteItem(room.roomNumber)} }>Delete</button>
-                                        </td>
-                                    </tr>
+            <div className="room-data">
+                <AdminTable>
+                    <AdminTableHead className="rounded-lg overflow-hidden">
+                        <AdminTableRow className="bg-blue-500">
+                            {
+                                tableFields.map(
+                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
                                 )
                             }
-                        )
-                    }
+                        </AdminTableRow>
 
-                </tbody>
-            </table>
-        </div>
+                    </AdminTableHead>
+                    <AdminTableBody>
+                        {
+                            rooms.map(
+                                (room, index) => {
+                                    return (
+                                        <AdminTableRow key={index}>
+                                            <AdminTableTD>{room.roomNumber}</AdminTableTD>
+                                            <AdminTableTD>{room.category}</AdminTableTD>
+                                            <AdminTableTD>{room.maxGuests}</AdminTableTD>
+                                            <AdminTableTD>{room.disabled ? "Yes" : "No"}</AdminTableTD>
+                                            <AdminTableTD>{room.description.substring(0, 50)}</AdminTableTD>
 
-    </>
+                                            <AdminTableTD>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(room.roomNumber) }}>Delete</button>
+                                            </AdminTableTD>
+                                        </AdminTableRow>
+                                    )
+                                }
+                            )
+                        }
+
+                    </AdminTableBody>
+                </AdminTable>
+            </div>
+
+        </>
     )
 }
 
