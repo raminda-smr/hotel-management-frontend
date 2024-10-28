@@ -1,53 +1,55 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import PageHeader from "../../components/admin/page-header/pageHeader"
+import AdminTable from "../../components/admin/admin-table/adminTable"
 
 function Categories() {
 
     const [categories, setCategories] = useState([])
     const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false)
 
-    useEffect(()=>{
+    useEffect(() => {
         // read categories
         const token = localStorage.getItem('token')
 
-        if(token != null && !isCategoriesLoaded){
+        if (token != null && !isCategoriesLoaded) {
             // console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories',{
-                headers:{
-                    "Authorization" : 'Bearer ' + token,
-                    "Content-Type" : "application/json"
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories', {
+                headers: {
+                    "Authorization": 'Bearer ' + token,
+                    "Content-Type": "application/json"
                 }
             }).then(
-                (cats)=>{
+                (cats) => {
                     // console.log(cats)
                     setCategories(cats.data.list)
                     setIsCategoriesLoaded(true)
                 }
             )
         }
-    },[isCategoriesLoaded])
+    }, [isCategoriesLoaded])
 
-    function deleteItem(name){
+    function deleteItem(name) {
         const token = localStorage.getItem('token')
 
-        if(token != null){
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/'+ name,{}).then(
-                (res)=>{
-                    setIsCategoriesLoaded(false)                  
+        if (token != null) {
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/' + name, {}).then(
+                (res) => {
+                    setIsCategoriesLoaded(false)
                 }
             )
         }
     }
 
-    
+
 
     return (
         <>
             <PageHeader to="/admin/categories" name="Categories" title="Category list" />
 
             <div className="booking-data">
-                <table className="min-w-full bg-white border border-gray-200">
+                <AdminTable>
+
                     <thead>
                         <tr className="bg-gray-50 border-b">
                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
@@ -68,10 +70,10 @@ function Categories() {
                                             </td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.name}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{category.price}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">{category.description.substring(0,50)}...</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{category.description.substring(0, 50)}...</td>
 
                                             <td className="px-6 py-4 text-sm text-gray-700">
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={ ()=>{ deleteItem(category.name)} }>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(category.name) }}>Delete</button>
                                             </td>
                                         </tr>
                                     )
@@ -80,7 +82,7 @@ function Categories() {
                         }
 
                     </tbody>
-                </table>
+                </AdminTable>
             </div>
 
         </>
