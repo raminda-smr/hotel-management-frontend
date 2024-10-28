@@ -52,7 +52,7 @@ export default function Users() {
 
     return (
         <>
-            <PageHeader to="/admin/users" name="Bookings" title="Bookings" />
+            <PageHeader to="/admin/users" name="Users" title="Users" />
 
             <div className="user-data">
                 <AdminTable>

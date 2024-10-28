@@ -53,7 +53,7 @@ function Rooms() {
 
     return (
         <>
-            <PageHeader to="/admin/rooms" name="Rooms" title="Room list" />
+            <PageHeader to="/admin/rooms" name="Rooms" title="Rooms" />
 
 
             <div className="room-data">

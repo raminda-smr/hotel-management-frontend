@@ -8,41 +8,41 @@ import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
 
-function Categories() {
+export default function Feedbacks() {
 
-    const [categories, setCategories] = useState([])
-    const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false)
+    const [feedbacks, setFeedbacks] = useState([])
+    const [isFeedbacksLoaded, setIsFeedbacksLoaded] = useState(false)
 
-    const tableFields = ['Image', 'Name', 'Price', 'Description', 'Action']
+    const tableFields = ['Username', 'Email', 'Title', 'Description', 'Created at', 'Approved' , 'Actions']
 
     useEffect(() => {
-        // read categories
+        // read feedbacks
         const token = localStorage.getItem('token')
 
-        if (token != null && !isCategoriesLoaded) {
+        if (token != null && !isFeedbacksLoaded) {
             // console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories', {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks', {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
                 }
             }).then(
-                (cats) => {
-                    // console.log(cats)
-                    setCategories(cats.data.list)
-                    setIsCategoriesLoaded(true)
+                (res) => {
+
+                    setFeedbacks(res.data.list)
+                    setIsFeedbacksLoaded(true)
                 }
             )
         }
-    }, [isCategoriesLoaded])
+    }, [isFeedbacksLoaded])
 
-    function deleteItem(name) {
+    function deleteItem(id) {
         const token = localStorage.getItem('token')
 
         if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/' + name, {}).then(
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks/' + id, {}).then(
                 (res) => {
-                    setIsCategoriesLoaded(false)
+                    setIsFeedbacksLoaded(false)
                 }
             )
         }
@@ -52,9 +52,9 @@ function Categories() {
 
     return (
         <>
-            <PageHeader to="/admin/categories" name="Categories" title="Categories" />
+            <PageHeader to="/admin/feedbacks" name="Feedbacks" title="Feedbacks" />
 
-            <div className="booking-data">
+            <div className="user-data">
                 <AdminTable>
 
                     <AdminTableHead className="rounded-lg overflow-hidden">
@@ -68,19 +68,20 @@ function Categories() {
                     </AdminTableHead>
                     <AdminTableBody>
                         {
-                            categories.map(
-                                (category, index) => {
+                            feedbacks.map(
+                                (feedback, index) => {
                                     return (
                                         <AdminTableRow key={index}>
-                                            <AdminTableTD>
-                                                <img className="w-[100px]" src={category.image} alt="Image" />
-                                            </AdminTableTD>
-                                            <AdminTableTD>{category.name}</AdminTableTD>
-                                            <AdminTableTD>{category.price}</AdminTableTD>
-                                            <AdminTableTD>{category.description.substring(0, 50)}...</AdminTableTD>
+                                            
+                                            <AdminTableTD>{feedback.username}</AdminTableTD>
+                                            <AdminTableTD>{feedback.email}</AdminTableTD>
+                                            <AdminTableTD>{feedback.title}</AdminTableTD>
+                                            <AdminTableTD>{feedback.description.substring(0,50)}</AdminTableTD>
+                                            <AdminTableTD>{new Date(feedback.date).toDateString()}</AdminTableTD>
+                                            <AdminTableTD>{feedback.disabled? "Yes": "No"}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(category.name) }}>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(feedback._id) }}>Delete</button>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
@@ -95,5 +96,3 @@ function Categories() {
         </>
     )
 }
-
-export default Categories
