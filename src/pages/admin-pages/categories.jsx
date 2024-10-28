@@ -4,11 +4,14 @@ import PageHeader from "../../components/admin/page-header/pageHeader"
 import AdminTable from "../../components/admin/admin-table/adminTable"
 import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
+import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 
 function Categories() {
 
     const [categories, setCategories] = useState([])
     const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false)
+
+    const tableFields = ['Image', 'Name', 'Price', 'Description', 'Action']
 
     useEffect(() => {
         // read categories
@@ -52,14 +55,14 @@ function Categories() {
             <div className="booking-data">
                 <AdminTable>
 
-                    <AdminTableHead>
-                        <AdminTableRow className="bg-blue-400">
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </AdminTableRow>
+                    <AdminTableHead className="rounded-lg overflow-hidden">
+                        <AdminTableRow className="bg-blue-500">
+                            {
+                                tableFields.map(
+                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
+                                )
+                            }
+                        </AdminTableRow>
                     </AdminTableHead>
                     <tbody>
                         {

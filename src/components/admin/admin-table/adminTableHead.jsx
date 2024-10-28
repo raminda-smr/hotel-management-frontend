@@ -1,6 +1,6 @@
 export default function AdminTableHead(props) {
     return (
-        <thead>
+        <thead className={props.className}>
             {props.children}
         </thead>
     )
