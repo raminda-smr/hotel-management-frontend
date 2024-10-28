@@ -5,6 +5,7 @@ import AdminTable from "../../components/admin/admin-table/adminTable"
 import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
 import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
+import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 
 function Categories() {
 
@@ -64,12 +65,12 @@ function Categories() {
                             }
                         </AdminTableRow>
                     </AdminTableHead>
-                    <tbody>
+                    <AdminTableBody>
                         {
                             categories.map(
                                 (category, index) => {
                                     return (
-                                        <tr key={index} className="border-b">
+                                        <AdminTableRow key={index}>
                                             <td className="px-6 py-4 text-sm text-gray-700">
                                                 <img className="w-[100px]" src={category.image} alt="Image" />
                                             </td>
@@ -80,13 +81,13 @@ function Categories() {
                                             <td className="px-6 py-4 text-sm text-gray-700">
                                                 <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(category.name) }}>Delete</button>
                                             </td>
-                                        </tr>
+                                        </AdminTableRow>
                                     )
                                 }
                             )
                         }
 
-                    </tbody>
+                    </AdminTableBody>
                 </AdminTable>
             </div>
 
