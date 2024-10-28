@@ -6,10 +6,10 @@ import Dashboard from "../../components/admin/dashboard/dashboard"
 import Bookings from './bookings'
 import Rooms from "./rooms"
 import Categories from "./categories"
-import Users from "../../components/admin/users/users"
 import Feedbacks from "../../components/admin/feedbacks/feedbacks"
 import Gallery from "../../components/admin/gallery/gallery"
 import PageNotFound from "../404-page/pageNotFound"
+import Users from './users'
 
 
 

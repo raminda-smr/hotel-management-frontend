@@ -8,20 +8,20 @@ import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
 
-export default function Bookings() {
+export default function Users() {
 
-    const [bookings, setBookings] = useState([])
-    const [isBookingsLoaded, setIsBookingsLoaded] = useState(false)
+    const [users, setUsers] = useState([])
+    const [isUsersLoaded, setIsUsersLoaded] = useState(false)
 
-    const tableFields = ['Booking ID', 'Room ID', 'Email', 'Phone', 'Status', 'Start Date' , 'End Date', 'Actions']
+    const tableFields = ['Image', 'Email', 'User Type', 'Whatsapp', 'Phone', 'Disabled' , 'Email Verified', 'Actions']
 
     useEffect(() => {
-        // read categories
+        // read users
         const token = localStorage.getItem('token')
 
-        if (token != null && !isBookingsLoaded) {
+        if (token != null && !isUsersLoaded) {
             // console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/bookings', {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users', {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
@@ -29,20 +29,20 @@ export default function Bookings() {
             }).then(
                 (res) => {
 
-                    setBookings(res.data.list)
-                    setIsBookingsLoaded(true)
+                    setUsers(res.data.list)
+                    setIsUsersLoaded(true)
                 }
             )
         }
-    }, [isBookingsLoaded])
+    }, [isUsersLoaded])
 
-    function deleteItem(bookingId) {
+    function deleteItem(email) {
         const token = localStorage.getItem('token')
 
         if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/bookings/' + bookingId, {}).then(
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/users/' + email, {}).then(
                 (res) => {
-                    setIsBookingsLoaded(false)
+                    setIsUsersLoaded(false)
                 }
             )
         }
@@ -52,9 +52,9 @@ export default function Bookings() {
 
     return (
         <>
-            <PageHeader to="/admin/bookings" name="Bookings" title="Bookings" />
+            <PageHeader to="/admin/users" name="Bookings" title="Bookings" />
 
-            <div className="booking-data">
+            <div className="user-data">
                 <AdminTable>
 
                     <AdminTableHead className="rounded-lg overflow-hidden">
@@ -68,20 +68,25 @@ export default function Bookings() {
                     </AdminTableHead>
                     <AdminTableBody>
                         {
-                            bookings.map(
-                                (booking, index) => {
+                            users.map(
+                                (user, index) => {
                                     return (
                                         <AdminTableRow key={index}>
-                                            <AdminTableTD>{booking.bookingId}</AdminTableTD>
-                                            <AdminTableTD>{booking.roomId}</AdminTableTD>
-                                            <AdminTableTD>{booking.email}</AdminTableTD>
-                                            <AdminTableTD>{booking.phone}</AdminTableTD>
-                                            <AdminTableTD>{booking.status}</AdminTableTD>
-                                            <AdminTableTD>{new Date(booking.start).toDateString()}</AdminTableTD>
-                                            <AdminTableTD>{new Date(booking.end).toDateString()}</AdminTableTD>
+                                            <AdminTableTD>
+                                                <img src={user.img ? user.img: "https://cdn-icons-png.flaticon.com/512/149/149071.png" } className="w-[50px]" alt="User" />
+                                            </AdminTableTD>
+                                            <AdminTableTD>
+                                                <p>{user.firstName} {user.lastName}</p>
+                                                {user.email}
+                                            </AdminTableTD>
+                                            <AdminTableTD>{user.type}</AdminTableTD>
+                                            <AdminTableTD>{user.whatsapp}</AdminTableTD>
+                                            <AdminTableTD>{user.phone}</AdminTableTD>
+                                            <AdminTableTD>{user.disabled? "Yes": "No"}</AdminTableTD>
+                                            <AdminTableTD>{user.emailVerified? "Yes": "No"}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(booking.bookingId) }}>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(user.email) }}>Delete</button>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
