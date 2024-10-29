@@ -55,10 +55,9 @@ export default function Gallery() {
         <>
             <PageHeader to="/admin/gallery" name="Gallery" title="Gallery" />
 
-
             <div className="gallery-data">
             
-                <AdminTable>
+                <AdminTable data={galleryItems} >
                     <AdminTableHead className="rounded-lg overflow-hidden">
                         <AdminTableRow className="bg-blue-500">
                             {
@@ -67,7 +66,6 @@ export default function Gallery() {
                                 )
                             }
                         </AdminTableRow>
-
                     </AdminTableHead>
                     <AdminTableBody>
                         {
