@@ -13,7 +13,7 @@ export default function Bookings() {
     const [bookings, setBookings] = useState([])
     const [isBookingsLoaded, setIsBookingsLoaded] = useState(false)
 
-    const tableFields = ['Booking ID', 'Room ID', 'Email', 'Phone', 'Status', 'Start Date' , 'End Date', 'Actions']
+    const tableFields = ['Booking ID', 'Room ID', 'Email', 'Phone', 'Status', 'Start Date', 'End Date', 'Actions']
 
     useEffect(() => {
         // read categories
@@ -55,17 +55,7 @@ export default function Bookings() {
             <PageHeader to="/admin/bookings" name="Bookings" title="Bookings" />
 
             <div className="booking-data">
-                <AdminTable>
-
-                    <AdminTableHead className="rounded-lg overflow-hidden">
-                        <AdminTableRow className="bg-blue-500">
-                            {
-                                tableFields.map(
-                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
-                                )
-                            }
-                        </AdminTableRow>
-                    </AdminTableHead>
+                <AdminTable data={bookings} tableFields={tableFields}>
                     <AdminTableBody>
                         {
                             bookings.map(

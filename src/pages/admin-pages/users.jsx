@@ -13,7 +13,7 @@ export default function Users() {
     const [users, setUsers] = useState([])
     const [isUsersLoaded, setIsUsersLoaded] = useState(false)
 
-    const tableFields = ['Image', 'Email', 'User Type', 'Whatsapp', 'Phone', 'Disabled' , 'Email Verified', 'Actions']
+    const tableFields = ['Image', 'Email', 'User Type', 'Whatsapp', 'Phone', 'Disabled', 'Email Verified', 'Actions']
 
     useEffect(() => {
         // read users
@@ -55,17 +55,7 @@ export default function Users() {
             <PageHeader to="/admin/users" name="Users" title="Users" />
 
             <div className="user-data">
-                <AdminTable>
-
-                    <AdminTableHead className="rounded-lg overflow-hidden">
-                        <AdminTableRow className="bg-blue-500">
-                            {
-                                tableFields.map(
-                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
-                                )
-                            }
-                        </AdminTableRow>
-                    </AdminTableHead>
+                <AdminTable data={users} tableFields={tableFields}>
                     <AdminTableBody>
                         {
                             users.map(
@@ -73,7 +63,7 @@ export default function Users() {
                                     return (
                                         <AdminTableRow key={index}>
                                             <AdminTableTD>
-                                                <img src={user.img ? user.img: "https://cdn-icons-png.flaticon.com/512/149/149071.png" } className="w-[50px]" alt="User" />
+                                                <img src={user.img ? user.img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} className="w-[50px]" alt="User" />
                                             </AdminTableTD>
                                             <AdminTableTD>
                                                 <p>{user.firstName} {user.lastName}</p>
@@ -82,8 +72,8 @@ export default function Users() {
                                             <AdminTableTD>{user.type}</AdminTableTD>
                                             <AdminTableTD>{user.whatsapp}</AdminTableTD>
                                             <AdminTableTD>{user.phone}</AdminTableTD>
-                                            <AdminTableTD>{user.disabled? "Yes": "No"}</AdminTableTD>
-                                            <AdminTableTD>{user.emailVerified? "Yes": "No"}</AdminTableTD>
+                                            <AdminTableTD>{user.disabled ? "Yes" : "No"}</AdminTableTD>
+                                            <AdminTableTD>{user.emailVerified ? "Yes" : "No"}</AdminTableTD>
 
                                             <AdminTableTD>
                                                 <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(user.email) }}>Delete</button>

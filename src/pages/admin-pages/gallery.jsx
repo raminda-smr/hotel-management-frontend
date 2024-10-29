@@ -56,9 +56,8 @@ export default function Gallery() {
             <PageHeader to="/admin/gallery" name="Gallery" title="Gallery" />
 
             <div className="gallery-data">
-            
+
                 <AdminTable data={galleryItems} tableFields={tableFields}>
-                    
                     <AdminTableBody>
                         {
                             galleryItems.map(
@@ -69,8 +68,8 @@ export default function Gallery() {
                                                 <img src={galleryItem.image} className="w-[100px]" alt="" />
                                             </AdminTableTD>
                                             <AdminTableTD>{galleryItem.name}</AdminTableTD>
-                                            <AdminTableTD>{galleryItem.description.substring(0,50)}</AdminTableTD>
-                                          
+                                            <AdminTableTD>{galleryItem.description.substring(0, 50)}</AdminTableTD>
+
                                             <AdminTableTD>
                                                 <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(galleryItem._id) }}>Delete</button>
                                             </AdminTableTD>

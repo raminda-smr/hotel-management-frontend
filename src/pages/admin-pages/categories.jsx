@@ -54,18 +54,8 @@ function Categories() {
         <>
             <PageHeader to="/admin/categories" name="Categories" title="Categories" />
 
-            <div className="booking-data">
-                <AdminTable>
-
-                    <AdminTableHead className="rounded-lg overflow-hidden">
-                        <AdminTableRow className="bg-blue-500">
-                            {
-                                tableFields.map(
-                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
-                                )
-                            }
-                        </AdminTableRow>
-                    </AdminTableHead>
+            <div className="category-data">
+                <AdminTable data={categories} tableFields={tableFields}>
                     <AdminTableBody>
                         {
                             categories.map(

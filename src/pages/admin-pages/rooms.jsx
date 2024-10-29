@@ -57,17 +57,7 @@ function Rooms() {
 
 
             <div className="room-data">
-                <AdminTable>
-                    <AdminTableHead className="rounded-lg overflow-hidden">
-                        <AdminTableRow className="bg-blue-500">
-                            {
-                                tableFields.map(
-                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
-                                )
-                            }
-                        </AdminTableRow>
-
-                    </AdminTableHead>
+                <AdminTable data={rooms} tableFields={tableFields}>
                     <AdminTableBody>
                         {
                             rooms.map(

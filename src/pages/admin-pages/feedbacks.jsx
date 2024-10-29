@@ -13,7 +13,7 @@ export default function Feedbacks() {
     const [feedbacks, setFeedbacks] = useState([])
     const [isFeedbacksLoaded, setIsFeedbacksLoaded] = useState(false)
 
-    const tableFields = ['Username', 'Email', 'Title', 'Description', 'Created at', 'Approved' , 'Actions']
+    const tableFields = ['Username', 'Email', 'Title', 'Description', 'Created at', 'Approved', 'Actions']
 
     useEffect(() => {
         // read feedbacks
@@ -56,20 +56,19 @@ export default function Feedbacks() {
 
             <div className="user-data">
                 <AdminTable data={feedbacks} tableFields={tableFields}>
-
                     <AdminTableBody>
                         {
                             feedbacks.map(
                                 (feedback, index) => {
                                     return (
                                         <AdminTableRow key={index}>
-                                            
+
                                             <AdminTableTD>{feedback.username}</AdminTableTD>
                                             <AdminTableTD>{feedback.email}</AdminTableTD>
                                             <AdminTableTD>{feedback.title}</AdminTableTD>
-                                            <AdminTableTD>{feedback.description.substring(0,50)}</AdminTableTD>
+                                            <AdminTableTD>{feedback.description.substring(0, 50)}</AdminTableTD>
                                             <AdminTableTD>{new Date(feedback.date).toDateString()}</AdminTableTD>
-                                            <AdminTableTD>{feedback.disabled? "Yes": "No"}</AdminTableTD>
+                                            <AdminTableTD>{feedback.disabled ? "Yes" : "No"}</AdminTableTD>
 
                                             <AdminTableTD>
                                                 <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(feedback._id) }}>Delete</button>
