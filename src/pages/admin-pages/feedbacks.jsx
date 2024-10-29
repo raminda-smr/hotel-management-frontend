@@ -55,17 +55,8 @@ export default function Feedbacks() {
             <PageHeader to="/admin/feedbacks" name="Feedbacks" title="Feedbacks" />
 
             <div className="user-data">
-                <AdminTable>
+                <AdminTable data={feedbacks} tableFields={tableFields}>
 
-                    <AdminTableHead className="rounded-lg overflow-hidden">
-                        <AdminTableRow className="bg-blue-500">
-                            {
-                                tableFields.map(
-                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
-                                )
-                            }
-                        </AdminTableRow>
-                    </AdminTableHead>
                     <AdminTableBody>
                         {
                             feedbacks.map(

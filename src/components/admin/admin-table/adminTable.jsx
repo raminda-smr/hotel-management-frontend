@@ -1,3 +1,7 @@
+import AdminTableHead from "./adminTableHead";
+import AdminTableRow from "./adminTableRow";
+import AdminTableTH from "./adminTableTH";
+
 export default function AdminTable(props) {
     return (
         <>
@@ -5,7 +9,7 @@ export default function AdminTable(props) {
                 props.data != null && props.data.length > 0 ? (
                     <table className="min-w-full bg-white rounded-md overflow-hidden border border-gray-200 shadow-xl">
                         {
-                            props.dataFields != null && Array.isArray(props.dataFields) && props.dataFields.length > 0 ? (
+                            props.tableFields != null && Array.isArray(props.tableFields) && props.tableFields.length > 0 ? (
                                 <AdminTableHead className="rounded-lg overflow-hidden">
                                     <AdminTableRow className="bg-blue-500">
                                         {
