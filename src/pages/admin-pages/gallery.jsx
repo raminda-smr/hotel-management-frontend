@@ -57,16 +57,8 @@ export default function Gallery() {
 
             <div className="gallery-data">
             
-                <AdminTable data={galleryItems} >
-                    <AdminTableHead className="rounded-lg overflow-hidden">
-                        <AdminTableRow className="bg-blue-500">
-                            {
-                                tableFields.map(
-                                    (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
-                                )
-                            }
-                        </AdminTableRow>
-                    </AdminTableHead>
+                <AdminTable data={galleryItems} tableFields={tableFields}>
+                    
                     <AdminTableBody>
                         {
                             galleryItems.map(

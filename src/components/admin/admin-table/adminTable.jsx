@@ -2,8 +2,22 @@ export default function AdminTable(props) {
     return (
         <>
             {
-                props.data.length > 0 ? (
+                props.data != null && props.data.length > 0 ? (
                     <table className="min-w-full bg-white rounded-md overflow-hidden border border-gray-200 shadow-xl">
+                        {
+                            props.dataFields != null && Array.isArray(props.dataFields) && props.dataFields.length > 0 ? (
+                                <AdminTableHead className="rounded-lg overflow-hidden">
+                                    <AdminTableRow className="bg-blue-500">
+                                        {
+                                            props.tableFields.map(
+                                                (tableField, index) => <AdminTableTH key={index}>{tableField}</AdminTableTH>
+                                            )
+                                        }
+                                    </AdminTableRow>
+                                </AdminTableHead>
+                            ) : ""
+                        }
+
                         {props.children}
                     </table>
                 ) : (
