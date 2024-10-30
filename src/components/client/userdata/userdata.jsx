@@ -19,14 +19,20 @@ export default function UserTag(props){
             })
             .then(
                 (res)=>{
-                    console.log(res)
+                    // console.log(res)
                     setName(res.data.user.lastName)
                     setUserFound(true)
+                    props.setUserLogged(true)
+                }
+            ).catch(
+                (err)=>{
+                    props.setUserLogged(false)
                 }
             )
         }
         else{
             setName("")
+            props.setUserLogged(false)
         }
     },[userFound])
     
