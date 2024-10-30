@@ -2,13 +2,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import PageHeader from "../../components/admin/page-header/pageHeader"
 import AdminTable from "../../components/admin/admin-table/adminTable"
-import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
-import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
-
-
 
 export default function Gallery() {
 
@@ -21,7 +17,7 @@ export default function Gallery() {
         const token = localStorage.getItem('token')
 
         if (token != null && !isGalleryItemsLoaded) {
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/gallary', {}).then(
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/gallery', {}).then(
                 (res) => {
                     // console.log(cats)
                     setGalleryItems(res.data.list)
