@@ -5,11 +5,14 @@ import AdminTable from "../../components/admin/admin-table/adminTable"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
+import Modal from "../../components/common/modal/modal"
 
 export default function Gallery() {
 
     const [galleryItems, setGalleryItems] = useState([])
     const [isGalleryItemsLoaded, setIsGalleryItemsLoaded] = useState(false)
+
+    const [isModalOpen, setIsModalOpen] = useState(false) 
 
     const tableFields = ['Image', 'Name', 'Description', 'Actions']
 
@@ -28,22 +31,28 @@ export default function Gallery() {
 
     }, [isGalleryItemsLoaded])
 
+    function getDeleteConfirmation(id){
+        setIsModalOpen(!isModalOpen); 
+    }
 
     function deleteItem(id) {
-        const token = localStorage.getItem('token')
+        
+        getDeleteConfirmation(id)
 
-        if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/gallery/' + id, {
-                headers: {
-                    "Authorization": 'Bearer ' + token,
-                    "Content-Type": "application/json"
-                }
-            }).then(
-                (res) => {
-                    setIsGalleryItemsLoaded(false)
-                }
-            )
-        }
+        // const token = localStorage.getItem('token')
+
+        // if (token != null) {
+        //     axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/gallery/' + id, {
+        //         headers: {
+        //             "Authorization": 'Bearer ' + token,
+        //             "Content-Type": "application/json"
+        //         }
+        //     }).then(
+        //         (res) => {
+        //             setIsGalleryItemsLoaded(false)
+        //         }
+        //     )
+        // }
     }
 
 
@@ -52,7 +61,6 @@ export default function Gallery() {
             <PageHeader to="/admin/gallery" name="Gallery" title="Gallery" />
 
             <div className="gallery-data">
-
                 <AdminTable data={galleryItems} tableFields={tableFields}>
                     <AdminTableBody>
                         {
@@ -78,6 +86,10 @@ export default function Gallery() {
                     </AdminTableBody>
                 </AdminTable>
             </div>
+
+            {
+                isModalOpen && ( <Modal></Modal>)
+            }
 
         </>
     )
