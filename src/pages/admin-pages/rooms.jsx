@@ -2,18 +2,20 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import PageHeader from "../../components/admin/page-header/pageHeader"
 import AdminTable from "../../components/admin/admin-table/adminTable"
-import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
-import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
-
+import Modal from "../../components/common/modal/modal"
+import ModalButton from "../../components/common/modal/modalButton"
 
 
 function Rooms() {
 
     const [rooms, setRooms] = useState([])
     const [isRoomsLoaded, setIsRoomsLoaded] = useState(false)
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+    const [selectedItem, setSelectedItem] = useState("")
 
     const tableFields = ['Room', 'Category', 'Max Guests', 'Disabled', 'Description', 'Actions']
 
@@ -33,7 +35,15 @@ function Rooms() {
     }, [isRoomsLoaded])
 
 
-    function deleteItem(roomNumber) {
+    function getDeleteConfirmation(roomNumber) {
+
+        setSelectedItem(roomNumber)
+        setIsDeleteModalOpen(!isDeleteModalOpen)
+    }
+
+    function deleteItem() {
+
+        const roomNumber = selectedItem
         const token = localStorage.getItem('token')
 
         if (token != null) {
@@ -44,7 +54,9 @@ function Rooms() {
                 }
             }).then(
                 (res) => {
+                    setSelectedItem("")
                     setIsRoomsLoaded(false)
+                    setIsDeleteModalOpen(false)
                 }
             )
         }
@@ -71,7 +83,7 @@ function Rooms() {
                                             <AdminTableTD>{room.description.substring(0, 50)}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(room.roomNumber) }}>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(room.roomNumber) }}>Delete</button>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
@@ -83,6 +95,21 @@ function Rooms() {
                 </AdminTable>
             </div>
 
+            {
+                isDeleteModalOpen && (
+                    <Modal setIsModalOpen={setIsDeleteModalOpen} title="Delete room"  >
+                        <p>Are you sure you want to delete this item?</p>
+                        <div className="confirmation-buttons flex justify-end mt-2">
+                            <ModalButton type="danger" onClick={deleteItem} >Yes</ModalButton>
+                            <ModalButton type="primary" onClick={()=>{ 
+                                setSelectedItem("") 
+                                setIsDeleteModalOpen(false)
+                                }} >No</ModalButton>
+                            
+                        </div>
+                    </Modal>
+                )
+            }
         </>
     )
 }
