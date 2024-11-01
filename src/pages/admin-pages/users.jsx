@@ -2,16 +2,19 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import PageHeader from "../../components/admin/page-header/pageHeader"
 import AdminTable from "../../components/admin/admin-table/adminTable"
-import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
-import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
+import Modal from "../../components/common/modal/modal"
+import ModalButton from "../../components/common/modal/modalButton"
 
 export default function Users() {
 
     const [users, setUsers] = useState([])
     const [isUsersLoaded, setIsUsersLoaded] = useState(false)
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+    const [selectedItem, setSelectedItem] = useState("")
 
     const tableFields = ['Image', 'Email', 'User Type', 'Whatsapp', 'Phone', 'Disabled', 'Email Verified', 'Actions']
 
@@ -36,13 +39,30 @@ export default function Users() {
         }
     }, [isUsersLoaded])
 
-    function deleteItem(email) {
+
+    function getDeleteConfirmation(email) {
+        
+        setSelectedItem(email)
+        setIsDeleteModalOpen(!isDeleteModalOpen)
+    }
+
+
+    function deleteItem() {
+
+        const email = selectedItem
         const token = localStorage.getItem('token')
 
         if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/users/' + email, {}).then(
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/users/' + email, {
+                headers: {
+                    "Authorization": 'Bearer ' + token,
+                    "Content-Type": "application/json"
+                }
+            }).then(
                 (res) => {
+                    setSelectedItem("")
                     setIsUsersLoaded(false)
+                    setIsDeleteModalOpen(false)
                 }
             )
         }
@@ -76,7 +96,7 @@ export default function Users() {
                                             <AdminTableTD>{user.emailVerified ? "Yes" : "No"}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(user.email) }}>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(user.email) }}>Delete</button>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
@@ -87,6 +107,22 @@ export default function Users() {
                     </AdminTableBody>
                 </AdminTable>
             </div>
+
+            {
+                isDeleteModalOpen && (
+                    <Modal setIsModalOpen={setIsDeleteModalOpen} title="Delete user"  >
+                        <p>Are you sure you want to delete this item?</p>
+                        <div className="confirmation-buttons flex justify-end mt-2">
+                            <ModalButton type="danger" onClick={deleteItem} >Yes</ModalButton>
+                            <ModalButton type="primary" onClick={()=>{ 
+                                setSelectedItem("") 
+                                setIsDeleteModalOpen(false)
+                                }} >No</ModalButton>
+                            
+                        </div>
+                    </Modal>
+                )
+            }
 
         </>
     )
