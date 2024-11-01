@@ -18,14 +18,14 @@ export default function Modal(props) {
             <div className="modal bg-white  max-w-[512px] rounded-md overflow-hidden" >
                 <div className="modal-head flex justify-between items-center bg-gray-200">
                     <div className="title w-full text-center ">
-                        <h4 className='font-medium text-lg pt-2 pb-1'>{props.title}</h4>
+                        <h4 className='font-medium text-lg pt-2 pb-1 px-5'>{props.title}</h4>
                     </div>
                     <div className="close-button flex h-full p-2 py-3 bg-gray-400 text-lg hover:bg-red-900 hover:text-white" onClick={closeModel}>
                         <IoIosClose  />
                     </div>
 
                 </div>
-                <div className="modal-body px-5 py-4">
+                <div className="modal-body px-5 py-6">
                     {props.children}
                 </div>
                 {
