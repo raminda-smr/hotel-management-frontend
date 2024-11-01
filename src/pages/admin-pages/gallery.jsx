@@ -12,7 +12,8 @@ export default function Gallery() {
     const [galleryItems, setGalleryItems] = useState([])
     const [isGalleryItemsLoaded, setIsGalleryItemsLoaded] = useState(false)
 
-    const [isModalOpen, setIsModalOpen] = useState(false) 
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+    const [selectedItem, setSelectedItem] = useState("")
 
     const tableFields = ['Image', 'Name', 'Description', 'Actions']
 
@@ -31,28 +32,31 @@ export default function Gallery() {
 
     }, [isGalleryItemsLoaded])
 
-    function getDeleteConfirmation(id){
-        setIsModalOpen(!isModalOpen); 
+    function getDeleteConfirmation(id) {
+        
+        setSelectedItem(id)
+        setIsDeleteModalOpen(!isDeleteModalOpen)
     }
 
-    function deleteItem(id) {
-        
-        getDeleteConfirmation(id)
+    function deleteItem() {
 
-        // const token = localStorage.getItem('token')
+        const id = selectedItem
+        const token = localStorage.getItem('token')
 
-        // if (token != null) {
-        //     axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/gallery/' + id, {
-        //         headers: {
-        //             "Authorization": 'Bearer ' + token,
-        //             "Content-Type": "application/json"
-        //         }
-        //     }).then(
-        //         (res) => {
-        //             setIsGalleryItemsLoaded(false)
-        //         }
-        //     )
-        // }
+        if (token != null) {
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/gallery/' + id, {
+                headers: {
+                    "Authorization": 'Bearer ' + token,
+                    "Content-Type": "application/json"
+                }
+            }).then(
+                (res) => {
+                    setSelectedItem("")
+                    setIsGalleryItemsLoaded(false)
+                    setIsDeleteModalOpen(false)
+                }
+            )
+        }
     }
 
 
@@ -75,7 +79,7 @@ export default function Gallery() {
                                             <AdminTableTD>{galleryItem.description.substring(0, 50)}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(galleryItem._id) }}>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(galleryItem._id) }}>Delete</button>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
@@ -88,7 +92,18 @@ export default function Gallery() {
             </div>
 
             {
-                isModalOpen && ( <Modal></Modal>)
+                isDeleteModalOpen && (
+                    <Modal setIsModalOpen={setIsDeleteModalOpen} title="Delete gallery item"  >
+                        <p>Are you sure you want to delete this item?</p>
+                        <div className="confirmation-buttons flex justify-end mt-2">
+                            <button  onClick={deleteItem} className="bg-red-400 text-white px-5 py-1 ml-1 rounded-md hover:bg-red-500 ">Yes</button>
+                            <button onClick={()=>{ 
+                                setSelectedItem("") 
+                                setIsDeleteModalOpen(false)
+                                }} className="bg-blue-400 text-white px-5 py-1 ml-1 rounded-md hover:bg-blue-500">No</button>
+                        </div>
+                    </Modal>
+                )
             }
 
         </>
