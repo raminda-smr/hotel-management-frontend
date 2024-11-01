@@ -14,7 +14,7 @@ export default function Modal(props) {
     }
 
     return (
-        <div className='modal-backdrop w-full h-screen bg-black/30 top-0 left-0 fixed flex justify-center items-center z-10' onClick={handleBackdropClick} >
+        <div className='modal-backdrop w-full h-screen bg-black/70 top-0 left-0 fixed flex justify-center items-center z-10' onClick={handleBackdropClick} >
             <div className="modal bg-white  max-w-[512px] rounded-md overflow-hidden" >
                 <div className="modal-head flex justify-between items-center bg-gray-200">
                     <div className="title w-full text-center ">

@@ -6,6 +6,7 @@ import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
 import Modal from "../../components/common/modal/modal"
+import ModalButton from "../../components/common/modal/modalButton"
 
 export default function Gallery() {
 
@@ -96,11 +97,12 @@ export default function Gallery() {
                     <Modal setIsModalOpen={setIsDeleteModalOpen} title="Delete gallery item"  >
                         <p>Are you sure you want to delete this item?</p>
                         <div className="confirmation-buttons flex justify-end mt-2">
-                            <button  onClick={deleteItem} className="bg-red-400 text-white px-5 py-1 ml-1 rounded-md hover:bg-red-500 ">Yes</button>
-                            <button onClick={()=>{ 
+                            <ModalButton type="danger" onClick={deleteItem} >Yes</ModalButton>
+                            <ModalButton type="primary" onClick={()=>{ 
                                 setSelectedItem("") 
                                 setIsDeleteModalOpen(false)
-                                }} className="bg-blue-400 text-white px-5 py-1 ml-1 rounded-md hover:bg-blue-500">No</button>
+                                }} >No</ModalButton>
+                            
                         </div>
                     </Modal>
                 )
