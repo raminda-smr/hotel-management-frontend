@@ -8,17 +8,18 @@ import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
-import CategoriesCreate from "./categoriesCreate"
+import { useNavigate } from "react-router-dom"
+import { MdOutlineCreate } from "react-icons/md"
 
 function Categories() {
 
     const [categories, setCategories] = useState([])
     const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false)
 
-    const [isCreateModelOpen, setIsCreateModelOpen] = useState(false)
-
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+
+    const navigate = useNavigate()
 
     const tableFields = ['Image', 'Name', 'Price', 'Description', 'Action']
 
@@ -71,12 +72,19 @@ function Categories() {
         }
     }
 
+    function handleCreate() {
+        navigate("/admin/categories/create")
+    }
+
 
 
     return (
         <>
             <PageHeader to="/admin/categories" name="Categories" title="Categories" >
-                <PageHeaderButton onClick={()=>{ setIsCreateModelOpen(true) }}>Create</PageHeaderButton>
+                <PageHeaderButton onClick={handleCreate}>
+                    <MdOutlineCreate className='text-md ' />
+                    <span className='text-sm '>Create</span>
+                </PageHeaderButton>
             </PageHeader>
 
             <div className="category-data">
@@ -108,13 +116,7 @@ function Categories() {
             </div>
 
             {
-                isCreateModelOpen&& (
-                    <CategoriesCreate setIsModalOpen={setIsCreateModelOpen} />
-                )
-            }
 
-            {
-                
                 isDeleteModalOpen && (
                     <Modal setIsModalOpen={setIsDeleteModalOpen} title="Delete category item"  >
                         <p>Are you sure you want to delete this item?</p>

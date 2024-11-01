@@ -10,6 +10,7 @@ import PageNotFound from "../404-page/pageNotFound"
 import Users from './users'
 import Feedbacks from './feedbacks'
 import Gallery from './gallery'
+import CategoriesCreate from './categories/categoriesCreate'
 
 
 
@@ -28,7 +29,7 @@ export default function AdminPage() {
                 <div className='flex-1  '>
                     <TopMenu/>
 
-                    <div className="content-area p-4 pt-2 overflow-y-scroll h-screen">
+                    <div className="content-area p-4 pt-2 overflow-y-scroll h-screen pb-[100px]">
                         <Routes path="/*" >
                             <Route path="/" element={<Dashboard />} />
 
@@ -37,6 +38,7 @@ export default function AdminPage() {
                             <Route path="/rooms" element={<Rooms />} />
 
                             <Route path="/categories" element={<Categories />} />
+                            <Route path="/categories/create" element={<CategoriesCreate />} />
 
                             <Route path="/users" element={<Users />} />
 
