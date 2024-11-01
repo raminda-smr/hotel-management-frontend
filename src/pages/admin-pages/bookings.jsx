@@ -2,9 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import PageHeader from "../../components/admin/page-header/pageHeader"
 import AdminTable from "../../components/admin/admin-table/adminTable"
-import AdminTableHead from "../../components/admin/admin-table/adminTableHead"
 import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
-import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
 import Modal from "../../components/common/modal/modal"
@@ -21,7 +19,7 @@ export default function Bookings() {
     const tableFields = ['Booking ID', 'Room ID', 'Email', 'Phone', 'Status', 'Start Date', 'End Date', 'Actions']
 
     useEffect(() => {
-        // read categories
+        // read bookings
         const token = localStorage.getItem('token')
 
         if (token != null && !isBookingsLoaded) {
