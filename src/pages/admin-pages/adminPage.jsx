@@ -5,7 +5,7 @@ import TopMenu from "../../components/admin/top-menubar/topMenu"
 import Dashboard from "../../components/admin/dashboard/dashboard"
 import Bookings from './bookings'
 import Rooms from "./rooms"
-import Categories from "./categories"
+import Categories from "./categories/categories"
 import PageNotFound from "../404-page/pageNotFound"
 import Users from './users'
 import Feedbacks from './feedbacks'
