@@ -7,11 +7,16 @@ import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
 import AdminTableTH from "../../components/admin/admin-table/adminTableTH"
 import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
 import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
+import Modal from "../../components/common/modal/modal"
+import ModalButton from "../../components/common/modal/modalButton"
 
 export default function Bookings() {
 
     const [bookings, setBookings] = useState([])
     const [isBookingsLoaded, setIsBookingsLoaded] = useState(false)
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+    const [selectedItem, setSelectedItem] = useState("")
 
     const tableFields = ['Booking ID', 'Room ID', 'Email', 'Phone', 'Status', 'Start Date', 'End Date', 'Actions']
 
@@ -36,13 +41,28 @@ export default function Bookings() {
         }
     }, [isBookingsLoaded])
 
-    function deleteItem(bookingId) {
+    function getDeleteConfirmation(id) {
+        
+        setSelectedItem(id)
+        setIsDeleteModalOpen(!isDeleteModalOpen)
+    }
+
+    function deleteItem() {
+
+        const id = selectedItem
         const token = localStorage.getItem('token')
 
         if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/bookings/' + bookingId, {}).then(
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/bookings/' + id, {
+                headers: {
+                    "Authorization": 'Bearer ' + token,
+                    "Content-Type": "application/json"
+                }
+            }).then(
                 (res) => {
+                    setSelectedItem("")
                     setIsBookingsLoaded(false)
+                    setIsDeleteModalOpen(false)
                 }
             )
         }
@@ -71,7 +91,7 @@ export default function Bookings() {
                                             <AdminTableTD>{new Date(booking.end).toDateString()}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { deleteItem(booking.bookingId) }}>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(booking.bookingId) }}>Delete</button>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
@@ -82,6 +102,22 @@ export default function Bookings() {
                     </AdminTableBody>
                 </AdminTable>
             </div>
+
+            {
+                isDeleteModalOpen && (
+                    <Modal setIsModalOpen={setIsDeleteModalOpen} title="Delete booking"  >
+                        <p>Are you sure you want to delete this item?</p>
+                        <div className="confirmation-buttons flex justify-end mt-2">
+                            <ModalButton type="danger" onClick={deleteItem} >Yes</ModalButton>
+                            <ModalButton type="primary" onClick={()=>{ 
+                                setSelectedItem("") 
+                                setIsDeleteModalOpen(false)
+                                }} >No</ModalButton>
+                            
+                        </div>
+                    </Modal>
+                )
+            }
 
         </>
     )
