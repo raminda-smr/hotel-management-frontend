@@ -25,9 +25,19 @@ export default function CategoriesCreate(props) {
     const navigate = useNavigate()
 
     const token = localStorage.getItem("token")
+
     if(token == null){
         window.location.href="/login"
     }
+
+    function handleFileChange(e){
+        if (e.target.files && e.target.files.length > 0) {
+            setImage(e.target.files[0])
+        } else {
+            setImage(e.target.files[0])
+        }
+
+    };
 
     function goBack() {
         navigate("/admin/categories")
@@ -41,10 +51,9 @@ export default function CategoriesCreate(props) {
             return
         }else{
             // set form loading state
-            setIsLoading(ture)
+            setIsLoading(true)
         }
 
-        console.log("form submitted")
         uploadMedia(image).then(
             (snapshot) => {
                 getDownloadURL(snapshot.ref).then(
@@ -66,8 +75,8 @@ export default function CategoriesCreate(props) {
                             }
                         }).then(
                             (res)=>{
-                                console.log(res)
-                                setIsLoading(false)
+                                // console.log(res)
+                                goBack()
                             }
                         )
 
@@ -93,17 +102,17 @@ export default function CategoriesCreate(props) {
 
                     <h3 className="text-lg font-medium mb-3">Create Category</h3>
 
-                    <Input name="name" defaultValue="" label="Name*" onChange={(e) => { setName(e.target.value) }} />
+                    <Input name="name" defaultValue={name} label="Name*" onChange={(e) => { setName(e.target.value) }} />
 
-                    <Input name="price" type="number" min="0" step="0.01" defaultValue="" label="Price*" onChange={(e) => { setPrice(e.target.value) }} />
+                    <Input name="price" type="number" min="0" step="0.01" defaultValue={price} label="Price*" onChange={(e) => { setPrice(e.target.value) }} />
 
-                    <Input name="features" type="text" defaultValue="" onChange={(e) => { setFeatures(e.target.value) }} label="Features" helper="Comma seperated list" />
+                    <Input name="features" type="text" defaultValue={features} onChange={(e) => { setFeatures(e.target.value) }} label="Features" helper="Comma seperated list" />
 
-                    <FileSelector name="image" label="Image" setFile={setImage} />
+                    <FileSelector name="image" label="Image" defaultValue={image} onChange={handleFileChange} />
 
                     <Textarea name="description" label="Description*" onChange={(e) => { setDescription(e.target.value) }}></Textarea>
 
-                    <button type="submit" onClick={handleSubmit} className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 hover:bg-blue-600" >
+                    <button type="submit" onClick={handleSubmit} className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 flex justify-center hover:bg-blue-600" >
                         {
                             isLoading? 
                             (<div className="border-2 border-t-white w-[20px] h-[20px] rounded-full animate-spin"></div>)

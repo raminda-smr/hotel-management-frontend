@@ -12,7 +12,7 @@ export default function Input(props) {
                 name={props.name}
                 onChange={props.onChange}
                 type={type}
-                {...(props.defaultValue && { defaultValue: props.defaultValue })}
+                {...(props.defaultValue && { min: props.defaultValue })}
                 {...(props.min && { min: props.min })}
                 {...(props.max && { max: props.max })}
                 {...(props.step && { step: props.step })}
