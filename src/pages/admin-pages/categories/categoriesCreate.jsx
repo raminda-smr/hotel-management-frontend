@@ -49,6 +49,16 @@ export default function CategoriesCreate(props) {
     }
 
 
+    function resetForm() {
+        setName(" ");
+        setPrice("0.00");
+        setFeatures(" ");
+        setImage(null);
+        setDescription(" ");
+        setIsLoading(false);
+    }
+
+
     function saveCategory(name, price, features, url, description) {
 
         const category = {
@@ -68,6 +78,7 @@ export default function CategoriesCreate(props) {
             (res) => {
                 toast.success('Category successfully created!');
                 // goBack()
+                resetForm()
             }
         ).catch(
             (error) => {
@@ -79,7 +90,7 @@ export default function CategoriesCreate(props) {
 
 
     function handleSubmit(e) {
-        // e.preventDefault()
+        e.preventDefault()
 
         if (isLoading) {
             // prevent button click while form processing
