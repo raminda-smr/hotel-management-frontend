@@ -16,7 +16,7 @@ export default function FileSelector(props) {
 
             <label className="flex rounded-md w-full">
                 <div className="flex-1 py-2 px-4 text-gray-500 border border-gray-300 rounded-md rounded-e-none ">
-                    { props.defaultValue && props.defaultValue.name || "No file selected"} 
+                    { props.value && props.value.name || "No file selected"} 
                 </div>
                 <div className="bg-blue-500 text-white px-4 py-2 rounded-r-md cursor-pointer flex items-center">
                     <IoCloudUploadOutline className="mr-1 mt-1 text-xl" />
@@ -26,6 +26,7 @@ export default function FileSelector(props) {
                     type="file"
                     name={props.name}
                     onChange={props.onChange}
+                    {...(props.required && { required: props.required })}
                     className="hidden" 
                 />
             </label>

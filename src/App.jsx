@@ -5,6 +5,7 @@ import HomePage from './pages/client-page/homePage'
 import PageNotFound from './pages/404-page/pageNotFound'
 import LoginPage from './pages/login-page/LoginPage'
 import TestPage from './pages/test-page/testPage'
+import { Toaster } from 'react-hot-toast'
 
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
 
     return (
         <BrowserRouter>
+            <Toaster position="top-right" reverseOrder={false} />
+
             <Routes path="/*">
                 <Route path="/*" element={<HomePage />} />
                 <Route path="/admin/*" element={<AdminPage />} />
@@ -19,6 +22,7 @@ function App() {
                 <Route path="/test" element={<TestPage />} />
 
             </Routes>
+            
         </BrowserRouter>
     )
 }
