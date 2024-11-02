@@ -6,14 +6,15 @@ export default function FileSelector(props) {
     const [file, setFile] = useState(null)
 
     let label = props.label ? props.label : "Label"
-    let defaultValue = props.defaultValue ? props.defaultValue : ""
     let helper = props.helper ? "(" + props.helper + ")" : ""
 
     function handleFileChange(e){
         if (e.target.files && e.target.files.length > 0) {
             setFile(e.target.files[0]); 
+            props.setFile(e.target.files[0])
         } else {
             setFile(null);
+            props.setFile(e.target.files[0])
         }
         props.onChange && props.onChange(e);
     };
