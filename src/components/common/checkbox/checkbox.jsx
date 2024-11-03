@@ -10,11 +10,9 @@ export default function CheckBox(props) {
                 name={props.name}
                 onChange={props.onChange}
                 type="checkbox"
-                {...(props.defaultValue && { min: props.defaultValue })}
+                checked={props.checked}
+                value={props.value}
                 {...(props.required && { required: props.required })}
-                {...(props.value && { value: props.value })}
-                {...(props.checked && { checked: props.checked })}
-                {...(props.defaultChecked && { defaultChecked: props.defaultChecked })}
                 
                 className=" border border-gray-300 rounded-md p-2" />
                 <span className="ml-1">{label}</span> <span className="text-xs text-gray-400">{helper}</span></label>

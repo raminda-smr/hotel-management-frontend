@@ -10,7 +10,7 @@ export default function Textarea(props) {
             <textarea
                 name={props.name}
                 onChange={props.onChange}
-                {...(props.defaultValue && { defaultValue: props.defaultValue })}
+                value={props.value}
                 {...(props.required && { required: props.required })}
                 {...(props.value && { value: props.value })}
                 className="border border-gray-300 rounded-md w-full p-2" ></textarea>
