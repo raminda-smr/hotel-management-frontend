@@ -4,13 +4,14 @@ import Sidebar from "../../components/admin/sidebar/sideBar"
 import TopMenu from "../../components/admin/top-menubar/topMenu"
 import Dashboard from "../../components/admin/dashboard/dashboard"
 import Bookings from './bookings'
-import Rooms from "./rooms"
+import Rooms from "./rooms/rooms"
 import Categories from "./categories/categories"
 import PageNotFound from "../404-page/pageNotFound"
 import Users from './users'
 import Feedbacks from './feedbacks'
 import Gallery from './gallery'
 import CategoriesCreate from './categories/categoriesCreate'
+import RoomsCreate from './rooms/roomsCreate'
 
 
 
@@ -36,6 +37,7 @@ export default function AdminPage() {
                             <Route path="/bookings" element={<Bookings />} />
 
                             <Route path="/rooms" element={<Rooms />} />
+                            <Route path="/rooms/create" element={<RoomsCreate />} />
 
                             <Route path="/categories" element={<Categories />} />
                             <Route path="/categories/create" element={<CategoriesCreate />} />
