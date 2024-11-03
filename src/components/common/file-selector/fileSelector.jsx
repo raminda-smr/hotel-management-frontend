@@ -13,7 +13,7 @@ export default function FileSelector(props) {
         selectedFile = props.value.length + " Files selected";
     }
     else if(props.value && props.value.name){
-        selectedFile = props.value.name
+        selectedFile = props.value.name.length > 30 ? props.value.name.slice(0, 27) + "..." : props.value.name
     }
 
 
@@ -24,7 +24,7 @@ export default function FileSelector(props) {
                 {label} <span className="text-xs text-gray-400">{helper}</span>
             </label>
 
-            <label className="flex rounded-md w-full">
+            <label htmlFor={props.name} className="flex rounded-md w-full">
                 <div className="flex-1 py-2 px-4 text-gray-500 border border-gray-300 rounded-md rounded-e-none ">
                     { selectedFile } 
                 </div>
@@ -35,6 +35,7 @@ export default function FileSelector(props) {
                 <input
                     type="file"
                     name={props.name}
+                    id={props.name}
                     onChange={props.onChange}
                     {...(props.required && { required: props.required })}
                     {...(props.multiple && { multiple: props.multiple })}

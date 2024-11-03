@@ -14,12 +14,11 @@ import toast from "react-hot-toast"
 
 export default function GalleryCreate(props) {
 
+    const initialGalleryItem = {name:"" , image: "", description:"" }
+
+    const [galleryItem, setGalleryItem] = useState(initialGalleryItem)
     const [image, setImage] = useState(null)
-
-
-    const [galleryItem, setGalleryItem] = useState({})
     const [isLoading, setIsLoading] = useState(false);
-
 
     const navigate = useNavigate()
 
@@ -30,11 +29,14 @@ export default function GalleryCreate(props) {
 
     function handleChange(e){
         const {name, value} = e.target
-        setGalleryItem({...PrevData, [name]: value })
+        setGalleryItem((prevData) =>({
+            ...prevData, 
+            [name]: value 
+        }))
     }
 
     function handleFileChange(e) {
-        console.log(e)
+        // console.log(e)
         if (e.target.files && e.target.files.length > 0) {
             setImage(e.target.files[0])
         } else {
@@ -50,26 +52,17 @@ export default function GalleryCreate(props) {
 
 
     function resetForm() {
-        setName(" ");
-        setPrice("0.00");
-        setFeatures(" ");
-        setImage(null);
-        setDescription(" ");
-        setIsLoading(false);
+        setImage(null)
+        setGalleryItem(initialGalleryItem)
+        setIsLoading(false)
     }
 
 
-    function saveCategory(name, price, features, url, description) {
+    function saveGalleryItem(url) {
 
-        const category = {
-            name: name,
-            price: price,
-            features: features.split(","),
-            image: url,
-            description: description
-        }
+        setGalleryItem(galleryItem["image"] = url)
 
-        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/categories/', category, {
+        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/gallery', galleryItem, {
             headers: {
                 "Authorization": 'Bearer ' + token,
                 "Content-Type": "application/json"
@@ -77,12 +70,10 @@ export default function GalleryCreate(props) {
         }).then(
             (res) => {
                 toast.success('Category successfully created!');
-                // goBack()
                 resetForm()
             }
         ).catch(
             (error) => {
-                console.error("Error creating category:", error);
                 toast.error("Failed to create category.");
             }
         )
@@ -106,15 +97,15 @@ export default function GalleryCreate(props) {
                     getDownloadURL(snapshot.ref).then(
                         (url) => {
                             // console.log(url)
-                            saveCategory(name, price, features, url, description)
+                            saveGalleryItem(url)
                         }
                     )
                 }
             )
         }
         else{
-            const url = null
-            saveCategory(name, price, features, url, description)
+            toast.error("Image field is required.");
+            setIsLoading(false)
         }
     }
 
@@ -135,7 +126,7 @@ export default function GalleryCreate(props) {
 
                     <Input name="name" required="required" value={galleryItem.name} label="Name*" onChange={handleChange} />
 
-                    <FileSelector name="image" label="Image" value={image} onChange={handleFileChange} />
+                    <FileSelector name="image" label="Image" required="required" value={image} onChange={handleFileChange} />
 
                     <Textarea name="description" required="required" value={galleryItem.description} label="Description*"  onChange={handleChange} ></Textarea>
 

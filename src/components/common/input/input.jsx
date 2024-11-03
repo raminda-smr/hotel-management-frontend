@@ -1,7 +1,8 @@
 export default function Input(props) {
 
-    let label = props.label ? props.label : "Label"
+    let label = props.label != undefined ? props.label : "Label"
     let type = props.type ? props.type : 'text'
+    let value = props.value != undefined ? props.value : ""
     let defaultValue = props.defaultValue ? props.defaultValue : ""
     let helper = props.helper ? "(" + props.helper + ")" : ""
 
@@ -12,7 +13,7 @@ export default function Input(props) {
                 name={props.name}
                 onChange={props.onChange}
                 type={type}
-                value={props.value}
+                value={value}
                 {...(props.required && { required: props.required })}
                 {...(props.min && { min: props.min })}
                 {...(props.max && { max: props.max })}
