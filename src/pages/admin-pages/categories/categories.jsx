@@ -10,6 +10,7 @@ import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import { useNavigate } from "react-router-dom"
 import { MdOutlineCreate } from "react-icons/md"
+import toast from "react-hot-toast"
 
 function Categories() {
 
@@ -67,6 +68,7 @@ function Categories() {
                     setSelectedItem("")
                     setIsCategoriesLoaded(false)
                     setIsDeleteModalOpen(false)
+                    toast.success("Category deleted successfully!")
                 }
             )
         }
