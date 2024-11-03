@@ -9,9 +9,10 @@ import Categories from "./categories/categories"
 import PageNotFound from "../404-page/pageNotFound"
 import Users from './users'
 import Feedbacks from './feedbacks'
-import Gallery from './gallery'
+import Gallery from './gallery/gallery'
 import CategoriesCreate from './categories/categoriesCreate'
 import RoomsCreate from './rooms/roomsCreate'
+import GalleryCreate from './gallery/galleryCreate'
 
 
 
@@ -47,6 +48,7 @@ export default function AdminPage() {
                             <Route path="/feedbacks" element={<Feedbacks />} />
 
                             <Route path="/gallery" element={<Gallery />} />
+                            <Route path="/gallery/create" element={<GalleryCreate />} />
 
                             <Route path="/*" element={<PageNotFound />} />
 

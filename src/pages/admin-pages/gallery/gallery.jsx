@@ -1,12 +1,15 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import PageHeader from "../../components/admin/page-header/pageHeader"
-import AdminTable from "../../components/admin/admin-table/adminTable"
-import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
-import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
-import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
-import Modal from "../../components/common/modal/modal"
-import ModalButton from "../../components/common/modal/modalButton"
+import PageHeader from "../../../components/admin/page-header/pageHeader"
+import AdminTable from "../../../components/admin/admin-table/adminTable"
+import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
+import AdminTableBody from "../../../components/admin/admin-table/adminTableBody"
+import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
+import Modal from "../../../components/common/modal/modal"
+import ModalButton from "../../../components/common/modal/modalButton"
+import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
+import { MdOutlineCreate } from "react-icons/md"
+import { useNavigate } from "react-router-dom"
 
 export default function Gallery() {
 
@@ -15,6 +18,8 @@ export default function Gallery() {
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+
+    const navigate = useNavigate()
 
     const tableFields = ['Image', 'Name', 'Description', 'Actions']
 
@@ -60,10 +65,18 @@ export default function Gallery() {
         }
     }
 
+    function handleCreate(){
+        navigate("/admin/gallery/create")
+    }
 
     return (
         <>
-            <PageHeader to="/admin/gallery" name="Gallery" title="Gallery" />
+            <PageHeader to="/admin/gallery" name="Gallery" title="Gallery" >
+                <PageHeaderButton onClick={handleCreate}>
+                    <MdOutlineCreate className='text-md ' />
+                    <span className='text-sm '>Create</span>
+                </PageHeaderButton>
+            </PageHeader>
 
             <div className="gallery-data">
                 <AdminTable data={galleryItems} tableFields={tableFields}>
