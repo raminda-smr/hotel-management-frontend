@@ -18,6 +18,7 @@ export default function Input(props) {
                 {...(props.min && { min: props.min })}
                 {...(props.max && { max: props.max })}
                 {...(props.step && { step: props.step })}
+                {...(props.disabled && { disabled: props.disabled })}
                 className=" border border-gray-300 rounded-md w-full p-2" />
         </div>
     )

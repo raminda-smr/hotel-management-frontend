@@ -1,4 +1,5 @@
 import axios from "axios"
+import toast from "react-hot-toast"
 import { useEffect, useState } from "react"
 import PageHeader from "../../components/admin/page-header/pageHeader"
 import AdminTable from "../../components/admin/admin-table/adminTable"
@@ -61,6 +62,7 @@ export default function Bookings() {
                     setSelectedItem("")
                     setIsBookingsLoaded(false)
                     setIsDeleteModalOpen(false)
+                    toast.success('Booking deleted successfully')
                 }
             )
         }

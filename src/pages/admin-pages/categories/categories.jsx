@@ -8,9 +8,10 @@ import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { MdOutlineCreate } from "react-icons/md"
 import toast from "react-hot-toast"
+import { FaEdit, FaRegTrashAlt } from "react-icons/fa"
 
 function Categories() {
 
@@ -45,20 +46,20 @@ function Categories() {
         }
     }, [isCategoriesLoaded])
 
-    function getDeleteConfirmation(id) {
+    function getDeleteConfirmation(name) {
 
-        setSelectedItem(id)
+        setSelectedItem(name)
         setIsDeleteModalOpen(!isDeleteModalOpen)
     }
 
 
     function deleteItem() {
 
-        const id = selectedItem
+        const name = selectedItem
         const token = localStorage.getItem('token')
 
         if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/' + id, {
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/' + name, {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
@@ -71,8 +72,8 @@ function Categories() {
                     toast.success("Category deleted successfully!")
                 }
             ).catch(
-                (err) =>{
-                    toast.error("Category deleted failed")
+                (err) => {
+                    toast.error("Category delete failed")
                 }
             )
         }
@@ -109,7 +110,14 @@ function Categories() {
                                             <AdminTableTD>{category.description.substring(0, 50)}...</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(category._id) }}>Delete</button>
+                                                <div className="flex items-center">
+                                                    <Link to="/admin/categories/update" state={category} className="bg-blue-400 inline-block text-white text-xs p-2 rounded-md">
+                                                        <FaEdit />
+                                                    </Link>
+                                                    <button className="bg-red-400 text-white text-xs p-2 ml-1 rounded-md" onClick={() => { getDeleteConfirmation(category.name) }}>
+                                                        <FaRegTrashAlt />
+                                                    </button>
+                                                </div>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )

@@ -12,7 +12,7 @@ import { getDownloadURL } from "firebase/storage"
 import axios from "axios"
 import toast from "react-hot-toast"
 
-export default function CategoriesCreate(props) {
+export default function CategoryCreate(props) {
 
     const [image, setImage] = useState(null)
 
