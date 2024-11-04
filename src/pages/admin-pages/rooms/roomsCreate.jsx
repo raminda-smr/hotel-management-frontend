@@ -16,7 +16,7 @@ export default function RoomsCreate() {
     const initialRoom = { roomNumber: "", category: "", description: "", maxGuests: 1, disabled: false, images: [], notes: "" }
 
     const [room, setRoom] = useState(initialRoom)
-    const [images, setImages] = useState(initialRoom)
+    const [images, setImages] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
     const [categories, setCategories] = useState([])
@@ -78,6 +78,12 @@ export default function RoomsCreate() {
         }
     }
 
+    function resetForm(){
+        setRoom(initialRoom)
+        setIsLoading(false)
+        setImages(null)
+    }
+
 
     function saveRoom() {
 
@@ -90,8 +96,7 @@ export default function RoomsCreate() {
         }).then(
             (res) => {
                 toast.success('Room successfully created!');
-                // goBack()
-                setRoom(initialRoom)
+                resetForm()
                
             }
         ).catch(
@@ -104,6 +109,14 @@ export default function RoomsCreate() {
 
     function handleSubmit(e){
         e.preventDefault()
+
+        if (isLoading) {
+            // prevent button click while form processing
+            return
+        } else {
+            // set form loading state
+            setIsLoading(true)
+        }
         saveRoom()
     }
 
