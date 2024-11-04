@@ -9,7 +9,8 @@ import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import { MdOutlineCreate } from "react-icons/md"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { FaEdit, FaTrashAlt } from "react-icons/fa"
 
 export default function Gallery() {
 
@@ -39,7 +40,7 @@ export default function Gallery() {
     }, [isGalleryItemsLoaded])
 
     function getDeleteConfirmation(id) {
-        
+
         setSelectedItem(id)
         setIsDeleteModalOpen(!isDeleteModalOpen)
     }
@@ -65,7 +66,7 @@ export default function Gallery() {
         }
     }
 
-    function handleCreate(){
+    function handleCreate() {
         navigate("/admin/gallery/create")
     }
 
@@ -93,7 +94,12 @@ export default function Gallery() {
                                             <AdminTableTD>{galleryItem.description.substring(0, 50)}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(galleryItem._id) }}>Delete</button>
+                                                <div className="flex items-center">
+                                                    <Link to="/admin/categories/update" state={galleryItem} className="bg-blue-400 inline-block text-white text-xs p-2 rounded-md">
+                                                        <FaEdit />
+                                                    </Link>
+                                                    <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(galleryItem._id) }}><FaTrashAlt /></button>
+                                                </div>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
@@ -111,11 +117,11 @@ export default function Gallery() {
                         <p>Are you sure you want to delete this item?</p>
                         <div className="confirmation-buttons flex justify-end mt-2">
                             <ModalButton type="danger" onClick={deleteItem} >Yes</ModalButton>
-                            <ModalButton type="primary" onClick={()=>{ 
-                                setSelectedItem("") 
+                            <ModalButton type="primary" onClick={() => {
+                                setSelectedItem("")
                                 setIsDeleteModalOpen(false)
-                                }} >No</ModalButton>
-                            
+                            }} >No</ModalButton>
+
                         </div>
                     </Modal>
                 )
