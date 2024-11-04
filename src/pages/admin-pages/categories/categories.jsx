@@ -45,20 +45,20 @@ function Categories() {
         }
     }, [isCategoriesLoaded])
 
-    function getDeleteConfirmation(name) {
+    function getDeleteConfirmation(id) {
 
-        setSelectedItem(name)
+        setSelectedItem(id)
         setIsDeleteModalOpen(!isDeleteModalOpen)
     }
 
 
     function deleteItem() {
 
-        const name = selectedItem
+        const id = selectedItem
         const token = localStorage.getItem('token')
 
         if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/' + name, {
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/categories/' + id, {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
@@ -69,6 +69,10 @@ function Categories() {
                     setIsCategoriesLoaded(false)
                     setIsDeleteModalOpen(false)
                     toast.success("Category deleted successfully!")
+                }
+            ).catch(
+                (err) =>{
+                    toast.error("Category deleted failed")
                 }
             )
         }
@@ -105,7 +109,7 @@ function Categories() {
                                             <AdminTableTD>{category.description.substring(0, 50)}...</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(category.name) }}>Delete</button>
+                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(category._id) }}>Delete</button>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
