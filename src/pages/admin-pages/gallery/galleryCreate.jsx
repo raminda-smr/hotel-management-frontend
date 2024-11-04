@@ -1,5 +1,9 @@
+import axios from "axios"
+import toast from "react-hot-toast"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { MdOutlineArrowBack } from "react-icons/md"
+import { getDownloadURL } from "firebase/storage"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import Input from "../../../components/common/input/input"
@@ -7,10 +11,7 @@ import FileSelector from "../../../components/common/file-selector/fileSelector"
 import Textarea from "../../../components/common/textarea/textarea"
 import uploadMedia from "../../../utils/mediaUpload"
 
-import { useState } from "react"
-import { getDownloadURL } from "firebase/storage"
-import axios from "axios"
-import toast from "react-hot-toast"
+
 
 export default function GalleryCreate(props) {
 
@@ -69,12 +70,12 @@ export default function GalleryCreate(props) {
             }
         }).then(
             (res) => {
-                toast.success('Category successfully created!');
+                toast.success('Gallery item successfully created!');
                 resetForm()
             }
         ).catch(
             (error) => {
-                toast.error("Failed to create category.");
+                toast.error("Failed to create gallery item.");
             }
         )
     }
