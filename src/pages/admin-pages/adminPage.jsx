@@ -11,7 +11,7 @@ import Users from './users'
 import Feedbacks from './feedbacks'
 import Gallery from './gallery/gallery'
 import CategoryCreate from './categories/categoryCreate'
-import RoomsCreate from './rooms/roomsCreate'
+import RoomCreate from './rooms/roomCreate'
 import GalleryCreate from './gallery/galleryCreate'
 import CategoryUpdate from './categories/categoryUpdate'
 import GalleryUpdate from './gallery/galleryUpdate'
@@ -40,7 +40,7 @@ export default function AdminPage() {
                             <Route path="/bookings" element={<Bookings />} />
 
                             <Route path="/rooms" element={<Rooms />} />
-                            <Route path="/rooms/create" element={<RoomsCreate />} />
+                            <Route path="/rooms/create" element={<RoomCreate />} />
 
                             <Route path="/categories" element={<Categories />} />
                             <Route path="/categories/create" element={<CategoryCreate />} />

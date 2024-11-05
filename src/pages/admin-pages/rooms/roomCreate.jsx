@@ -11,7 +11,7 @@ import axios from "axios"
 import CheckBox from "../../../components/common/checkbox/checkbox"
 import toast from "react-hot-toast"
 
-export default function RoomsCreate() {
+export default function RoomCreate() {
 
     const initialRoom = { roomNumber: "", category: "", description: "", maxGuests: 1, disabled: false, images: [], notes: "" }
 
