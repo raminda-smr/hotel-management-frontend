@@ -15,6 +15,7 @@ import RoomCreate from './rooms/roomCreate'
 import GalleryCreate from './gallery/galleryCreate'
 import CategoryUpdate from './categories/categoryUpdate'
 import GalleryUpdate from './gallery/galleryUpdate'
+import RoomUpdate from './rooms/roomUpdate'
 
 
 
@@ -41,6 +42,7 @@ export default function AdminPage() {
 
                             <Route path="/rooms" element={<Rooms />} />
                             <Route path="/rooms/create" element={<RoomCreate />} />
+                            <Route path="/rooms/update" element={<RoomUpdate />} />
 
                             <Route path="/categories" element={<Categories />} />
                             <Route path="/categories/create" element={<CategoryCreate />} />

@@ -9,7 +9,8 @@ import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import { MdOutlineCreate } from "react-icons/md"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { FaEdit, FaTrashAlt } from "react-icons/fa"
 
 
 function Rooms() {
@@ -97,7 +98,14 @@ function Rooms() {
                                             <AdminTableTD>{room.description.substring(0, 50)}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(room.roomNumber) }}>Delete</button>
+
+                                                <div className="flex items-center">
+                                                    <Link to="/admin/rooms/update" state={room} className="bg-blue-400 inline-block text-white text-xs p-2 rounded-md">
+                                                        <FaEdit />
+                                                    </Link>
+                                                    <button className="bg-red-400 text-white text-xs p-2 m-1 rounded-md" onClick={() => { getDeleteConfirmation(room.roomNumber) }}><FaTrashAlt /></button>
+                                                </div>
+
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
