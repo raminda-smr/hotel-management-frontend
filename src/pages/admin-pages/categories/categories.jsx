@@ -92,7 +92,7 @@ function Categories() {
                 </PageHeaderButton>
             </PageHeader>
 
-            <div className="category-data">
+            <div className="category-data p-4">
                 <AdminTable data={categories} tableFields={tableFields}>
                     <AdminTableBody>
                         {

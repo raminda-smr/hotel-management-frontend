@@ -34,7 +34,7 @@ export default function AdminPage() {
                 <div className='flex-1  '>
                     <TopMenu/>
 
-                    <div className="content-area p-4 pt-2 overflow-y-scroll h-screen pb-[100px]">
+                    <div className="content-area bg-gray-200 overflow-y-scroll h-screen pb-[100px]">
                         <Routes path="/*" >
                             <Route path="/" element={<Dashboard />} />
 
