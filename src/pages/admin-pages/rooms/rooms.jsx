@@ -1,5 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { FaEdit, FaPlus, FaRegTrashAlt } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import AdminTable from "../../../components/admin/admin-table/adminTable"
 import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
@@ -8,9 +10,7 @@ import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
-import { MdOutlineCreate } from "react-icons/md"
-import { Link, useNavigate } from "react-router-dom"
-import { FaEdit, FaTrashAlt } from "react-icons/fa"
+
 
 
 function Rooms() {
@@ -77,13 +77,12 @@ function Rooms() {
         <>
             <PageHeader to="/admin/rooms" name="Rooms" title="Rooms" >
                 <PageHeaderButton onClick={handleCreate}>
-                    <MdOutlineCreate className='text-md ' />
-                    <span className='text-sm '>Create</span>
+                    <FaPlus className="text-xl m-1" />
                 </PageHeaderButton>
             </PageHeader>
 
 
-            <div className="room-data">
+            <div className="room-data p-4">
                 <AdminTable data={rooms} tableFields={tableFields}>
                     <AdminTableBody>
                         {
@@ -100,10 +99,10 @@ function Rooms() {
                                             <AdminTableTD>
 
                                                 <div className="flex items-center">
-                                                    <Link to="/admin/rooms/update" state={room} className="bg-blue-400 inline-block text-white text-xs p-2 rounded-md">
+                                                    <Link to="/admin/rooms/update" state={room} className="inline-block text-gray-500 rounded-full text-lg hover:text-green-600">
                                                         <FaEdit />
                                                     </Link>
-                                                    <button className="bg-red-400 text-white text-xs p-2 m-1 rounded-md" onClick={() => { getDeleteConfirmation(room.roomNumber) }}><FaTrashAlt /></button>
+                                                    <button className="text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(room.roomNumber) }}><FaRegTrashAlt /></button>
                                                 </div>
 
                                             </AdminTableTD>

@@ -126,13 +126,13 @@ export default function GalleryUpdate(props) {
         <>
             <PageHeader to="/admin/gallery" name="Gallery" title="Update gallery item" >
                 <PageHeaderButton onClick={goBack}>
-                    <MdOutlineArrowBack className='text-md ' />
-                    <span className='text-sm '>Back</span>
+                    <MdOutlineArrowBack className='text-2xl ' />
+                    <span className='text-base pr-2'>Back</span>
                 </PageHeaderButton>
             </PageHeader>
 
             <div className="form-container flex justify-center mt-8">
-                <form onSubmit={handleSubmit} className="min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
+                <form onSubmit={handleSubmit} className="bg-white min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
 
                     <h3 className="text-lg font-medium mb-3">Update Gallery Item</h3>
 

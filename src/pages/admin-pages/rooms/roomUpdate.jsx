@@ -140,22 +140,22 @@ export default function RoomUpdate() {
         <>
             <PageHeader to="/admin/rooms" name="Categories" title="Update room" >
                 <PageHeaderButton onClick={goBack}>
-                    <MdOutlineArrowBack className='text-md ' />
-                    <span className='text-sm '>Back</span>
+                    <MdOutlineArrowBack className='text-2xl ' />
+                    <span className='text-base pr-2'>Back</span>
                 </PageHeaderButton>
             </PageHeader>
 
             <div className="form-container flex justify-center mt-8">
-                <form onSubmit={handleSubmit} className="min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
+                <form onSubmit={handleSubmit} className="bg-white min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
 
                     <h3 className="text-lg font-medium mb-3">Update room</h3>
 
                     <Input name="roomNumber" type="number" label="Room number*" required="required" min="1" step="1" onChange={handleChange} value={room.roomNumber} />
 
-                    <Select name="category" required="required" label="Category*"  onChange={handleChange} >
+                    <Select name="category" required="required" label="Category*" defaultValue={room.category} onChange={handleChange} >
                         <option value="">Select a category</option>
                         {categories.map((item, index) =>
-                            <option key={index} selected={room.category === item.name} value={item.name} >{item.name}</option>
+                            <option key={index} value={item.name} >{item.name}</option>
                         )}
                     </Select>
 
