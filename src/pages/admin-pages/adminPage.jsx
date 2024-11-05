@@ -8,7 +8,7 @@ import Rooms from "./rooms/rooms"
 import Categories from "./categories/categories"
 import PageNotFound from "../404-page/pageNotFound"
 import Users from './users'
-import Feedbacks from './feedbacks'
+import Feedbacks from './feedbacks/feedbacks'
 import Gallery from './gallery/gallery'
 import CategoryCreate from './categories/categoryCreate'
 import RoomCreate from './rooms/roomCreate'
