@@ -112,7 +112,7 @@ function Categories() {
                                                     <Link to="/admin/categories/update" state={category} className="inline-block text-gray-500 rounded-full text-lg hover:text-green-600">
                                                         <FaEdit />
                                                     </Link>
-                                                    <button className=" text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(category.name) }}>
+                                                    <button className=" text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(category.name) }} >
                                                         <FaRegTrashAlt />
                                                     </button>
                                                 </div>

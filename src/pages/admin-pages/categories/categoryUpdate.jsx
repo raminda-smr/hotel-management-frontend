@@ -133,7 +133,7 @@ export default function CategoryUpdate(props) {
             </PageHeader>
 
             <div className="form-container flex justify-center mt-8">
-                <form onSubmit={handleSubmit} className="min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
+                <form onSubmit={handleSubmit} className="bg-white min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
 
                     <h3 className="text-lg font-medium mb-3">Update Category</h3>
 
