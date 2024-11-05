@@ -9,9 +9,8 @@ import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import { Link, useNavigate } from "react-router-dom"
-import { MdOutlineCreate } from "react-icons/md"
 import toast from "react-hot-toast"
-import { FaEdit, FaRegTrashAlt } from "react-icons/fa"
+import { FaEdit, FaPlus, FaRegTrashAlt } from "react-icons/fa"
 
 function Categories() {
 
@@ -89,12 +88,11 @@ function Categories() {
         <>
             <PageHeader to="/admin/categories" name="Categories" title="Categories" >
                 <PageHeaderButton onClick={handleCreate}>
-                    <MdOutlineCreate className='text-md ' />
-                    <span className='text-sm '>Create</span>
+                    <FaPlus  className="text-xl m-1" />
                 </PageHeaderButton>
             </PageHeader>
 
-            <div className="category-data">
+            <div className="category-data p-4">
                 <AdminTable data={categories} tableFields={tableFields}>
                     <AdminTableBody>
                         {
@@ -111,10 +109,10 @@ function Categories() {
 
                                             <AdminTableTD>
                                                 <div className="flex items-center">
-                                                    <Link to="/admin/categories/update" state={category} className="bg-blue-400 inline-block text-white text-xs p-2 rounded-md">
+                                                    <Link to="/admin/categories/update" state={category} className="inline-block text-gray-500 rounded-full text-lg hover:text-green-600">
                                                         <FaEdit />
                                                     </Link>
-                                                    <button className="bg-red-400 text-white text-xs p-2 ml-1 rounded-md" onClick={() => { getDeleteConfirmation(category.name) }}>
+                                                    <button className=" text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(category.name) }} >
                                                         <FaRegTrashAlt />
                                                     </button>
                                                 </div>
