@@ -1,6 +1,6 @@
 export default function PageHeaderButton(props) {
     return (
-        <button onClick={props.onClick} className="bg-blue-500 text-white  py-2 px-3 rounded flex items-center hover:bg-blue-600">
+        <button onClick={props.onClick} className="text-gray-100 bg-amber-500 font-bold text-xl p-3 rounded-full flex items-center transition-all duration-300 hover:text-white hover:bg-blue-500 hover:animate-pulse">
             {props.children}
         </button>
     )

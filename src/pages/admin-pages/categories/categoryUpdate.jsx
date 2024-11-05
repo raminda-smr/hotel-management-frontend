@@ -22,29 +22,29 @@ export default function CategoryUpdate(props) {
     const location = useLocation()
     const navigate = useNavigate()
 
-    if(location.state == null){
-        window.location.href="/admin/categories"
+    if (location.state == null) {
+        window.location.href = "/admin/categories"
     }
 
     const [image, setImage] = useState(null)
 
     const initialCategory = {
         name: location.state.name,
-        price: location.state.price, 
+        price: location.state.price,
         features: location.state.features.join(),
         image: location.state.image,
         description: location.state.description
     }
 
-    const [category, setCategory ] = useState(initialCategory)
+    const [category, setCategory] = useState(initialCategory)
     const [isLoading, setIsLoading] = useState(false);
 
 
-    function handleChange(e){
-        const {name, value} = e.target
-        setCategory((prevData)=> ({ ...prevData,[name]:value }))
+    function handleChange(e) {
+        const { name, value } = e.target
+        setCategory((prevData) => ({ ...prevData, [name]: value }))
     }
-    
+
     // make image selected
     function handleFileChange(e) {
         console.log(e)
@@ -73,8 +73,8 @@ export default function CategoryUpdate(props) {
         // prevent changing category name
         setCategory(category["name"] = initialCategory.name)
         setCategory(category["image"] = url)
-        
-        axios.put(import.meta.env.VITE_BACKEND_URL + '/api/categories/' +initialCategory.name , category, {
+
+        axios.put(import.meta.env.VITE_BACKEND_URL + '/api/categories/' + initialCategory.name, category, {
             headers: {
                 "Authorization": 'Bearer ' + token,
                 "Content-Type": "application/json"
@@ -104,7 +104,7 @@ export default function CategoryUpdate(props) {
             setIsLoading(true)
         }
 
-        if(image != null) {
+        if (image != null) {
             uploadMedia(image).then(
                 (snapshot) => {
                     getDownloadURL(snapshot.ref).then(
@@ -116,7 +116,7 @@ export default function CategoryUpdate(props) {
                 }
             )
         }
-        else{
+        else {
             const url = initialCategory.image
             updateCategory(url)
         }
@@ -127,8 +127,8 @@ export default function CategoryUpdate(props) {
         <>
             <PageHeader to="/admin/categories" name="Categories" title="Update Category" >
                 <PageHeaderButton onClick={goBack}>
-                    <MdOutlineArrowBack className='text-md ' />
-                    <span className='text-sm '>Back</span>
+                    <MdOutlineArrowBack className='text-2xl ' />
+                    <span className='text-base pr-2'>Back</span>
                 </PageHeaderButton>
             </PageHeader>
 
@@ -145,7 +145,7 @@ export default function CategoryUpdate(props) {
 
                     <FileSelector name="image" label="Image" value={image} onChange={handleFileChange} />
 
-                    <Textarea name="description" required="required" value={category.description} label="Description*"  onChange={handleChange} ></Textarea>
+                    <Textarea name="description" required="required" value={category.description} label="Description*" onChange={handleChange} ></Textarea>
 
                     <button type="submit" className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 flex justify-center hover:bg-blue-600" >
                         {

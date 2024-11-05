@@ -123,8 +123,8 @@ export default function CategoryCreate(props) {
         <>
             <PageHeader to="/admin/categories" name="Categories" title="Create Categories" >
                 <PageHeaderButton onClick={goBack}>
-                    <MdOutlineArrowBack className='text-md ' />
-                    <span className='text-sm '>Back</span>
+                    <MdOutlineArrowBack className='text-2xl ' />
+                    <span className='text-base pr-2'>Back</span>
                 </PageHeaderButton>
             </PageHeader>
 
