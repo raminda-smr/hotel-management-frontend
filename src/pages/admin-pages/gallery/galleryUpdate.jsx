@@ -1,7 +1,7 @@
 import axios from "axios"
 import toast from "react-hot-toast"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { MdOutlineArrowBack } from "react-icons/md"
 import { getDownloadURL } from "firebase/storage"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
@@ -15,24 +15,35 @@ import uploadMedia from "../../../utils/mediaUpload"
 
 export default function GalleryUpdate(props) {
 
-    const initialGalleryItem = {name:"" , image: "", description:"" }
+    const token = localStorage.getItem("token")
+
+    if (token == null) {
+        window.location.href = "/login"
+    }
+
+    const location = useLocation();
+    const navigate = useNavigate()
+
+    if (location.state == null) {
+        window.location.href = "/admin/gallery"
+    }
+
+    const initialGalleryItem = { 
+        name: location.state.name, 
+        image: location.state.image, 
+        description: location.state.description 
+    }
 
     const [galleryItem, setGalleryItem] = useState(initialGalleryItem)
     const [image, setImage] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate()
 
-    const token = localStorage.getItem("token")
-    if (token == null) {
-        window.location.href = "/login"
-    }
-
-    function handleChange(e){
-        const {name, value} = e.target
-        setGalleryItem((prevData) =>({
-            ...prevData, 
-            [name]: value 
+    function handleChange(e) {
+        const { name, value } = e.target
+        setGalleryItem((prevData) => ({
+            ...prevData,
+            [name]: value
         }))
     }
 
@@ -59,23 +70,23 @@ export default function GalleryUpdate(props) {
     }
 
 
-    function saveGalleryItem(url) {
+    function updateGalleryItem(url) {
 
         setGalleryItem(galleryItem["image"] = url)
 
-        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/gallery', galleryItem, {
+        axios.put(import.meta.env.VITE_BACKEND_URL + '/api/gallery/' +location.state._id , galleryItem, {
             headers: {
                 "Authorization": 'Bearer ' + token,
                 "Content-Type": "application/json"
             }
         }).then(
             (res) => {
-                toast.success('Gallery item successfully created!');
-                resetForm()
+                toast.success('Gallery item successfully updated!');
+                goBack()
             }
         ).catch(
             (error) => {
-                toast.error("Failed to create gallery item.");
+                toast.error("Failed to update gallery item.");
             }
         )
     }
@@ -92,28 +103,28 @@ export default function GalleryUpdate(props) {
             setIsLoading(true)
         }
 
-        if(image != null) {
+        if (image != null) {
             uploadMedia(image).then(
                 (snapshot) => {
                     getDownloadURL(snapshot.ref).then(
                         (url) => {
                             // console.log(url)
-                            saveGalleryItem(url)
+                            updateGalleryItem(url)
                         }
                     )
                 }
             )
         }
-        else{
-            toast.error("Image field is required.");
-            setIsLoading(false)
+        else {
+            const url = initialGalleryItem.image
+            updateGalleryItem(url)
         }
     }
 
 
     return (
         <>
-            <PageHeader to="/admin/gallery" name="Gallery" title="Create gallery item" >
+            <PageHeader to="/admin/gallery" name="Gallery" title="Update gallery item" >
                 <PageHeaderButton onClick={goBack}>
                     <MdOutlineArrowBack className='text-md ' />
                     <span className='text-sm '>Back</span>
@@ -123,20 +134,20 @@ export default function GalleryUpdate(props) {
             <div className="form-container flex justify-center mt-8">
                 <form onSubmit={handleSubmit} className="min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
 
-                    <h3 className="text-lg font-medium mb-3">Create Gallery Item</h3>
+                    <h3 className="text-lg font-medium mb-3">Update Gallery Item</h3>
 
                     <Input name="name" required="required" value={galleryItem.name} label="Name*" onChange={handleChange} />
 
-                    <FileSelector name="image" label="Image" required="required" value={image} onChange={handleFileChange} />
+                    <FileSelector name="image" label="Image" value={image} onChange={handleFileChange} />
 
-                    <Textarea name="description" required="required" value={galleryItem.description} label="Description*"  onChange={handleChange} ></Textarea>
+                    <Textarea name="description"  value={galleryItem.description} label="Description*" onChange={handleChange} ></Textarea>
 
                     <button type="submit" className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 flex justify-center hover:bg-blue-600" >
                         {
                             isLoading ?
                                 (<div className="border-2 border-t-white w-[20px] h-[20px] rounded-full animate-spin"></div>)
                                 :
-                                (<span> Add Gallery Item</span>)
+                                (<span> Update Gallery Item</span>)
                         }
 
                     </button>

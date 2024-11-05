@@ -14,6 +14,7 @@ import CategoryCreate from './categories/categoryCreate'
 import RoomsCreate from './rooms/roomsCreate'
 import GalleryCreate from './gallery/galleryCreate'
 import CategoryUpdate from './categories/categoryUpdate'
+import GalleryUpdate from './gallery/galleryUpdate'
 
 
 
@@ -51,6 +52,7 @@ export default function AdminPage() {
 
                             <Route path="/gallery" element={<Gallery />} />
                             <Route path="/gallery/create" element={<GalleryCreate />} />
+                            <Route path="/gallery/update" element={<GalleryUpdate />} />
 
                             <Route path="/*" element={<PageNotFound />} />
 

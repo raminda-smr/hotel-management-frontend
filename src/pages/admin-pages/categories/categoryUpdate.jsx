@@ -62,6 +62,7 @@ export default function CategoryUpdate(props) {
 
 
     function resetForm() {
+        setImage(null)
         setIsLoading(false)
         goBack()
     }

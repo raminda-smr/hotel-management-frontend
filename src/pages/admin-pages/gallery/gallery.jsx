@@ -95,10 +95,10 @@ export default function Gallery() {
 
                                             <AdminTableTD>
                                                 <div className="flex items-center">
-                                                    <Link to="/admin/categories/update" state={galleryItem} className="bg-blue-400 inline-block text-white text-xs p-2 rounded-md">
+                                                    <Link to="/admin/gallery/update" state={galleryItem} className="bg-blue-400 inline-block text-white text-xs p-2 rounded-md">
                                                         <FaEdit />
                                                     </Link>
-                                                    <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(galleryItem._id) }}><FaTrashAlt /></button>
+                                                    <button className="bg-red-400 text-white text-xs p-2 m-1 rounded-md" onClick={() => { getDeleteConfirmation(galleryItem._id) }}><FaTrashAlt /></button>
                                                 </div>
                                             </AdminTableTD>
                                         </AdminTableRow>
