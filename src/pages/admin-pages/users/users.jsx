@@ -1,5 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { FaEdit, FaPlus, FaRegTrashAlt } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import AdminTable from "../../../components/admin/admin-table/adminTable"
 import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
@@ -7,11 +9,11 @@ import AdminTableBody from "../../../components/admin/admin-table/adminTableBody
 import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
-import { Link } from "react-router-dom"
-import { FaEdit, FaPlus, FaRegTrashAlt } from "react-icons/fa"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 
 export default function Users() {
+
+    const navigate = useNavigate()
 
     const [users, setUsers] = useState([])
     const [isUsersLoaded, setIsUsersLoaded] = useState(false)
@@ -92,7 +94,7 @@ export default function Users() {
                                     return (
                                         <AdminTableRow key={index}>
                                             <AdminTableTD>
-                                                <img src={user.img ? user.img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} className="w-[50px]" alt="User" />
+                                                <img src={user.img !="" ? user.img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} className="w-[50px]" alt="User" />
                                             </AdminTableTD>
                                             <AdminTableTD>
                                                 <p>{user.firstName} {user.lastName}</p>
