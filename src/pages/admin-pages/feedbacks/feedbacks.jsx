@@ -1,12 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import PageHeader from "../../components/admin/page-header/pageHeader"
-import AdminTable from "../../components/admin/admin-table/adminTable"
-import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
-import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
-import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
-import Modal from "../../components/common/modal/modal"
-import ModalButton from "../../components/common/modal/modalButton"
+import PageHeader from "../../../components/admin/page-header/pageHeader"
+import AdminTable from "../../../components/admin/admin-table/adminTable"
+import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
+import AdminTableBody from "../../../components/admin/admin-table/adminTableBody"
+import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
+import Modal from "../../../components/common/modal/modal"
+import ModalButton from "../../../components/common/modal/modalButton"
+import { Link } from "react-router-dom"
+import { FaEdit, FaRegEye, FaRegTrashAlt } from "react-icons/fa"
 
 export default function Feedbacks() {
 
@@ -72,7 +74,7 @@ export default function Feedbacks() {
         <>
             <PageHeader to="/admin/feedbacks" name="Feedbacks" title="Feedbacks" />
 
-            <div className="user-data">
+            <div className="feedback-data p-4">
                 <AdminTable data={feedbacks} tableFields={tableFields}>
                     <AdminTableBody>
                         {
@@ -85,11 +87,22 @@ export default function Feedbacks() {
                                             <AdminTableTD>{feedback.email}</AdminTableTD>
                                             <AdminTableTD>{feedback.title}</AdminTableTD>
                                             <AdminTableTD>{feedback.description.substring(0, 50)}</AdminTableTD>
-                                            <AdminTableTD>{new Date(feedback.date).toDateString()}</AdminTableTD>
-                                            <AdminTableTD>{feedback.disabled ? "Yes" : "No"}</AdminTableTD>
+                                            <AdminTableTD>{feedback.date.split('T')[0]}</AdminTableTD>
+                                            <AdminTableTD>{feedback.approved ? "Yes" : "No"}</AdminTableTD>
 
                                             <AdminTableTD>
-                                                <button className="bg-red-400 text-white text-xs px-2 py-1 rounded-md" onClick={() => { getDeleteConfirmation(feedback._id) }}>Delete</button>
+                                                <div className="flex items-center">
+                                                    <Link to={`/admin/feedbacks/view/${feedback._id}`} className="inline-block text-gray-500 rounded-full text-lg hover:text-blue-600">
+                                                        <FaRegEye />
+                                                    </Link>
+
+                                                    <Link to="/admin/feedbacks/update" state={feedback} className="inline-block text-gray-500 rounded-full text-lg ml-3 hover:text-green-600">
+                                                        <FaEdit />
+                                                    </Link>
+                                                    <button className=" text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(feedback._id) }} >
+                                                        <FaRegTrashAlt />
+                                                    </button>
+                                                </div>
                                             </AdminTableTD>
                                         </AdminTableRow>
                                     )
@@ -108,11 +121,11 @@ export default function Feedbacks() {
                         <p>Are you sure you want to delete this item?</p>
                         <div className="confirmation-buttons flex justify-end mt-2">
                             <ModalButton type="danger" onClick={deleteItem} >Yes</ModalButton>
-                            <ModalButton type="primary" onClick={()=>{ 
-                                setSelectedItem("") 
+                            <ModalButton type="primary" onClick={() => {
+                                setSelectedItem("")
                                 setIsDeleteModalOpen(false)
-                                }} >No</ModalButton>
-                            
+                            }} >No</ModalButton>
+
                         </div>
                     </Modal>
                 )

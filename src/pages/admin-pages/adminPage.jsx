@@ -8,7 +8,7 @@ import Rooms from "./rooms/rooms"
 import Categories from "./categories/categories"
 import PageNotFound from "../404-page/pageNotFound"
 import Users from './users'
-import Feedbacks from './feedbacks'
+import Feedbacks from './feedbacks/feedbacks'
 import Gallery from './gallery/gallery'
 import CategoryCreate from './categories/categoryCreate'
 import RoomCreate from './rooms/roomCreate'
@@ -16,6 +16,8 @@ import GalleryCreate from './gallery/galleryCreate'
 import CategoryUpdate from './categories/categoryUpdate'
 import GalleryUpdate from './gallery/galleryUpdate'
 import RoomUpdate from './rooms/roomUpdate'
+import FeedbackView from './feedbacks/feedbackView'
+import FeedbackUpdate from './feedbacks/feedbackUpdate'
 
 
 
@@ -51,6 +53,8 @@ export default function AdminPage() {
                             <Route path="/users" element={<Users />} />
 
                             <Route path="/feedbacks" element={<Feedbacks />} />
+                            <Route path="/feedbacks/view/:id" element={<FeedbackView />} />
+                            <Route path="/feedbacks/update" element={<FeedbackUpdate />} />
 
                             <Route path="/gallery" element={<Gallery />} />
                             <Route path="/gallery/create" element={<GalleryCreate />} />
