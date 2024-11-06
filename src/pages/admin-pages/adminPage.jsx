@@ -18,6 +18,7 @@ import GalleryUpdate from './gallery/galleryUpdate'
 import RoomUpdate from './rooms/roomUpdate'
 import FeedbackView from './feedbacks/feedbackView'
 import FeedbackUpdate from './feedbacks/feedbackUpdate'
+import UserCreate from './users/userCreate'
 
 
 
@@ -51,6 +52,7 @@ export default function AdminPage() {
                             <Route path="/categories/update" element={<CategoryUpdate />} />
 
                             <Route path="/users" element={<Users />} />
+                            <Route path="/users/create" element={<UserCreate />} />
 
                             <Route path="/feedbacks" element={<Feedbacks />} />
                             <Route path="/feedbacks/view/:id" element={<FeedbackView />} />
