@@ -7,7 +7,7 @@ import Bookings from './bookings'
 import Rooms from "./rooms/rooms"
 import Categories from "./categories/categories"
 import PageNotFound from "../404-page/pageNotFound"
-import Users from './users'
+import Users from './users/users'
 import Feedbacks from './feedbacks/feedbacks'
 import Gallery from './gallery/gallery'
 import CategoryCreate from './categories/categoryCreate'
