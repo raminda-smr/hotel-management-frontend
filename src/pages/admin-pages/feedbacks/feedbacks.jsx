@@ -87,8 +87,8 @@ export default function Feedbacks() {
                                             <AdminTableTD>{feedback.email}</AdminTableTD>
                                             <AdminTableTD>{feedback.title}</AdminTableTD>
                                             <AdminTableTD>{feedback.description.substring(0, 50)}</AdminTableTD>
-                                            <AdminTableTD>{new Date(feedback.date).toDateString()}</AdminTableTD>
-                                            <AdminTableTD>{feedback.disabled ? "Yes" : "No"}</AdminTableTD>
+                                            <AdminTableTD>{feedback.date.split('T')[0]}</AdminTableTD>
+                                            <AdminTableTD>{feedback.approved ? "Yes" : "No"}</AdminTableTD>
 
                                             <AdminTableTD>
                                                 <div className="flex items-center">
