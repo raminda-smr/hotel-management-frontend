@@ -6,10 +6,11 @@ import PageHeader from "../../../components/admin/page-header/pageHeader"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import Input from "../../../components/common/input/input"
 import FileSelector from "../../../components/common/file-selector/fileSelector"
-import Textarea from "../../../components/common/textarea/textarea"
 import Select from "../../../components/common/select/select"
 import axios from "axios"
 import CheckBox from "../../../components/common/checkbox/checkbox"
+import uploadMedia from "../../../utils/mediaUpload"
+import { getDownloadURL } from "firebase/storage"
 
 
 export default function UserCreate() {
@@ -21,7 +22,7 @@ export default function UserCreate() {
         window.location.href = "/login"
     }
 
-    const initialUser = {email: "", password: "", firstName: "", lastName: "", type: "customer", whatsapp: "", phone: "", disabled: false, emailVerified: false, images: "" }
+    const initialUser = { email: "", password: "", firstName: "", lastName: "", type: "customer", whatsapp: "", phone: "", disabled: false, emailVerified: false, img: "" }
 
     const [user, setUser] = useState(initialUser)
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -32,44 +33,79 @@ export default function UserCreate() {
         { value: "customer", label: "Customer" },
         { value: "admin", label: "Admin" }
     ]
-    
-    const [errors, setErrors] = useState({email:"", password :"", confirmPassword:"" })
+
+    const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "" })
 
     // pre validate email existance
-    useEffect(()=>{
-        console.log("email changed")
-    },[user.email])
+    useEffect(() => {
+        // console.log(checkIFValidEmail(user.email))
+        if (checkIfValidEmail(user.email)) {
+            axios.get(import.meta.env.VITE_BACKEND_URL + "/api/users/check-email-exist/" + user.email)
+                .then(
+                    (res) => {
+                        // no users found
+                        setErrorMessage("email", "")
+                    }
+                )
+                .catch(
+                    (err) => {
+                        // user exist
+                        setErrorMessage("email", "Email already have an account. Use different email.")
+                    }
+                )
+        }
+    }, [user.email])
 
     // check password in correct format
-    useEffect(()=>{
+    useEffect(() => {
 
         let newPass = user.password.trim()
         let newConf = confirmPassword.trim()
-        
-        if(newPass.length == 0 ){
+
+        if (newPass.length == 0) {
             setErrorMessage("password", "Password is empty")
             setErrorMessage("confirmPassword", "")
         }
-        else if(newPass.length != 0 && newConf.length != 0 && newPass != newConf){
-            if(newPass.length < 6 ){
+        else if (newPass.length != 0 && newConf.length != 0 && newPass != newConf) {
+            if (newPass.length < 6) {
                 setErrorMessage("password", "Password must be at least 6 characters long.")
             }
-            else{
+            else {
                 setErrorMessage("password", "")
             }
-           
+
             setErrorMessage("confirmPassword", "Password confirmation is missmatched.")
         }
-        else{
+        else {
             setErrorMessage("password", "")
             setErrorMessage("confirmPassword", "")
         }
 
-    },[user.password, confirmPassword])
+    }, [user.password, confirmPassword])
 
-    function setErrorMessage(name, message){
-        setErrors((prevData)=>({...prevData, [name] : message }))
+    function setErrorMessage(name, message) {
+        setErrors((prevData) => ({ ...prevData, [name]: message }))
     }
+
+    function checkIfValidEmail(email){
+        let isValid = false
+
+        // if not empty
+        if(email.length > 5){
+            
+            // check if in correct format
+            let re = /\S+@\S+\.\S+/;
+            if(!re.test(email)){
+                setErrorMessage("email","Email is not in correct format")
+            }
+            else{
+                isValid = true;
+                setErrorMessage("email","")
+            }
+        }
+        return isValid
+    }
+
 
     // send back
     function goBack() {
@@ -108,14 +144,14 @@ export default function UserCreate() {
         }
     }
 
-    function resetForm(){
-        setUser(initialUser)
-        setIsLoading(false)
-        setImage(null)
+    function resetForm() {
+        goBack()
     }
 
 
-    function saveUser() {
+    function saveUser(url) {
+
+        setUser(user["img"] = url)
         
         axios.post(import.meta.env.VITE_BACKEND_URL + '/api/users/', user, {
             headers: {
@@ -126,7 +162,7 @@ export default function UserCreate() {
             (res) => {
                 toast.success('User successfully created!');
                 resetForm()
-               
+
             }
         ).catch(
             (error) => {
@@ -135,7 +171,7 @@ export default function UserCreate() {
         )
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault()
 
         if (isLoading) {
@@ -145,7 +181,24 @@ export default function UserCreate() {
             // set form loading state
             setIsLoading(true)
         }
-        saveRoom()
+
+        if(image != null){
+            uploadMedia(image).then(
+                (snapshot) => {
+                    getDownloadURL(snapshot.ref).then(
+                        (url) => {
+                            // console.log(url)
+                            saveUser(url)
+                        }
+                    )
+                }
+            )
+        }
+        else{
+            saveUser()
+        }
+
+        
     }
 
 
@@ -165,13 +218,13 @@ export default function UserCreate() {
 
                     <Input name="firstName" type="text" label="First name*" required="required" onChange={handleChange} value={user.firstName} />
 
-                    <Input name="lastName" type="text" label="Last name"  onChange={handleChange} value={user.lastName} />
+                    <Input name="lastName" type="text" label="Last name" onChange={handleChange} value={user.lastName} />
 
                     <Input name="email" type="email" label="Email*" required="required" onChange={handleChange} value={user.email} error={errors.email} />
 
                     <Input name="password" type="password" label="Password*" required="required" onChange={handleChange} value={user.password} error={errors.password} />
-                    
-                    <Input name="confirmPassword" type="password" label="Password Confirmation*" required="required" onChange={handleConfirmationPasswordChange} value={confirmPassword} error={errors.confirmPassword}  />
+
+                    <Input name="confirmPassword" type="password" label="Password Confirmation*" required="required" onChange={handleConfirmationPasswordChange} value={confirmPassword} error={errors.confirmPassword} />
 
                     <Select name="type" required="required" label="User Type*" onChange={handleChange} >
                         <option value="">Select a user type</option>
@@ -180,13 +233,13 @@ export default function UserCreate() {
                         )}
                     </Select>
 
-                    <Input name="whatsapp" type="telephone" label="Whatsapp"  onChange={handleChange} value={user.whatsapp} />
+                    <Input name="whatsapp" type="telephone" label="Whatsapp" onChange={handleChange} value={user.whatsapp} />
 
-                    <Input name="phone" type="telephone" label="Phone"  onChange={handleChange} value={user.phone} />
+                    <Input name="phone" type="telephone" label="Phone" onChange={handleChange} value={user.phone} />
 
                     <CheckBox name="disabled" label="Disabled" onChange={handleCheckChange} checked={user.disabled} />
 
-                    <FileSelector name="img" label="Image" onChange={handleFileChange} value={image}  />
+                    <FileSelector name="img" label="Image" onChange={handleFileChange} value={image} />
 
 
                     <button type="submit" className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 flex justify-center hover:bg-blue-600" >
