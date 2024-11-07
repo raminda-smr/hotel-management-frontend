@@ -21,20 +21,10 @@ export default function UserCreate() {
         window.location.href = "/login"
     }
 
-    const initialUser = { 
-        email: "", 
-        password: "", 
-        firstName: "", 
-        lastName: "", 
-        type: "customer", 
-        whatsapp: "", 
-        phone: "", 
-        disabled: false,
-        emailVerified: false,
-        images: ""
-    }
+    const initialUser = {email: "", password: "", firstName: "", lastName: "", type: "customer", whatsapp: "", phone: "", disabled: false, emailVerified: false, images: "" }
 
     const [user, setUser] = useState(initialUser)
+    const [confirmPassword, setConfirmPassword] = useState("")
     const [image, setImage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -42,6 +32,44 @@ export default function UserCreate() {
         { value: "customer", label: "Customer" },
         { value: "admin", label: "Admin" }
     ]
+    
+    const [errors, setErrors] = useState({email:"", password :"", confirmPassword:"" })
+
+    // pre validate email existance
+    useEffect(()=>{
+        console.log("email changed")
+    },[user.email])
+
+    // check password in correct format
+    useEffect(()=>{
+
+        let newPass = user.password.trim()
+        let newConf = confirmPassword.trim()
+        
+        if(newPass.length == 0 ){
+            setErrorMessage("password", "Password is empty")
+            setErrorMessage("confirmPassword", "")
+        }
+        else if(newPass.length != 0 && newConf.length != 0 && newPass != newConf){
+            if(newPass.length < 6 ){
+                setErrorMessage("password", "Password must be at least 6 characters long.")
+            }
+            else{
+                setErrorMessage("password", "")
+            }
+           
+            setErrorMessage("confirmPassword", "Password confirmation is missmatched.")
+        }
+        else{
+            setErrorMessage("password", "")
+            setErrorMessage("confirmPassword", "")
+        }
+
+    },[user.password, confirmPassword])
+
+    function setErrorMessage(name, message){
+        setErrors((prevData)=>({...prevData, [name] : message }))
+    }
 
     // send back
     function goBack() {
@@ -55,6 +83,11 @@ export default function UserCreate() {
             [name]: value
         }));
 
+    }
+
+    function handleConfirmationPasswordChange(e) {
+        const { name, value } = e.target;
+        setConfirmPassword(value);
     }
 
     function handleCheckChange(e) {
@@ -134,11 +167,11 @@ export default function UserCreate() {
 
                     <Input name="lastName" type="text" label="Last name"  onChange={handleChange} value={user.lastName} />
 
-                    <Input name="email" type="email" label="Email*" required="required" onChange={handleChange} value={user.email} />
+                    <Input name="email" type="email" label="Email*" required="required" onChange={handleChange} value={user.email} error={errors.email} />
 
-                    <Input name="password" type="password" label="Password*" required="required" onChange={handleChange} value={user.password} error="Password Must contain 8 charactors" />
+                    <Input name="password" type="password" label="Password*" required="required" onChange={handleChange} value={user.password} error={errors.password} />
                     
-                    <Input name="confirmPassword" type="password" label="Password Confirmation*" required="required" onChange={handleChange} value={user.email} />
+                    <Input name="confirmPassword" type="password" label="Password Confirmation*" required="required" onChange={handleConfirmationPasswordChange} value={confirmPassword} error={errors.confirmPassword}  />
 
                     <Select name="type" required="required" label="User Type*" onChange={handleChange} >
                         <option value="">Select a user type</option>
