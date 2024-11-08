@@ -20,6 +20,11 @@ export default function Input(props) {
                 {...(props.step && { step: props.step })}
                 {...(props.disabled && { disabled: props.disabled })}
                 className=" border border-gray-300 rounded-md w-full p-2" />
+            {
+                props.error && (
+                    <div className="text-red-500 text-xs">{props.error}</div>
+                )
+            }
         </div>
     )
 }
