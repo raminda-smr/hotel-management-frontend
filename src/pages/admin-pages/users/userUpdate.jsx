@@ -93,7 +93,7 @@ export default function UserUpdate() {
 
         setUser(user["img"] = url)
 
-        axios.put(import.meta.env.VITE_BACKEND_URL + '/api/users/' + initialUser.email, user, {
+        axios.put(import.meta.env.VITE_BACKEND_URL + '/api/users/update/' + initialUser.email, user, {
             headers: {
                 "Authorization": 'Bearer ' + token,
                 "Content-Type": "application/json"
