@@ -123,13 +123,13 @@ export default function CategoryCreate(props) {
         <>
             <PageHeader to="/admin/categories" name="Categories" title="Create Categories" >
                 <PageHeaderButton onClick={goBack}>
-                    <MdOutlineArrowBack className='text-md ' />
-                    <span className='text-sm '>Back</span>
+                    <MdOutlineArrowBack className='text-2xl ' />
+                    <span className='text-base pr-2'>Back</span>
                 </PageHeaderButton>
             </PageHeader>
 
             <div className="form-container flex justify-center mt-8">
-                <form onSubmit={handleSubmit} className="min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
+                <form onSubmit={handleSubmit} className="bg-white min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
 
                     <h3 className="text-lg font-medium mb-3">Create Category</h3>
 
@@ -143,7 +143,7 @@ export default function CategoryCreate(props) {
 
                     <Textarea name="description" required="required" value={description} label="Description*"  onChange={(e) => { setDescription(e.target.value) }} ></Textarea>
 
-                    <button type="submit" className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 flex justify-center hover:bg-blue-600" >
+                    <button type="submit" className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 flex justify-center  hover:bg-blue-600 " >
                         {
                             isLoading ?
                                 (<div className="border-2 border-t-white w-[20px] h-[20px] rounded-full animate-spin"></div>)
