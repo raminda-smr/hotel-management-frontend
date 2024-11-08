@@ -21,6 +21,7 @@ import FeedbackUpdate from './feedbacks/feedbackUpdate'
 import UserCreate from './users/userCreate'
 import UserUpdate from './users/userUpdate'
 import UserChagePassword from './users/userChagePassword'
+import BookingUpdate from './bookings/bookingUpdate'
 
 
 
@@ -44,6 +45,7 @@ export default function AdminPage() {
                             <Route path="/" element={<Dashboard />} />
 
                             <Route path="/bookings" element={<Bookings />} />
+                            <Route path="/bookings/update" element={<BookingUpdate />} />
 
                             <Route path="/rooms" element={<Rooms />} />
                             <Route path="/rooms/create" element={<RoomCreate />} />
