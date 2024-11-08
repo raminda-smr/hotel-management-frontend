@@ -64,7 +64,9 @@ export default function BookingView() {
 
                         <h3 className="text-lg font-medium mb-5  ">Booking</h3>
 
-                        <h4 className="text-lg text-gray-700 text-center pb-2 mb-3 border-b border-gray-300">Booking ID: {booking.bookingId}</h4>
+                        <h4 className="text-lg text-gray-700 text-center pb-2 mb-3 border-b border-gray-300">Booking ID: 
+                            <span className="bg-blue-600 text-white font-medium px-3 py-1 ml-1 rounded-md">{booking.bookingId}</span>
+                            </h4>
 
                         <p className="flex justify-center items-center text-sm mt-2 mb-3">
                             <span className=" bg-teal-800 text-white px-3 py-1 rounded-l-md"><FaRegCalendarCheck className="inline-block" /></span>
@@ -78,7 +80,9 @@ export default function BookingView() {
                             <tbody>
                                 <tr className="border-b">
                                     <td className="px-4 py-2 font-semibold text-gray-600">Room ID</td>
-                                    <td className="px-4 py-2 text-gray-800">{booking.roomId}</td>
+                                    <td className="px-4 py-2 text-gray-800">
+                                        <span className="bg-amber-600 text-white px-2 py-1 rounded-md">{booking.roomId}</span>
+                                    </td>
                                 </tr>
                                 <tr className="border-b">
                                     <td className="px-4 py-2 font-semibold text-gray-600">Email</td>
