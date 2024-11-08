@@ -1,16 +1,17 @@
+import axios from "axios"
 import toast from "react-hot-toast"
 import { MdOutlineArrowBack } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { getDownloadURL } from "firebase/storage"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import Input from "../../../components/common/input/input"
 import FileSelector from "../../../components/common/file-selector/fileSelector"
 import Select from "../../../components/common/select/select"
-import axios from "axios"
 import CheckBox from "../../../components/common/checkbox/checkbox"
 import uploadMedia from "../../../utils/mediaUpload"
-import { getDownloadURL } from "firebase/storage"
+
 
 
 export default function UserCreate() {
@@ -195,7 +196,8 @@ export default function UserCreate() {
             )
         }
         else{
-            saveUser()
+            const url = ""
+            saveUser(url)
         }
 
         

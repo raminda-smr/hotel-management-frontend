@@ -19,6 +19,7 @@ import RoomUpdate from './rooms/roomUpdate'
 import FeedbackView from './feedbacks/feedbackView'
 import FeedbackUpdate from './feedbacks/feedbackUpdate'
 import UserCreate from './users/userCreate'
+import UserUpdate from './users/userUpdate'
 
 
 
@@ -53,6 +54,7 @@ export default function AdminPage() {
 
                             <Route path="/users" element={<Users />} />
                             <Route path="/users/create" element={<UserCreate />} />
+                            <Route path="/users/update" element={<UserUpdate />} />
 
                             <Route path="/feedbacks" element={<Feedbacks />} />
                             <Route path="/feedbacks/view/:id" element={<FeedbackView />} />
