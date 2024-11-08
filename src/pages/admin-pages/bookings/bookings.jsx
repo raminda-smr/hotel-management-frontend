@@ -1,13 +1,13 @@
 import axios from "axios"
 import toast from "react-hot-toast"
 import { useEffect, useState } from "react"
-import PageHeader from "../../components/admin/page-header/pageHeader"
-import AdminTable from "../../components/admin/admin-table/adminTable"
-import AdminTableRow from "../../components/admin/admin-table/adminTableRow"
-import AdminTableBody from "../../components/admin/admin-table/adminTableBody"
-import AdminTableTD from "../../components/admin/admin-table/adminTableTD"
-import Modal from "../../components/common/modal/modal"
-import ModalButton from "../../components/common/modal/modalButton"
+import PageHeader from "../../../components/admin/page-header/pageHeader"
+import AdminTable from "../../../components/admin/admin-table/adminTable"
+import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
+import AdminTableBody from "../../../components/admin/admin-table/adminTableBody"
+import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
+import Modal from "../../../components/common/modal/modal"
+import ModalButton from "../../../components/common/modal/modalButton"
 
 export default function Bookings() {
 
