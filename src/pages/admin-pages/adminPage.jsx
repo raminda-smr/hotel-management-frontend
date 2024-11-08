@@ -3,7 +3,7 @@ import SidebarUserData from "../../components/admin/sidebar-user-data/sidebarUse
 import Sidebar from "../../components/admin/sidebar/sideBar"
 import TopMenu from "../../components/admin/top-menubar/topMenu"
 import Dashboard from "../../components/admin/dashboard/dashboard"
-import Bookings from './bookings'
+import Bookings from './bookings/bookings'
 import Rooms from "./rooms/rooms"
 import Categories from "./categories/categories"
 import PageNotFound from "../404-page/pageNotFound"
@@ -21,6 +21,8 @@ import FeedbackUpdate from './feedbacks/feedbackUpdate'
 import UserCreate from './users/userCreate'
 import UserUpdate from './users/userUpdate'
 import UserChagePassword from './users/userChagePassword'
+import BookingUpdate from './bookings/bookingUpdate'
+import BookingView from './bookings/bookingView'
 
 
 
@@ -44,6 +46,8 @@ export default function AdminPage() {
                             <Route path="/" element={<Dashboard />} />
 
                             <Route path="/bookings" element={<Bookings />} />
+                            <Route path="/bookings/view/:id" element={<BookingView />} />
+                            <Route path="/bookings/update" element={<BookingUpdate />} />
 
                             <Route path="/rooms" element={<Rooms />} />
                             <Route path="/rooms/create" element={<RoomCreate />} />
