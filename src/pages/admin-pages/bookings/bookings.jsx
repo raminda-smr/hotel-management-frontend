@@ -2,7 +2,7 @@ import axios from "axios"
 import toast from "react-hot-toast"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { FaEdit, FaRegTrashAlt } from "react-icons/fa"
+import { FaEdit, FaRegEye, FaRegTrashAlt } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import AdminTable from "../../../components/admin/admin-table/adminTable"
 import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
@@ -95,7 +95,12 @@ export default function Bookings() {
 
                                             <AdminTableTD>
                                                 <div className="flex items-center">
-                                                    <Link to="/admin/bookings/update" state={booking} className="inline-block text-gray-500 rounded-full text-lg hover:text-green-600">
+
+                                                    <Link to={`/admin/bookings/view/${booking.bookingId}`} className="inline-block text-gray-500 rounded-full text-lg hover:text-blue-600">
+                                                        <FaRegEye />
+                                                    </Link>
+
+                                                    <Link to="/admin/bookings/update" state={booking} className="inline-block text-gray-500 rounded-full text-lg ml-3 hover:text-green-600">
                                                         <FaEdit />
                                                     </Link>
                                                     <button className=" text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(booking.bookingId) }} >

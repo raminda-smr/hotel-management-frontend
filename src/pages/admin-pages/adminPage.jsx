@@ -22,6 +22,7 @@ import UserCreate from './users/userCreate'
 import UserUpdate from './users/userUpdate'
 import UserChagePassword from './users/userChagePassword'
 import BookingUpdate from './bookings/bookingUpdate'
+import BookingView from './bookings/bookingView'
 
 
 
@@ -45,6 +46,7 @@ export default function AdminPage() {
                             <Route path="/" element={<Dashboard />} />
 
                             <Route path="/bookings" element={<Bookings />} />
+                            <Route path="/bookings/view/:id" element={<BookingView />} />
                             <Route path="/bookings/update" element={<BookingUpdate />} />
 
                             <Route path="/rooms" element={<Rooms />} />
