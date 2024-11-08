@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { FaEdit, FaPlus, FaRegTrashAlt } from "react-icons/fa"
+import { FaEdit, FaPlus, FaRegTrashAlt, FaUnlockAlt } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import AdminTable from "../../../components/admin/admin-table/adminTable"
 import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
@@ -108,9 +108,16 @@ export default function Users() {
 
                                             <AdminTableTD>
                                                 <div className="flex items-center">
+                                                
+
                                                     <Link to="/admin/users/update" state={user} className="inline-block text-gray-500 rounded-full text-lg hover:text-green-600">
                                                         <FaEdit />
                                                     </Link>
+
+                                                    <Link to="/admin/users/change-password" state={user} className="inline-block text-gray-500 rounded-full text-lg  ml-3 hover:text-green-600">
+                                                        <FaUnlockAlt />
+                                                    </Link>
+
                                                     <button className="text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(user.email) }}><FaRegTrashAlt /></button>
                                                 </div>
                                             </AdminTableTD>

@@ -20,6 +20,7 @@ import FeedbackView from './feedbacks/feedbackView'
 import FeedbackUpdate from './feedbacks/feedbackUpdate'
 import UserCreate from './users/userCreate'
 import UserUpdate from './users/userUpdate'
+import UserChagePassword from './users/userChagePassword'
 
 
 
@@ -55,6 +56,7 @@ export default function AdminPage() {
                             <Route path="/users" element={<Users />} />
                             <Route path="/users/create" element={<UserCreate />} />
                             <Route path="/users/update" element={<UserUpdate />} />
+                            <Route path="/users/change-password" element={<UserChagePassword />} />
 
                             <Route path="/feedbacks" element={<Feedbacks />} />
                             <Route path="/feedbacks/view/:id" element={<FeedbackView />} />
