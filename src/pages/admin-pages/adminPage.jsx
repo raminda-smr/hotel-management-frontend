@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom'
 import SidebarUserData from "../../components/admin/sidebar-user-data/sidebarUserData"
 import Sidebar from "../../components/admin/sidebar/sideBar"
 import TopMenu from "../../components/admin/top-menubar/topMenu"
-import Dashboard from "../../components/admin/dashboard/dashboard"
 import Bookings from './bookings/bookings'
 import Rooms from "./rooms/rooms"
 import Categories from "./categories/categories"
@@ -23,6 +22,7 @@ import UserUpdate from './users/userUpdate'
 import UserChagePassword from './users/userChagePassword'
 import BookingUpdate from './bookings/bookingUpdate'
 import BookingView from './bookings/bookingView'
+import Dashboard from './dashboard/dashboard'
 
 
 
