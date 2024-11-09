@@ -1,13 +1,12 @@
-import { CiBookmarkCheck, CiCalendar, CiCalendarDate, CiChat2, CiHome, CiImageOn, CiShirt, CiUser, CiViewTable } from "react-icons/ci"
-import PageHeader from "../../../components/admin/page-header/pageHeader"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { PiClockClockwise } from "react-icons/pi"
+import { CiBookmarkCheck, CiCalendarDate, CiChat2, CiHome, CiImageOn, CiShirt, CiUser, CiViewTable } from "react-icons/ci"
+import BookingCountItem from "./bookingCountItem"
 import BookingItem from "./bookingItem"
 import ModuleStat from "./moduleStats"
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
-import BookingCountItem from "./bookingCountItem"
-
+import PageHeader from "../../../components/admin/page-header/pageHeader"
 
 function Dashboard() {
 
@@ -101,28 +100,27 @@ function Dashboard() {
                                     <CiCalendarDate /> <span className="text-2xl  ml-1">Today's Bookings</span>
                                 </h2>
                                 {
-                                    bookingData.todaysBookings.count > 0 &&
+                                    bookingData.todaysBookings.count > 0 ?
                                     bookingData.todaysBookings.map(
                                         (item, index) =>  <BookingItem data={item} key={index} />
                                     )
+                                    :
+                                    <p className="text-white text-center">0 bookings found</p>
                                 }
-                               
-
-
                             </div>
 
                             <div className="bg-amber-800 w-full p-4 rounded">
                                 <h2 className="text-5xl text-white flex items-center border-b border-white pb-2 mb-4">
                                     <PiClockClockwise /> <span className="text-2xl  ml-1">Tomorrow's Bookings</span>
                                 </h2>
-
                                 {
-                                    bookingData.tomorrowsBookings.count > 0 &&
+                                    bookingData.tomorrowsBookings.count > 0 ?
                                     bookingData.tomorrowsBookings.map(
                                         (item, index) =>  <BookingItem data={item} key={index} />
                                     )
+                                    :
+                                    <p className="text-white text-center">0 bookings found</p>
                                 }
-
                             </div>
                         </div>
                     )
