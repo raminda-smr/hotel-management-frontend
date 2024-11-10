@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import SearchRooms from "../../components/client/search-rooms/searchRooms";
 import AboutUs from "../../components/client/about-us/aboutUs";
@@ -7,7 +9,39 @@ import Register from "../../components/client/register/register";
 import Header from "../../components/client/header/header";
 import IndexPage from "./index/indexPage";
 
+
+
 export default function HomePage() {
+
+    const [user, setUser] = useState({})
+    const [userLogged, setUserLogged] = useState(false)
+    
+    useEffect(()=>{
+        
+        const token = localStorage.getItem('token')
+
+        if(token != null){
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/logged',{
+                headers:{
+                    "Authorization" : 'Bearer ' + token,
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then(
+                (res)=>{
+                    setUser(res.data.user)
+                    setUserLogged(true)
+                }
+            ).catch(
+                (err)=>{
+                    setUserLogged(false)
+                }
+            )
+        }
+        else{
+            setUserLogged(false)
+        }
+    },[userLogged])
 
     return (
         <>
