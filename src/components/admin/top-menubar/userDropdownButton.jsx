@@ -17,8 +17,8 @@ export default function UserDropdownButton(props) {
                 <img className="w-[30px] h-[30px]" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
             </div>
             <div className="user-name ml-2 text-white flex flex-col">
-                <span>Raminda Laksiri</span>
-                <span className="text-xs">ramindalaksiri91@gmail.com</span>
+                <span>{props.user.firstName} {props.user.lastName}</span>
+                <span className="text-xs">{props.user.email}</span>
             </div>
         </div>
     )
