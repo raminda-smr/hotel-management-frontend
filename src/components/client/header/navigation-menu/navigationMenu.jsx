@@ -1,29 +1,50 @@
 import { Link } from "react-router-dom"
 import { RxHamburgerMenu } from "react-icons/rx"
 import NavigationLink from "./navigationLink"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function NavigationMenu(props) {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    function toggleMenuOpen(){
+    function toggleMenuOpen() {
         setIsMenuOpen(!isMenuOpen)
     }
 
+    useEffect(() => {
+
+        function handleResize() {
+            if (window.innerWidth >= 768) {
+                setIsMenuOpen(true); // Open menu if screen width is larger than 768px
+            } else {
+                setIsMenuOpen(false); // Close menu if screen width is 768px or smaller
+            }
+        }
+
+        // Initialize menu state on component mount
+        handleResize();
+
+        // Listen for resize event
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup event listener on component unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, [])
+
+
     return (
         <div className="main-menu flex items-center">
-            <div className="menu-button text-white text-3xl" onClick={toggleMenuOpen}>
+            <div className="menu-button select-none text-white text-3xl md:hidden" onClick={toggleMenuOpen}>
                 <RxHamburgerMenu />
             </div>
             {
                 isMenuOpen && (
                     <div className="menu-content absolute right-0 top-[64px] w-full">
                         <div className="menu-body bg-white text-gray-500 flex flex-col rounded-lg shadow-2xl overflow-hidden">
-                            <NavigationLink to="/">Home</NavigationLink>
-                            <NavigationLink to="/search-rooms">Search Rooms</NavigationLink>
-                            <NavigationLink to="/about-us">About Us</NavigationLink>
-                            <NavigationLink to="/contact-us">Contact Us</NavigationLink>
+                            <NavigationLink onClick={toggleMenuOpen} to="/">Home</NavigationLink>
+                            <NavigationLink onClick={toggleMenuOpen} to="/search-rooms">Search Rooms</NavigationLink>
+                            <NavigationLink onClick={toggleMenuOpen} to="/about-us">About Us</NavigationLink>
+                            <NavigationLink onClick={toggleMenuOpen} to="/contact-us">Contact Us</NavigationLink>
                             {
                                 props.userLogged ? (
                                     <Link to="/admin">
