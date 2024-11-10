@@ -45,7 +45,7 @@ export default function HomePage() {
 
     return (
         <>
-            <Header />
+            <Header user={user} userLogged={userLogged} setUserLogged={setUserLogged} />
 
             <Routes path="/*">
                 <Route path="/" element={<IndexPage />} />
