@@ -32,11 +32,7 @@ export default function AdminPage() {
         <>
             <div className="w-full h-screen flex overflow-hidden">
 
-                <div className='sidebar w-64 bg-gray-900 p-4'>
-                    <SidebarUserData />
-                    <Sidebar />
-
-                </div>
+                <Sidebar />
 
                 <div className='flex-1  '>
                     <TopMenu/>
