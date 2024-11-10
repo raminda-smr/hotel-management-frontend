@@ -2,9 +2,29 @@ import ImageSlider from "../../../components/client/image-slider/imageSlider";
 
 export default function IndexPage() {
 
+    const slides = [
+        { "url":"http://localhost:3000/slides/slide-1.jpg", "title": "Beach" },
+        { "url":"http://localhost:3000/slides/slide-2.jpg", "title": "Beach" },
+        { "url":"http://localhost:3000/slides/slide-3.jpg", "title": "Beach" },
+        { "url":"http://localhost:3000/slides/slide-4.jpg", "title": "Beach" },
+        { "url":"http://localhost:3000/slides/slide-5.jpg", "title": "Beach" }
+    ]
+
+    const settings= {
+        autoSlide: true,
+        slideDuration: 5000,  // in ms
+        transitionDuration: 1000, // in ms
+        dots: false,
+        showTitle: false,
+        showSubTitle: false,
+        height: "100%",
+        width: "100%",
+    }
+
+
     return (
         <>
-            <ImageSlider />
+            <ImageSlider slides={slides} settings={settings} />
 
 
             <div className='w-full h-screen bg-blue-900 flex flex-col items-center'>
