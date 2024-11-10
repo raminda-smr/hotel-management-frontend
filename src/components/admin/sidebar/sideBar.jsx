@@ -7,7 +7,7 @@ function Sidebar() {
     return (
 
         <div className='sidebar w-64 bg-gray-900 p-4'>
-            <Link to="/" className="flex mb-6 mt-2">
+            <Link to="/" className="flex mb-6 mt-1">
                 <img src="/Leonine_Logo.png" alt="Logo" className="flex"  />            
             </Link>
 
