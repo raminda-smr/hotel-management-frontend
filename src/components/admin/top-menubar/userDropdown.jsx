@@ -12,7 +12,7 @@ export default function UserDropdown(props) {
             <UserDropdownButton setIsOpen={setIsDropdownOpen} isOpen={isDropdownOpen} user={props.user} />
 
             {
-                isDropdownOpen && <UserDropdownContent />
+                isDropdownOpen && <UserDropdownContent setUserLogged={props.setUserLogged} />
             }
             
 

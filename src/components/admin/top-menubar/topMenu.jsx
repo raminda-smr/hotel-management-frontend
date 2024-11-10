@@ -8,7 +8,7 @@ return(
             <h4 className="text-white pl-4">Welcome to Lionine Villa Backend!</h4>
         </div>
 
-        <UserDropdown user={props.user} />
+        <UserDropdown user={props.user} setUserLogged={props.setUserLogged} />
         
     </div>
 )

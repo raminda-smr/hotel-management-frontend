@@ -30,7 +30,7 @@ import axios from 'axios'
 
 export default function AdminPage() {
 
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState({})
     const [userLogged, setUserLogged] = useState(true)
     
     useEffect(()=>{
@@ -78,7 +78,7 @@ export default function AdminPage() {
                 <Sidebar />
 
                 <div className='flex-1  '>
-                    <TopMenu user={user} />
+                    <TopMenu user={user} setUserLogged={setUserLogged} />
 
                     <div className="content-area bg-gray-200 overflow-y-scroll h-screen pb-[100px]">
                         <Routes path="/*" >
