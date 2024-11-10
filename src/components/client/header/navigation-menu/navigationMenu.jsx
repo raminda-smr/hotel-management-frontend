@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { RxHamburgerMenu } from "react-icons/rx"
 import NavigationLink from "./navigationLink"
 import { useEffect, useState } from "react"
+import LoggedUser from "./logged-user/loggedUser";
 
 export default function NavigationMenu(props) {
 
@@ -47,9 +48,7 @@ export default function NavigationMenu(props) {
                             <NavigationLink onClick={toggleMenuOpen} to="/contact-us">Contact Us</NavigationLink>
                             {
                                 props.userLogged ? (
-                                    <Link to="/admin">
-                                        {/* <UserTag setUserLogged={setUserLogged} /> */}
-                                    </Link>
+                                    <LoggedUser user={props.user} userLogged={props.userLogged} setUserLogged={props.setUserLogged} />
                                 ) : (
                                     <>
                                         <NavigationLink to="/login">Login</NavigationLink>

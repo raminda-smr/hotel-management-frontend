@@ -15,7 +15,7 @@ function Header(props) {
                 </div>
             </Link>
 
-            <NavigationMenu userLogged={props.userLogged} />
+            <NavigationMenu user={props.user} userLogged={props.userLogged} setUserLogged={props.setUserLogged} />
         </header>
     )
 }
