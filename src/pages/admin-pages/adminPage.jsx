@@ -23,23 +23,62 @@ import UserChagePassword from './users/userChagePassword'
 import BookingUpdate from './bookings/bookingUpdate'
 import BookingView from './bookings/bookingView'
 import Dashboard from './dashboard/dashboard'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 
 
 export default function AdminPage() {
 
+    const [user, setUser] = useState({})
+    const [userLogged, setUserLogged] = useState(true)
+    
+    useEffect(()=>{
+        
+        const token = localStorage.getItem('token')
+
+        if(token != null){
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/logged',{
+                headers:{
+                    "Authorization" : 'Bearer ' + token,
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then(
+                (res)=>{
+
+                    // if user is admin keep 
+                    if(res.data.user.type == "admin"){
+                        setUser(res.data.user)
+                        setUserLogged(true)
+                       
+                    }
+                    else{
+                        // if user is not admin redirect to home
+                        window.location.href ="/"
+                    }
+                }
+            ).catch(
+                (err)=>{
+                    setUserLogged(false)
+                    window.location.href ="/"
+                }
+            )
+        }
+        else{
+            setUserLogged(false)
+            window.location.href ="/"
+        }
+    },[userLogged])
+
     return (
         <>
             <div className="w-full h-screen flex overflow-hidden">
 
-                <div className='sidebar w-64 bg-gray-900 p-4'>
-                    <SidebarUserData />
-                    <Sidebar />
-
-                </div>
+                <Sidebar />
 
                 <div className='flex-1  '>
-                    <TopMenu/>
+                    <TopMenu user={user} setUserLogged={setUserLogged} />
 
                     <div className="content-area bg-gray-200 overflow-y-scroll h-screen pb-[100px]">
                         <Routes path="/*" >
