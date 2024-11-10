@@ -1,26 +1,34 @@
+import ImageSlider from "../../../components/client/image-slider/imageSlider";
+
 export default function IndexPage() {
 
     return (
-        <div className='w-full h-screen bg-blue-900 flex flex-col items-center'>
+        <>
+            <ImageSlider />
 
-            <div className='border border-white bg-white w-[700px] h-[100px] flex rounded-lg justify-center items-center'>
 
-                <input type="date" name='start-date' />
+            <div className='w-full h-screen bg-blue-900 flex flex-col items-center'>
 
-                <input type="date" name='end-date' />
+                <div className='border border-white bg-white w-[700px] h-[100px] flex rounded-lg justify-center items-center'>
 
-                <select name="room-category" id="">
-                    <option value="Standard">Standard</option>
-                    <option value="Luxuary">Luxuary</option>
-                    <option value="Supreme">Supreme</option>
-                </select>
+                    <input type="date" name='start-date' />
 
-                <button>Book Now</button>
+                    <input type="date" name='end-date' />
+
+                    <select name="room-category" id="">
+                        <option value="Standard">Standard</option>
+                        <option value="Luxuary">Luxuary</option>
+                        <option value="Supreme">Supreme</option>
+                    </select>
+
+                    <button>Book Now</button>
+                </div>
+
+                <h1 className='text-white text-5xl'>Welcome to the Lionine Villa</h1>
+
             </div>
+        </>
 
-            <h1 className='text-white text-5xl'>Welcome to the Lionine Villa</h1>
-
-        </div>
     )
 }
 
