@@ -23,7 +23,7 @@ function Dashboard() {
     const [bookingData, setBookingData] = useState(null)
 
     useEffect(() => {
-        axios.get(import.meta.env.VITE_BACKEND_URL + "/api/stats/get-module-stats", {}, {
+        axios.get(import.meta.env.VITE_BACKEND_URL + "/api/stats/get-module-stats", {
             headers: {
                 "Authorization": 'Bearer ' + token,
                 "Content-Type": "application/json"
@@ -38,7 +38,7 @@ function Dashboard() {
 
 
     useEffect(() => {
-        axios.get(import.meta.env.VITE_BACKEND_URL + "/api/stats/get-dashboad-booking-data", {}, {
+        axios.get(import.meta.env.VITE_BACKEND_URL + "/api/stats/get-dashboad-booking-data", {
             headers: {
                 "Authorization": 'Bearer ' + token,
                 "Content-Type": "application/json"
