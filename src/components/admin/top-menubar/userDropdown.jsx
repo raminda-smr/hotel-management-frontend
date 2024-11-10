@@ -9,8 +9,12 @@ export default function UserDropdown() {
     return (
         <div className="user-drop-down relative">
 
-            <UserDropdownButton setOpen={setIsDropdownOpen} />
-            <UserDropdownContent />
+            <UserDropdownButton setIsOpen={setIsDropdownOpen} isOpen={isDropdownOpen} />
+
+            {
+                isDropdownOpen && <UserDropdownContent />
+            }
+            
 
         </div>
     )
