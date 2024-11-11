@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ImageSlider from "../../../components/client/image-slider/imageSlider";
 
 export default function IndexPage() {
@@ -52,7 +53,54 @@ export default function IndexPage() {
                 </div>
             </section>
 
-            
+            <section className="our-rooms py-20 bg-blue-500">
+
+                <div className="max-w-[768px] mx-auto px-4 mb-8">
+                    <h2 className="text-white text-5xl text-center mb-3">Our Rooms</h2>
+                    <p className="text-center text-white text-xl font-thin ">Our rooms cater to every need, offering three categories for your comfort</p>
+                </div>
+
+                <div className="max-w-[1200px] mx-auto">
+
+
+                    <div class="room-categories grid gap-4 px-4 lg:grid-cols-3">
+
+                        <div className="room-category bg-white rounded-lg overflow-hidden flex flex-col md:flex-row md:items-center lg:flex-col">
+                            <div className="image md:max-w-[50%] lg:max-w-full">
+                                <img src="https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg" alt="" className="w-full" />
+                            </div>
+                            <div className="content flex flex-col">
+                                <h2 className="pt-3 pb-2 text-center text-3xl">Standard</h2>
+                                <p className="px-4 pb-4 text-center">Cozy and comfortable, ideal for couples or solo travelers.</p>
+                                <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mb-4 hover:bg-blue-500' to="/">Book Now</Link>
+                            </div>
+                        </div>
+
+                        <div className="room-category bg-white rounded-lg overflow-hidden flex flex-col md:flex-row md:items-center lg:flex-col">
+                            <div className="image md:max-w-[50%] lg:max-w-full">
+                                <img src="https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Superior-Room1-e1464286461356.jpg" alt="" className="w-full" />
+                            </div>
+                            <div className="content flex flex-col">
+                                <h2 className="pt-3 pb-2 text-center text-3xl">Deluxe</h2>
+                                <p className="px-4 pb-4 text-center">Spacious rooms with added amenities for a premium stay.</p>
+                                <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mb-4 hover:bg-blue-500' to="/">Book Now</Link>
+                            </div>
+                        </div>
+
+                        <div className="room-category bg-white rounded-lg overflow-hidden flex flex-col md:flex-row md:items-center lg:flex-col">
+                            <div className="image md:max-w-[50%] lg:max-w-full">
+                                <img src="https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Grand-Superior3-e1464286239555.jpg" alt="" className="w-full" />
+                            </div>
+                            <div className="content flex flex-col">
+                                <h2 className="pt-3 pb-2 text-center text-3xl">Luxury</h2>
+                                <p className="px-4 pb-4 text-center">The epitome of opulence, with spectacular views and the finest comforts.</p>
+                                <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mb-4 hover:bg-blue-500' to="/">Book Now</Link>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
 
         </>
 
