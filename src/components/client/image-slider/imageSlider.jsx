@@ -25,6 +25,14 @@ export default function ImageSlider(props) {
         )
     }
 
+    function previousSlide() {
+        setCurrentIndex((prevIndex) => {
+            // console.log(prevIndex)
+            return (prevIndex - 1) < 0 ? slides.length - 1 : (prevIndex - 1)
+        })
+
+    }
+
     return (
         <div className="relative w-full h-full overflow-hidden" style={{ width: settings.width, height: settings.height }} >
             <div className="slider-wrapper">
@@ -46,6 +54,15 @@ export default function ImageSlider(props) {
                     </div>
                 ))}
             </div>
+
+            {
+                settings.nav && (
+                    <div className="slider-controller w-full h-full absolute flex items-center justify-between text-white z-10">
+                        <div onClick={previousSlide} className="next-button text-5xl ml-8 bg-black/40 p-3 rounded-full hover:bg-black/60"><GrPrevious /></div>
+                        <div onClick={nextSlide} className="next-button text-5xl mr-8 bg-black/40 p-3 rounded-full hover:bg-black/60"><GrNext /></div>
+                    </div>
+                )
+            }
 
 
         </div>
