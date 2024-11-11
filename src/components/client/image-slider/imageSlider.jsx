@@ -33,6 +33,11 @@ export default function ImageSlider(props) {
 
     }
 
+    function gotoSlide(index){
+        setCurrentIndex(index)
+    }
+
+
     return (
         <div className="relative w-full h-full overflow-hidden" style={{ width: settings.width, height: settings.height }} >
             <div className="slider-wrapper">
@@ -64,6 +69,17 @@ export default function ImageSlider(props) {
                 )
             }
 
+
+            {
+                settings.dots && (
+                    <div className="slider-dots absolute bottom-0 mb-8 w-full flex items-center justify-center text-white z-10">
+                        {slides.map((slide, index) => (
+                            <div key={index} className='w-[10px] h-[10px] mx-4 bg-white rounded-full cursor-pointer transition-all hover:scale-150 ' onClick={() => gotoSlide(index)}></div>
+                        ))}
+
+                    </div>
+                )
+            }
 
         </div>
     )
