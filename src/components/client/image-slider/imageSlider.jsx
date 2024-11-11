@@ -31,7 +31,16 @@ export default function ImageSlider(props) {
                 {slides.map((slide, index) => (
                     <div key={index} className={`absolute inset-0 flex items-center hover:opacity-0 justify-center transition-all duration-[${settings.transitionDuration}ms] ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`} style={{ backgroundImage: `url(${slide.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} >
                         <div className="content flex flex-col text-center px-5 py-3 bg-black/50 rounded-lg ">
-                            
+                            {settings.showTitle && (
+                                <h2 className="text-white text-6xl font-bold shadow-lg">
+                                    {slide.title}
+                                </h2>
+                            )}
+                            {settings.showSubTitle && (
+                                <h3 className="text-white text-2xl font-bold shadow-lg">
+                                    {slide.subtitle}
+                                </h3>
+                            )}
                         </div>
 
                     </div>
