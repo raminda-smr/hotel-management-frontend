@@ -3,7 +3,21 @@ import { GrNext, GrPrevious } from 'react-icons/gr';
 
 export default function ImageSlider(props) {
 
-    const settings = props.settings
+    const defaultSettings = {
+        autoSlide: true,
+        slideDuration: 5000,  // in ms
+        transitionDuration: 1000, // in ms
+        dots: true,
+        nav: true,
+        showTitle: true,
+        showSubTitle: true,
+        height: "100vh",
+        width: "100%",
+    }
+
+    // change only the provided settings
+    const settings = { ...defaultSettings, ...props.settings }
+
     const slides = props.slides
 
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -33,7 +47,7 @@ export default function ImageSlider(props) {
 
     }
 
-    function gotoSlide(index){
+    function gotoSlide(index) {
         setCurrentIndex(index)
     }
 
@@ -43,19 +57,20 @@ export default function ImageSlider(props) {
             <div className="slider-wrapper">
                 {slides.map((slide, index) => (
                     <div key={index} className={`absolute inset-0 flex items-center hover:opacity-0 justify-center transition-all duration-[${settings.transitionDuration}ms] ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`} style={{ backgroundImage: `url(${slide.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} >
-                        <div className="content flex flex-col text-center px-5 py-3 bg-black/50 rounded-lg ">
-                            {settings.showTitle && (
-                                <h2 className="text-white text-6xl font-bold shadow-lg">
-                                    {slide.title}
-                                </h2>
-                            )}
-                            {settings.showSubTitle && (
-                                <h3 className="text-white text-2xl font-bold shadow-lg">
-                                    {slide.subtitle}
-                                </h3>
-                            )}
-                        </div>
-
+                        {(settings.showTitle || settings.showSubTitle) && (
+                            <div className="content flex flex-col text-center px-5 py-3 bg-black/50 rounded-lg ">
+                                {settings.showTitle && (
+                                    <h2 className="text-white text-6xl font-bold shadow-lg">
+                                        {slide.title}
+                                    </h2>
+                                )}
+                                {settings.showSubTitle && (
+                                    <h3 className="text-white text-2xl font-bold shadow-lg">
+                                        {slide.subtitle}
+                                    </h3>
+                                )}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
@@ -63,8 +78,8 @@ export default function ImageSlider(props) {
             {
                 settings.nav && (
                     <div className="slider-controller w-full h-full absolute flex items-center justify-between text-white z-10">
-                        <div onClick={previousSlide} className="next-button text-5xl ml-8 bg-black/40 p-3 rounded-full hover:bg-black/60"><GrPrevious /></div>
-                        <div onClick={nextSlide} className="next-button text-5xl mr-8 bg-black/40 p-3 rounded-full hover:bg-black/60"><GrNext /></div>
+                        <div onClick={previousSlide} className="next-button text-2xl ml-2 bg-black/40 p-3 rounded-full hover:bg-black/60 md:ml-8 md:text-3xl "><GrPrevious /></div>
+                        <div onClick={nextSlide} className="next-button text-2xl mr-2 bg-black/40 p-3 rounded-full hover:bg-black/60 md:mr-8 md:text-3xl "><GrNext /></div>
                     </div>
                 )
             }

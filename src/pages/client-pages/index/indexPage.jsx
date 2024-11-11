@@ -13,13 +13,11 @@ export default function IndexPage() {
     const settings= {
         autoSlide: true,
         slideDuration: 5000,  // in ms
-        transitionDuration: 4000, // in ms
-        dots: true,
+        dots: false,
         nav: true,
-        showTitle: true,
-        showSubTitle: true,
+        showTitle: false,
+        showSubTitle: false,
         height: "500px",
-        width: "100%",
     }
 
 
