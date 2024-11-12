@@ -8,6 +8,7 @@ import Login from "../../components/client/login/login";
 import Register from "../../components/client/register/register";
 import Header from "../../components/client/header/header";
 import IndexPage from "./index/indexPage";
+import Footer from "../../components/client/footer/footer";
 
 
 
@@ -57,6 +58,7 @@ export default function HomePage() {
 
             </Routes>
             
+            <Footer />
         </>
     )
 }
