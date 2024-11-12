@@ -147,7 +147,7 @@ export default function IndexPage() {
                 </div>
 
                 <div className="max-w-[1200px] mx-auto">
-                    <div className="gallery-items grid gap-4 grid-cols-2 px-4 lg:grid-cols-4">
+                    <div className="feedback-items grid gap-4 grid-cols-1 px-4 md:grid-cols-2 lg:grid-cols-4">
 
                         {feedbacks.map((item,index) => <FeedbackItem key={index} item={item} />)}
 
