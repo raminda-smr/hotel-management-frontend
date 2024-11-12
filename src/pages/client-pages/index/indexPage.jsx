@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import ImageSlider from "../../../components/client/image-slider/imageSlider";
 import { CiZoomIn } from "react-icons/ci";
 import GalleryItem from "../../../components/client/gallery-item/galleryItem";
+import FeedbackItem from "../../../components/client/feedback-item/feedbackItem";
 
 export default function IndexPage() {
 
@@ -30,6 +31,14 @@ export default function IndexPage() {
         {"image" :"https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name":"Gallery Item" , "description" : "Gallery description"},
         {"image" :"https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name":"Gallery Item" , "description" : "Gallery description"}
     ]
+
+    const feedbacks = [
+        {email: "johndoe@example.com", username: "JohnDoe", title: "Great Service!", description: "I had a wonderful experience with the customer service team. They were very helpful and resolved my issue quickly.", date: "2023-11-01T10:00:00Z", approved: true},
+        {email: "janedoe@example.com", username: "JaneDoe", title: "Improvement Needed", description: "The website is great, but it would be helpful to have more detailed FAQs for common issues.", date: "2023-11-05T14:30:00Z", approved: true}, 
+        {email: "alexsmith@example.com", username: "AlexSmith", title: "Satisfied Customer", description: "Overall, I am happy with my purchase. The delivery was fast, and the product quality is excellent.", date: "2023-11-08T09:00:00Z", approved: true},
+        {email: "emilyjohnson@example.com", username: "EmilyJohnson", title: "User-Friendly Interface", description: "The app is very user-friendly and intuitive. I had no issues navigating through different sections.", date: "2023-11-10T18:45:00Z", approved: true}
+    ]
+
 
 
     return (
@@ -122,8 +131,25 @@ export default function IndexPage() {
 
                 <div className="max-w-[1200px] mx-auto">
                     <div className="gallery-items grid gap-4 grid-cols-2 px-4 lg:grid-cols-4">
-                        
+
                         {galleryItems.map((item,index) => <GalleryItem key={index} item={item} />)}
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section className="our-feedbacks py-20 bg-gray-300">
+
+                <div className="max-w-[768px] mx-auto px-4 mb-8">
+                    <h2 className="text-gray-600 text-5xl text-center mb-3">Guest Experiences</h2>
+                    <p className="text-center text-gray-600 text-xl font-thin ">Hear from Our Guests – Your Stories Inspire Us to Serve Better</p>
+                </div>
+
+                <div className="max-w-[1200px] mx-auto">
+                    <div className="gallery-items grid gap-4 grid-cols-2 px-4 lg:grid-cols-4">
+
+                        {feedbacks.map((item,index) => <FeedbackItem key={index} item={item} />)}
 
                     </div>
                 </div>
