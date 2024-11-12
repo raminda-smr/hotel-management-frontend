@@ -1,6 +1,6 @@
 
 
-export default function RoomSearchbar() {
+export default function RoomSearchBar() {
     return (
         <div className='bg-blue-500 flex flex-col rounded-lg justify-center items-center p-4  min-w-[260px]'>
             <div className="flex flex-col w-full md:flex-row">
