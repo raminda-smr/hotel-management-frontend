@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import ImageSlider from "../../../components/client/image-slider/imageSlider";
+import { CiZoomIn } from "react-icons/ci";
+import GalleryItem from "../../../components/client/gallery-item/galleryItem";
 
 export default function IndexPage() {
 
@@ -20,6 +22,14 @@ export default function IndexPage() {
         showSubTitle: false,
         height: "500px",
     }
+
+
+    const galleryItems =[
+        {"image" :"https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name":"Gallery Item" , "description" : "Gallery description"},
+        {"image" :"https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name":"Gallery Item" , "description" : "Gallery description"},
+        {"image" :"https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name":"Gallery Item" , "description" : "Gallery description"},
+        {"image" :"https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name":"Gallery Item" , "description" : "Gallery description"}
+    ]
 
 
     return (
@@ -63,7 +73,7 @@ export default function IndexPage() {
                 <div className="max-w-[1200px] mx-auto">
 
 
-                    <div class="room-categories grid gap-4 px-4 lg:grid-cols-3">
+                    <div className="room-categories grid gap-4 px-4 lg:grid-cols-3">
 
                         <div className="room-category bg-white rounded-lg overflow-hidden flex flex-col md:flex-row md:items-center lg:flex-col">
                             <div className="image md:max-w-[50%] lg:max-w-full">
@@ -97,6 +107,23 @@ export default function IndexPage() {
                                 <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mb-4 hover:bg-blue-500' to="/">Book Now</Link>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section className="our-gallery py-20 bg-gray-100">
+
+                <div className="max-w-[768px] mx-auto px-4 mb-8">
+                    <h2 className="text-gray-500 text-5xl text-center mb-3">Gallery</h2>
+                    <p className="text-center text-gray-500 text-xl font-thin ">Capture the Beauty of Every Moment – Explore Leonine Villa's Stunning Spaces</p>
+                </div>
+
+                <div className="max-w-[1200px] mx-auto">
+                    <div className="gallery-items grid gap-4 grid-cols-2 px-4 lg:grid-cols-4">
+                        
+                        {galleryItems.map((item,index) => <GalleryItem key={index} item={item} />)}
 
                     </div>
                 </div>
