@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import ImageSlider from "../../../components/client/image-slider/imageSlider";
-import { CiZoomIn } from "react-icons/ci";
 import GalleryItem from "../../../components/client/gallery-item/galleryItem";
 import FeedbackItem from "../../../components/client/feedback-item/feedbackItem";
-import RoomSearchbar from "../../../components/client/room-search-bar/roomSearchbar";
+import RoomSearchBar from "../../../components/client/room-search-bar/roomSearchbar";
 
 export default function IndexPage() {
 
@@ -48,7 +47,7 @@ export default function IndexPage() {
                 <ImageSlider slides={slides} settings={settings} />
 
                 <div className='absolute top-0 w-full h-full flex justify-center items-center z-20'>
-                    <RoomSearchbar />
+                    <RoomSearchBar />
 
                 </div>
             </section>
