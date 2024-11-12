@@ -7,11 +7,11 @@ import RoomSearchBar from "../../../components/client/room-search-bar/roomSearch
 export default function IndexPage() {
 
     const slides = [
-        { "url": "http://localhost:5173/slides/slide-1.jpg", "title": "Welcome Lionion Vila Resort", "subtitle": "Beach Resort" },
-        { "url": "http://localhost:5173/slides/slide-2.jpg", "title": "Beach", "subtitle": "Beach Resort" },
-        { "url": "http://localhost:5173/slides/slide-3.jpg", "title": "Beach", "subtitle": "Beach Resort" },
-        { "url": "http://localhost:5173/slides/slide-4.jpg", "title": "Beach", "subtitle": "Beach Resort" },
-        { "url": "http://localhost:5173/slides/slide-5.jpg", "title": "Beach", "subtitle": "Beach Resort" }
+        { "url": "/slides/slide-1.jpg", "title": "Welcome Lionion Vila Resort", "subtitle": "Beach Resort" },
+        { "url": "/slides/slide-2.jpg", "title": "Beach", "subtitle": "Beach Resort" },
+        { "url": "/slides/slide-3.jpg", "title": "Beach", "subtitle": "Beach Resort" },
+        { "url": "/slides/slide-4.jpg", "title": "Beach", "subtitle": "Beach Resort" },
+        { "url": "/slides/slide-5.jpg", "title": "Beach", "subtitle": "Beach Resort" }
     ]
 
     const settings = {
