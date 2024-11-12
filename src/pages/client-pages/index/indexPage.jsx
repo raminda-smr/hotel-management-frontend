@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import ImageSlider from "../../../components/client/image-slider/imageSlider";
 import GalleryItem from "../../../components/client/gallery-item/galleryItem";
 import FeedbackItem from "../../../components/client/feedback-item/feedbackItem";
-import RoomSearchBar from "../../../components/client/room-search-bar/roomSearchbar";
+import RoomSearchBar from "../../../components/client/room-search-bar/roomSearchBar";
 
 export default function IndexPage() {
 
