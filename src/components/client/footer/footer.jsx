@@ -50,8 +50,8 @@ export default function Footer() {
                                     <FaPhoneAlt />
                                 </div>
                                 <div className="content">
-                                    <div>(123) 456-7890</div>
-                                    <div>(123) 456-7890</div>
+                                    <div>(033) 456-7890</div>
+                                    <div>(033) 456-7892</div>
                                 </div>
                             </div>
                         </li>
@@ -61,7 +61,7 @@ export default function Footer() {
                                     <FaEnvelope />
                                 </div>
                                 <div className="content">
-                                    <div>info@company.com</div>
+                                    <div>info@leonine.com</div>
                                 </div>
                             </div>
                         </li>
@@ -71,7 +71,7 @@ export default function Footer() {
                                     <FaMapMarkerAlt />
                                 </div>
                                 <div className="content">
-                                    <div>1234 Street Name, City, State, Country</div>
+                                    <div>1234 , Puttalam -Colombo Rd, Negombo, Sri Lanka.</div>
                                 </div>
                             </div>
                         </li>
