@@ -49,11 +49,11 @@ export default function AboutUs() {
             </section>
 
 
-            <section className="villa bg-white py-20">
+            <section className="villa bg-gray-300 py-20">
 
                 <h2 className="text-6xl text-gray-500 mb-4 text-center" >Our Facilities</h2>
 
-                <div className="w-full max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <div className="w-full max-w-[1200px] mx-auto grid grid-cols-2 p-4 gap-4  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
                     {
                         facilities.map((facility, index) => <VillaFacility key={index} facility={facility} />)
                     }
