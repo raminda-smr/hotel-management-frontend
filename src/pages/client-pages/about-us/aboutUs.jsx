@@ -21,8 +21,13 @@ export default function AboutUs() {
                 </div>
             </section>
 
-            
 
+            <section className="villa bg-white py-20">
+
+                <h2 className="text-6xl text-gray-500 mb-4 text-center" >Our Facilities</h2>
+
+                
+            </section>
 
 
             <div className='w-full h-screen bg-blue-900'>
