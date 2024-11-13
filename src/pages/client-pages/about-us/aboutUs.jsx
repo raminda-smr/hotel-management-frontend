@@ -4,7 +4,26 @@ export default function AboutUs() {
 
     return (
         <>
-            <PageWrapper title="About us" image="/wrappers/about-us.jpg" />
+            <PageWrapper title="About us" image="/images/wrappers/about-us.jpg" />
+
+            <section className="villa bg-gray-200 py-20">
+                <div className="w-full max-w-[1200px] mx-auto flex flex-col lg:flex-row ">
+                    <div className="villa-image hidden lg:block lg:w-[50%] ">
+                        <img src="/images/about/villa.jpg" alt="" />
+                    </div>
+                    <div className="villa-content px-4 lg:mt-4 lg:w-[50%]">
+                        <h2 className="text-6xl text-gray-500 mb-4" >About Villa</h2>
+
+                        <p className="text-gray-500 text-justify mb-4 first-letter:float-left first-letter:text-5xl first-letter:pr-2  first-letter:text-gray-400">Nestled along the scenic shores of Negombo, Gampaha in Sri Lanka, Leonine Villa offers the ultimate beachside escape. Our villa is a sanctuary of relaxation and luxury, with every detail crafted to provide an unforgettable experience.</p>
+
+                        <p className="text-gray-500 text-justify">Indulge in our refreshing pool, unwind at our cozy bar, or enjoy the breathtaking ocean views from our open sea-facing terrace. Whether you're here to relax, celebrate, or explore, Leonine Villa is the perfect destination for all.</p>
+                    </div>
+                </div>
+            </section>
+
+            
+
+
 
             <div className='w-full h-screen bg-blue-900'>
                 <h1 className="text-white text-5xl text-center pt-10 pb-10">About us</h1>
