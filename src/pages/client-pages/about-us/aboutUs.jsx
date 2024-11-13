@@ -1,6 +1,5 @@
-import {Link} from 'react-router-dom'
 
-function AboutUs() {
+export default function AboutUs() {
 
     return (
         <div className='w-full h-screen bg-blue-900'>
@@ -41,6 +40,3 @@ function AboutUs() {
         </div>
     )
 }
-
-
-export default AboutUs
