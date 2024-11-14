@@ -37,7 +37,7 @@ export default function AboutUs() {
             <section className="villa bg-gray-200 py-20">
                 <div className="w-full max-w-[1200px] mx-auto flex flex-col lg:flex-row ">
                     <div className="villa-image hidden lg:block lg:w-[50%] ">
-                        <img src="/images/about/villa.jpg" alt="" />
+                        <img src="/images/about/villa.jpg" alt="" className="border border-gray-400 p-2 rounded-lg overflow-hidden" />
                     </div>
                     <div className="villa-content px-4 lg:mt-4 lg:w-[50%]">
                         <h2 className="text-6xl text-gray-500 mb-4" >About Villa</h2>
