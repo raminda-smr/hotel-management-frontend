@@ -51,28 +51,28 @@ export default function AboutUs() {
 
             {/* Room Structure */}
 
-            <section className="structure bg-gray-800 py-20">
-                <h2 className="text-6xl text-gray-500 mb-4 text-center" >Room Structure</h2>
-                <p className="text-center text-gray-500 text-xl font-thin ">Our rooms cater to every need, offering three categories for your comfort</p>
+            <section className="structure bg-gray-700 py-20">
+                <h2 className="text-6xl text-gray-200 mb-4 text-center" >Room Structure</h2>
+                <p className="text-center text-gray-100 text-xl font-thin ">Our rooms cater to every need, offering three categories for your comfort</p>
 
 
-                <div className="categories w-full max-w-[1200px] mx-auto mt-5 grid grid-cols-1 gap-4 md:grid-cols-3 ">
+                <div className="categories w-full max-w-[1200px] mx-auto mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 ">
                     <div className="category bg-gray-200 rounded">
                         <div className="head text-center p-4 pt-6 pb-0">
                             <h3 className="text-2xl text-gray-800 uppercase font-medium">Standard</h3>
                             <p className="text-gray-700">Cozy and comfortable, ideal for couples or solo travelers.</p>
                         </div>
-                        <div className="body flex flex-wrap py-4 px-2 justify-center text-center">
-                            <div className="room w-1/3 p-2">
+                        <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">102</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">103</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">104</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">105</div>
                             </div>
                         </div>
@@ -83,29 +83,29 @@ export default function AboutUs() {
                             <h3 className="text-2xl text-gray-800 uppercase font-medium">Deluxe</h3>
                             <p className="text-gray-700">Spacious rooms with added amenities for a premium stay.</p>
                         </div>
-                        <div className="body flex flex-wrap py-4 px-2 justify-center text-center">
-                            <div className="room w-1/3 p-2">
+                        <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">202</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">203</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">204</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">205</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">206</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">207</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">208</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">209</div>
                             </div>
                         </div>
@@ -116,14 +116,14 @@ export default function AboutUs() {
                             <h3 className="text-2xl text-gray-800 uppercase font-medium">Luxury</h3>
                             <p className="text-gray-700">The epitome of opulence, with spectacular views and the finest comforts.</p>
                         </div>
-                        <div className="body flex flex-wrap py-4 px-2 justify-center text-center">
-                            <div className="room w-1/3 p-2">
+                        <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">302</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">303</div>
                             </div>
-                            <div className="room w-1/3 p-2">
+                            <div className="room w-1/3 p-1">
                                 <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">304</div>
                             </div>
                         </div>
