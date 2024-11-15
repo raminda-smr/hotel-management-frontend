@@ -6,7 +6,7 @@ function ContactUs() {
 
     return (
         <>
-            <PageWrapper title="Contact us" image="/images/wrappers/about-us.jpg" />
+            <PageWrapper title="Contact us" image="/images/wrappers/contact-us.jpg" />
 
             <section className='contact-us w-full bg-gray-50 py-10'>
 
@@ -50,7 +50,7 @@ function ContactUs() {
             </section>
 
 
-            <section className="w-full">
+            <section className="w-full bg-center bg-no-repeat bg-cover"  style={{backgroundImage:'url("/images/wrappers/contact-us-form.jpg")'}}>
                 <div className="w-[1200px] flex mx-auto ">
                     <div className="grid grid-cols-2 gap-4">
                        
