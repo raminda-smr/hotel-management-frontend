@@ -2,13 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import SearchRooms from "../../components/client/search-rooms/searchRooms";
-import AboutUs from "../../components/client/about-us/aboutUs";
 import ContactUs from "../../components/client/contact-us/contactUs";
 import Login from "../../components/client/login/login";
 import Register from "../../components/client/register/register";
 import Header from "../../components/client/header/header";
 import IndexPage from "./index/indexPage";
 import Footer from "../../components/client/footer/footer";
+import AboutUs from "./about-us/aboutUs";
 
 
 
