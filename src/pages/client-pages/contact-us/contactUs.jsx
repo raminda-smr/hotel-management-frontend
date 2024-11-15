@@ -74,7 +74,15 @@ function ContactUs() {
 
             </section>
 
-
+            <section className='map'>
+                <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12580.78211163128!2d145.053135!3d-37.972566!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1731678356375!5m2!1sen!2sus"
+                width="100%" 
+                height="450" 
+                style={{border:0, display:"block"}} allowFullScreen="" 
+                loading="lazy"
+                ></iframe>
+            </section>
             
         </>
     )
