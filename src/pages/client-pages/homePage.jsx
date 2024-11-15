@@ -9,6 +9,7 @@ import Header from "../../components/client/header/header";
 import IndexPage from "./index/indexPage";
 import Footer from "../../components/client/footer/footer";
 import AboutUs from "./about-us/aboutUs";
+import Gallery from "./gallery/gallery";
 
 
 
@@ -52,6 +53,7 @@ export default function HomePage() {
                 <Route path="/" element={<IndexPage />} />
                 <Route path="/search-rooms" element={<SearchRooms />} />
                 <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
