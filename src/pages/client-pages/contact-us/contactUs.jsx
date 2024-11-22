@@ -20,7 +20,7 @@ function ContactUs() {
                             <CiLocationOn />
                         </div>
                         <div className="content ml-3">
-                            <h5 className='text-gray-700 text-xl font-medium'>Our Address</h5>
+                            <h5 className='text-gray-700 text-xl font-medium'>Address</h5>
                             <p className='text-gray-600'>1234 , Puttalam -Colombo Rd, Negombo, Sri Lanka.</p>
                         </div>
                     </div>
@@ -54,7 +54,8 @@ function ContactUs() {
                 <div className="max-w-[1200px] mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div className="contact-form w-full bg-white flex flex-col p-8 rounded-lg">
-                        <h2 className='text-3xl mb-5 text-slate-400'>Send Your Message</h2>
+                        <h2 className='text-3xl text-slate-500'>Send Your Message</h2>
+                        <p className='text-slate-400 mb-5'>Connect, Communicate, Inspire.</p>
 
                         <form action="" className='flex flex-col '>
 
@@ -80,8 +81,8 @@ function ContactUs() {
                             
                             <textarea className='border border-gray-300 mb-2 px-4 py-3 rounded-lg' name="message" id="" placeholder='Message' rows={5}></textarea>
 
-                            <button className='bg-blue-600 text-white px-5 py-3 flex items-center mr-0 ml-auto rounded-lg hover:bg-blue-500'>
-                                <CiPaperplane className='text-2xl mr-2 -rotate-45 ' />
+                            <button className='bg-blue-600 text-white px-4 py-2 flex items-center mr-0 ml-auto rounded hover:bg-blue-500'>
+                                <CiPaperplane className='text-2xl mr-1 -rotate-45 ' />
                                 Send Now
                             </button>
                         </form>
