@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import PageWrapper from '../../../components/client/page-wrapper/pageWrapper'
-import { CiLocationOn, CiMail, CiPhone } from 'react-icons/ci'
+import { CiBookmark, CiLocationOn, CiMail, CiPaperplane, CiPhone, CiUser } from 'react-icons/ci'
 
 function ContactUs() {
 
@@ -13,7 +13,7 @@ function ContactUs() {
                 <h3 className="text-gray-500 text-2xl text-center pt-10">Get In Touch</h3>
                 <h1 className="text-gray-500 text-5xl text-center pb-10">Our Contact Information</h1>
 
-                <div className="max-w-[1200px] grid grid-cols-1 gap-4 px-4 mx-auto md:grid-cols-2 lg:grid-cols-3 ">
+                <div className="max-w-[1200px] grid grid-cols-1 gap-4 px-4 mx-auto md:grid-cols-2 lg:grid-cols-3 lg:px-0 ">
 
                     <div className="contact-item flex items-center bg-white rounded-lg p-4 mb-5 border border-gray-300 group transition-all">
                         <div className="icon text-5xl bg-sky-900 text-white rounded-full p-2 group-hover:bg-sky-600 ">
@@ -50,34 +50,44 @@ function ContactUs() {
             </section>
 
 
-            <section className="w-full bg-center bg-no-repeat bg-cover"  style={{backgroundImage:'url("/images/wrappers/contact-us-form.jpg")'}}>
-                <div className="w-[1200px] flex mx-auto ">
-                    <div className="grid grid-cols-2 gap-4">
-                       
+            <section className="w-full py-10 bg-center bg-no-repeat bg-cover" style={{ backgroundImage: 'url("/images/wrappers/contact-us-form.jpg")' }}>
+                <div className="max-w-[1200px] mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 
-                        <div className='p-4'>
+                    <div className="contact-form w-full bg-white flex flex-col p-8 rounded-lg">
+                        <h2 className='text-3xl mb-5 text-slate-400'>Send Your Message</h2>
 
-                            <div className="contact-form bg-white flex flex-col p-4 rounded-lg">
-                                <h2 className='text-3xl mb-5'>Send your message</h2>
+                        <form action="" className='flex flex-col '>
 
-                                <input className='bg-gray-100 border border-gray-300 mb-2 px-4 py-3 rounded-lg ' type="text" name="name" placeholder='Name' />
-
-                                <input className='bg-gray-100 border border-gray-300 mb-2 px-4 py-3 rounded-lg ' type="text" name="subject" placeholder='Subject' />
-
-                                <input className='bg-gray-100 border border-gray-300 mb-2 px-4 py-3 rounded-lg ' type="emai" name='email' placeholder='Email' />
-
-                                <input className='bg-gray-100 border border-gray-300 mb-2 px-4 py-3 rounded-lg ' type="phone" name='phone' placeholder='phone' />
-
-                                <textarea className='bg-gray-100 border border-gray-300 mb-2 px-4 py-3 rounded-lg' name="message" id="" placeholder='Message'></textarea>
-
-                                <button className='bg-blue-600 text-white px-5 py-3 inline-block mr-0 ml-auto rounded-lg hover:bg-blue-500'>
-                                    Send Now
-                                </button>
-
+                            <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
+                                <CiUser className='text-2xl mx-3 text-gray-500 ' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="text" name="name" placeholder='Name' />
                             </div>
 
-                        </div>
+                            <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
+                                <CiBookmark className='text-2xl mx-3 text-gray-500 ' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="text" name="subject" placeholder='Subject' />
+                            </div>
+
+                            <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
+                                <CiMail className='text-2xl mx-3 text-gray-500 ' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="email" name="email" placeholder='Email' />
+                            </div>
+
+                            <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
+                                <CiPhone className='text-2xl mx-3 text-gray-500 ' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="telephone" name="phone" placeholder='Phone' />
+                            </div>
+                            
+                            <textarea className='border border-gray-300 mb-2 px-4 py-3 rounded-lg' name="message" id="" placeholder='Message' rows={5}></textarea>
+
+                            <button className='bg-blue-600 text-white px-5 py-3 flex items-center mr-0 ml-auto rounded-lg hover:bg-blue-500'>
+                                <CiPaperplane className='text-2xl mr-2 -rotate-45 ' />
+                                Send Now
+                            </button>
+                        </form>
+
                     </div>
+
 
                 </div>
             </section>
