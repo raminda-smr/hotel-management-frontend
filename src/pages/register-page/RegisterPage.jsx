@@ -110,13 +110,13 @@ export default function RegisterPage() {
                             <div className="buttons flex mt-10 mb-5">
                                 <button type="submit" className="bg-sky-600 font-medium text-white px-5 py-2 rounded-full shadow-md  text-sm hover:bg-sky-700" onClick={handleRegistration} >Register Now</button>
 
-                                <Link className="bg-white font-medium text-gray-400 px-5 py-2 rounded-full shadow-md text-sm ml-3 hover:bg-gray-300" >I have an account</Link>
+                                <Link to="/login" className="bg-white font-medium text-gray-400 px-5 py-2 rounded-full shadow-md text-sm ml-3 hover:bg-gray-300" >I have an account</Link>
 
                             </div>
 
 
                             <div className="back-link  mt-5 mb-5">
-                                <Link className="text-gray-400 flex items-center font-semibold hover:text-sky-600">
+                                <Link to="/" className="text-gray-400 flex items-center font-semibold hover:text-sky-600">
                                     <CiHome className="text-xl mr-1" />  Back to Home
                                 </Link>
                             </div>

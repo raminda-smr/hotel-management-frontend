@@ -33,7 +33,7 @@ export default function LoginPage() {
 
     return (
         <>
-            <div className="w-full h-screen flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url('./images/wrappers/login.jpg')` }}>
+            <div className="w-full min-h-screen py-10 flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url('./images/wrappers/login.jpg')` }}>
 
                 <div className="login-card max-w-[350px] lg:max-w-[700px] bg-gray-50 flex flex-col lg:flex-row w-full rounded-lg overflow-hidden shadow-lg">
                     <div className="login-image lg:w-1/2 bg-gray-200 bg-cover bg-center" style={{ backgroundImage: `url('./images/pages/login/side-image.jpg')` }}></div>
@@ -93,13 +93,13 @@ export default function LoginPage() {
                             <div className="buttons flex mt-3 mb-5">
                                 <button type="submit" className="bg-sky-600 font-medium text-white px-5 py-2 rounded-full shadow-md  text-sm hover:bg-sky-700" onClick={handleLogin} >Login Now</button>
 
-                                <Link className="bg-white font-medium text-gray-400 px-5 py-2 rounded-full shadow-md text-sm ml-3 hover:bg-gray-300" >Create Account</Link>
+                                <Link to="/register" className="bg-white font-medium text-gray-400 px-5 py-2 rounded-full shadow-md text-sm ml-3 hover:bg-gray-300" >Create Account</Link>
 
                             </div>
 
 
                             <div className="back-link  mt-5 mb-5">
-                                <Link className="text-gray-400 flex items-center font-semibold hover:text-sky-600">
+                                <Link to="/" className="text-gray-400 flex items-center font-semibold hover:text-sky-600">
                                     <CiHome className="text-xl mr-1" />  Back to Home
                                 </Link>
                             </div>
