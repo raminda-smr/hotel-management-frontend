@@ -35,10 +35,10 @@ export default function LoginPage() {
         <>
             <div className="w-full h-screen flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url('./images/wrappers/login.jpg')` }}>
 
-                <div className="login-card max-w-[700px] bg-gray-50 flex w-full rounded-lg overflow-hidden shadow-lg">
-                    <div className="login-image w-1/2 bg-teal-600 bg-cover bg-center" style={{ backgroundImage: `url('./images/pages/login/side-image.jpg')` }}></div>
-                    <div className="login-form w-1/2 p-6">
-                        <h2 className="text-3xl mt-5 mb-2 text-gray-500" >Welcome Back :)</h2>
+                <div className="login-card max-w-[350px] lg:max-w-[700px] bg-gray-50 flex flex-col lg:flex-row w-full rounded-lg overflow-hidden shadow-lg">
+                    <div className="login-image lg:w-1/2 bg-gray-200 bg-cover bg-center" style={{ backgroundImage: `url('./images/pages/login/side-image.jpg')` }}></div>
+                    <div className="login-form lg:w-1/2 p-6">
+                        <h2 className="text-3xl mt-5 mb-2 text-gray-500" >Login</h2>
                         <p className="text-sm text-gray-400 mb-10">To keep connected with us please login with your personal information</p>
 
                         <form action="">
@@ -101,25 +101,7 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                {/* <div className="w-[400px] h-[400px] backdrop-blur-lg rounded-lg m-auto flex flex-col items-center">
-                    <h3 className="text-white text-3xl mt-20 mb-5 ">Login</h3>
-
-                    <input type="text" placeholder="Enter your name" className="w-[80%] mb-3 px-4 py-2 border-white border-[2px] rounded-lg bg-transparent text-white " defaultValue={email} onChange={
-                        (e) => {
-                            setEmail(e.target.value)
-                        }
-                    } />
-
-                    <input type="password" placeholder="Enter your password" className="w-[80%] mb-3 px-4 py-2 border-white border-[2px] rounded-lg bg-transparent text-white " defaultValue={password} onChange={
-                        (e) => {
-                            setPassword(e.target.value)
-                        }
-                    } />
-
-
-                    <button className="w-[80%] bg-red-500 text-white px-4 py-4 mt-10" onClick={handleLogin}>Submit</button>
-
-                </div> */}
+                
             </div>
 
         </>
