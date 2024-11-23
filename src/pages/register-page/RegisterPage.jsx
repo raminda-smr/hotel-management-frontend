@@ -23,7 +23,7 @@ export default function RegisterPage() {
 
     return (
         <>
-            <div className="w-full h-screen flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url('./images/wrappers/login.jpg')` }}>
+            <div className="w-full min-h-screen py-10 flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url('./images/wrappers/login.jpg')` }}>
 
                 <div className="login-card max-w-[350px] lg:max-w-[700px] bg-gray-50 flex flex-col lg:flex-row w-full rounded-lg overflow-hidden shadow-lg">
                     <div className="login-image lg:w-1/2 bg-gray-200 bg-cover bg-center" style={{ backgroundImage: `url('./images/pages/register/register.jpg')` }}></div>
