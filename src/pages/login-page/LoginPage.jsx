@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import { CiLock, CiMail } from "react-icons/ci"
+import { CiHome, CiLock, CiMail } from "react-icons/ci"
 import { Link } from "react-router-dom"
 
 export default function LoginPage() {
@@ -97,11 +97,18 @@ export default function LoginPage() {
 
                             </div>
 
+
+                            <div className="back-link  mt-5 mb-5">
+                                <Link className="text-gray-400 flex items-center font-semibold hover:text-sky-600">
+                                    <CiHome className="text-xl mr-1" />  Back to Home
+                                </Link>
+                            </div>
+
                         </form>
                     </div>
                 </div>
 
-                
+
             </div>
 
         </>
