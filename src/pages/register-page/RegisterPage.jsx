@@ -1,17 +1,77 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { CiHome, CiLock, CiMail, CiUser } from "react-icons/ci"
 import { Link } from "react-router-dom"
+import { FaRegCheckCircle, FaRegTimesCircle } from "react-icons/fa"
 
 export default function RegisterPage() {
 
     const initialUser = { firstName:"", lastName: "", email:"", password:"", confirmPassword:"" }
-    const [user, setUser] = useState(initialUser);
+    const [registerUser, setRegisterUser] = useState(initialUser);
+    const [isEmailValid, setIsEmailValid] = useState(false);
+    const [isEmailChecked, setIsEmailChecked] = useState(false);
 
+
+    const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "" })
+
+
+    // Validate Email
+    useEffect(()=>{
+        if(checkIfValidEmail(registerUser.email)){
+            axios.get(import.meta.env.VITE_BACKEND_URL + "/api/users/check-email-exist/" + registerUser.email)
+                .then(
+                    (res) => {
+                        // no users found
+                        setErrorMessage("email", "")
+                        setIsEmailValid(true)
+                    }
+                )
+                .catch(
+                    (err) => {
+                        // user exist
+                        setErrorMessage("email", "Email already have an account. Use different email.")
+                        setIsEmailValid(false)
+                    }
+                )
+                .finally(
+                    ()=>{
+                        setIsEmailChecked(true)
+                    }
+                )
+                
+        }
+
+
+
+    },[registerUser.email])
+
+
+    function setErrorMessage(name, message) {
+        setErrors((prevData) => ({ ...prevData, [name]: message }))
+    }
+
+    function checkIfValidEmail(email){
+        let isValid = false
+
+        // if not empty
+        if(email.length > 5){
+            
+            // check if in correct format
+            let re = /\S+@\S+\.\S+/;
+            if(!re.test(email)){
+                setErrorMessage("email","Email is not in correct format")
+            }
+            else{
+                isValid = true;
+                setErrorMessage("email","")
+            }
+        }
+        return isValid
+    }
 
     function handleChange(e){
         const {name, value} = e.target
-        setUser((prevData) =>({
+        setRegisterUser((prevData) =>({
             ...prevData, 
             [name]: value 
         }))
@@ -39,7 +99,7 @@ export default function RegisterPage() {
                                 </div>
                                 <div className="input w-full flex flex-col px-2">
                                     <label htmlFor="" className="text-xs text-gray-400">First name</label>
-                                    <input type="text" name="firstName" placeholder="John" className="w-full text-sm outline-none bg-transparent" required value={user.firstName} onChange={handleChange} />
+                                    <input type="text" name="firstName" placeholder="John" className="w-full text-sm outline-none bg-transparent" required value={registerUser.firstName} onChange={handleChange} />
                                 </div>
                                 <div className="verified">
 
@@ -53,7 +113,7 @@ export default function RegisterPage() {
                                 </div>
                                 <div className="input w-full flex flex-col px-2">
                                     <label htmlFor="" className="text-xs text-gray-400">Last name</label>
-                                    <input type="text" name="lastName" placeholder="Doe" className="w-full text-sm outline-none bg-transparent" required value={user.lastName} onChange={handleChange} />
+                                    <input type="text" name="lastName" placeholder="Doe" className="w-full text-sm outline-none bg-transparent" required value={registerUser.lastName} onChange={handleChange} />
                                 </div>
                                 <div className="verified">
 
@@ -67,10 +127,11 @@ export default function RegisterPage() {
                                 </div>
                                 <div className="input w-full flex flex-col px-2">
                                     <label htmlFor="" className="text-xs text-gray-400">Email Address</label>
-                                    <input type="email" name="email" placeholder="yourmail@example.com" className="w-full text-sm outline-none bg-transparent" required value={user.email} onChange={handleChange} />
+                                    <input type="email" name="email" placeholder="yourmail@example.com" className="w-full text-sm outline-none bg-transparent" required value={registerUser.email} onChange={handleChange} />
                                 </div>
                                 <div className="verified">
-
+                                    { isEmailChecked && isEmailValid && <FaRegCheckCircle className="text-green-500 mr-2" /> }
+                                    { isEmailChecked && !isEmailValid && <FaRegTimesCircle className="text-red-500 mr-2" /> }
                                 </div>
 
                             </div>
@@ -81,7 +142,7 @@ export default function RegisterPage() {
                                 </div>
                                 <div className="input w-full flex flex-col px-2">
                                     <label htmlFor="" className="text-xs text-gray-400">Password</label>
-                                    <input type="password" name="password" placeholder="*********" className="w-full text-sm outline-none bg-transparent" required value={user.password} onChange={handleChange} />
+                                    <input type="password" name="password" placeholder="*********" className="w-full text-sm outline-none bg-transparent" required value={registerUser.password} onChange={handleChange} />
                                 </div>
                                 <div className="verified">
 
@@ -95,7 +156,7 @@ export default function RegisterPage() {
                                 </div>
                                 <div className="input w-full flex flex-col px-2">
                                     <label htmlFor="" className="text-xs text-gray-400">Password Confirmation</label>
-                                    <input type="password" name="confirmPassword" placeholder="*********" className="w-full text-sm outline-none bg-transparent" required value={user.confirmPassword} onChange={handleChange} />
+                                    <input type="password" name="confirmPassword" placeholder="*********" className="w-full text-sm outline-none bg-transparent" required value={registerUser.confirmPassword} onChange={handleChange} />
                                 </div>
                                 <div className="verified">
 
