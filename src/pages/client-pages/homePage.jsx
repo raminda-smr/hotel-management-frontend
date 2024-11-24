@@ -56,6 +56,7 @@ export default function HomePage() {
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />
+                {/* <Route path="/verify/:token" element={<VerifyEmail />} /> */}
                 <Route path="/*" element={<PageNotFound />} />
 
             </Routes>

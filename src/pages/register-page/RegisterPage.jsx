@@ -87,7 +87,7 @@ export default function RegisterPage() {
 
     function saveUser() {
 
-        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/users/', registerUser, {}).then(
+        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/users/register', registerUser, {}).then(
             (res) => {
                 toast.success('User successfully created!');
                 resetForm()
