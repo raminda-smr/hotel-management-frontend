@@ -3,6 +3,7 @@ import axios from "axios"
 import { CiHome, CiLock, CiMail, CiUser } from "react-icons/ci"
 import { Link } from "react-router-dom"
 import { FaRegCheckCircle, FaRegTimesCircle } from "react-icons/fa"
+import toast from "react-hot-toast"
 
 export default function RegisterPage() {
 
@@ -10,6 +11,7 @@ export default function RegisterPage() {
     const [registerUser, setRegisterUser] = useState(initialUser);
     const [isEmailValid, setIsEmailValid] = useState(false);
     const [isEmailChecked, setIsEmailChecked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "" })
 
@@ -76,8 +78,49 @@ export default function RegisterPage() {
         }))
     }
 
-    function handleRegistration() {
+    function resetForm() {
+        setRegisterUser(initialUser)
+        setIsLoading(false)
+        setIsEmailChecked(false)
+        setIsEmailValid(false)
+    }
 
+    function saveUser() {
+
+        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/users/', registerUser, {}).then(
+            (res) => {
+                toast.success('User successfully created!');
+                resetForm()
+                
+            }
+        ).catch(
+            (error) => {
+                toast.error("Failed to create user.");
+            }
+        )
+    }
+
+    function handleRegistration(e) {
+        e.preventDefault()
+
+        // validate input
+        if (
+            registerUser.password.length > 5 &&
+            (registerUser.password == registerUser.confirmPassword) &&
+            isEmailChecked &&
+            isEmailValid
+        ){
+            if (isLoading) {
+                // prevent button click while form processing
+                return
+            } else {
+                // set form loading state
+                setIsLoading(true)
+            }
+            
+            // save user
+            saveUser()
+        }
     }
 
     return (
@@ -90,7 +133,7 @@ export default function RegisterPage() {
                         <h2 className="text-3xl mt-5 mb-2 text-gray-500" >Register now</h2>
                         <p className="text-sm text-gray-400 mb-10">Register with your personal information</p>
 
-                        <form action="">
+                        <form onSubmit={(e) => { handleRegistration(e) }} action="">
 
                             <div className="input-group flex items-center border-b border-gray-300 bg-gray-200 py-2 px-3 focus-within:bg-gray-50">
                                 <div className="icon text-3xl text-gray-500">
@@ -169,7 +212,14 @@ export default function RegisterPage() {
 
 
                             <div className="buttons flex mt-10 mb-5">
-                                <button type="submit" className="bg-sky-600 font-medium text-white px-5 py-2 rounded-full shadow-md  text-sm hover:bg-sky-700" onClick={handleRegistration} >Register Now</button>
+                                <button type="submit" className="bg-sky-600 font-medium text-white px-5 py-2 rounded-full shadow-md  text-sm hover:bg-sky-700" >
+                                    {
+                                        isLoading ?
+                                            (<div className="border-2 border-t-white w-[20px] h-[20px] rounded-full animate-spin"></div>)
+                                            :
+                                            (<span> Register Now</span>)
+                                    }
+                                </button>
 
                                 <Link to="/login" className="bg-white font-medium text-gray-400 px-5 py-2 rounded-full shadow-md text-sm ml-3 hover:bg-gray-300" >I have an account</Link>
 
