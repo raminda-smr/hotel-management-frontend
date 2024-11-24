@@ -4,7 +4,7 @@ export default function PageNotFound() {
 
     return (
         <>
-            <div className="w-full h-screen bg-yellow-100 flex flex-row justify-center items-center">
+            <div className="w-full p-20 bg-white flex flex-row justify-center items-center">
                 <div className="image">
                     <img src="https://png.pngtree.com/png-vector/20221124/ourmid/pngtree-traffic-cone-in-3d-flat-style-with-orange-white-color-png-image_6471441.png" alt="" className="mb-[-50px]" />
                 </div>
