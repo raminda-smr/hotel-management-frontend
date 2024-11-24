@@ -89,7 +89,7 @@ export default function RegisterPage() {
 
         axios.post(import.meta.env.VITE_BACKEND_URL + '/api/users/register', registerUser, {}).then(
             (res) => {
-                toast.success('User successfully created!');
+                toast.success('Verification link sent to your email. Please verify your email within 1 hour.');
                 resetForm()
                 
             }
