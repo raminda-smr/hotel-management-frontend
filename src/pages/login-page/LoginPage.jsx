@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { CiHome, CiLock, CiMail } from "react-icons/ci"
 import { Link, useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 export default function LoginPage() {
 
@@ -38,14 +39,21 @@ export default function LoginPage() {
             }
         ).catch(
             (err) => {
-                toast.error(err.message)
+
+                if(err.status == 402){
+                    navigate('/verify/verification-failed')
+                }
+                else{
+                    toast.error(err.message)
+                }
+                setIsLoading(false)
             }
         )
     }
 
     return (
         <>
-            <div className="w-full min-h-screen py-10 flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url('./images/wrappers/login.jpg')` }}>
+            <div className="w-full min-h-screen py-10 flex justify-center items-center bg-cover bg-center " style={{ backgroundImage: `url('./images/pages/login/background.jpg')` }}>
 
                 <div className="login-card max-w-[350px] lg:max-w-[700px] bg-gray-50 flex flex-col lg:flex-row w-full rounded-lg overflow-hidden shadow-lg">
                     <div className="login-image lg:w-1/2 bg-gray-200 bg-cover bg-center" style={{ backgroundImage: `url('./images/pages/login/side-image.jpg')` }}></div>
