@@ -1,14 +1,27 @@
 import { useState } from "react"
 import axios from "axios"
 import { CiHome, CiLock, CiMail } from "react-icons/ci"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function LoginPage() {
 
+    const navigate  = useNavigate()
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isLoading, setIsLoading] =useState(false);
+ 
+    function handleLogin(e) {
 
-    function handleLogin() {
+        e.preventDefault()
+
+        if(isLoading){
+            return
+        }
+        else{
+            setIsLoading(true)
+        }
+
         axios.post(import.meta.env.VITE_BACKEND_URL + "/api/users/login", {
             email: email,
             password: password
@@ -17,16 +30,15 @@ export default function LoginPage() {
                 localStorage.setItem('token', res.data.token)
 
                 if (res.data.user.type == 'customer') {
-                    window.location.href = "/"
+                    navigate("/")
                 }
                 else if (res.data.user.type == 'admin') {
-                    window.location.href = "/admin"
+                    navigate("/admin")
                 }
-
             }
         ).catch(
             (err) => {
-                console.log(err)
+                toast.error(err.message)
             }
         )
     }
@@ -41,12 +53,12 @@ export default function LoginPage() {
                         <h2 className="text-3xl mt-5 mb-2 text-gray-500" >Login</h2>
                         <p className="text-sm text-gray-400 mb-10">To keep connected with us please login with your personal information</p>
 
-                        <form action="">
+                        <form action="" onSubmit={(e)=>{handleLogin(e)}}>
                             <div className="input-group flex items-center border-b border-gray-300 bg-gray-200 py-2 px-3 focus-within:bg-gray-50">
                                 <div className="icon text-3xl text-gray-500">
                                     <CiMail />
                                 </div>
-                                <div className="input flex flex-col px-2">
+                                <div className="input w-full flex flex-col px-2">
                                     <label htmlFor="" className="text-xs text-gray-400">Email Address</label>
                                     <input type="email" name="email" placeholder="yourmail@example.com" className="w-full text-sm outline-none bg-transparent" required defaultValue={email} onChange={
                                         (e) => {
@@ -64,7 +76,7 @@ export default function LoginPage() {
                                 <div className="icon text-3xl text-gray-500">
                                     <CiLock />
                                 </div>
-                                <div className="input flex flex-col px-2">
+                                <div className="input w-full flex flex-col px-2">
                                     <label htmlFor="" className="text-xs text-gray-400">Password</label>
                                     <input type="password" name="password" placeholder="*********" className="w-full text-sm outline-none bg-transparent" required defaultValue={password} onChange={
                                         (e) => {
@@ -91,7 +103,7 @@ export default function LoginPage() {
 
 
                             <div className="buttons flex mt-3 mb-5">
-                                <button type="submit" className="bg-sky-600 font-medium text-white px-5 py-2 rounded-full shadow-md  text-sm hover:bg-sky-700" onClick={handleLogin} >Login Now</button>
+                                <button type="submit" className="bg-sky-600 font-medium text-white px-5 py-2 rounded-full shadow-md  text-sm hover:bg-sky-700"  >Login Now</button>
 
                                 <Link to="/register" className="bg-white font-medium text-gray-400 px-5 py-2 rounded-full shadow-md text-sm ml-3 hover:bg-gray-300" >Create Account</Link>
 
