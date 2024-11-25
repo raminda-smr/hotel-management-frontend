@@ -1,9 +1,12 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 import { CiHome, CiMail } from "react-icons/ci"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 export default function VerifyEmail() {
+
+    const navigate = useNavigate()
 
     const [isVerificationChecked, setIsVerificationChecked] = useState(false)
     const [isVerified, setIsVerified] = useState(false)
@@ -50,19 +53,21 @@ export default function VerifyEmail() {
 
         setIsLoading(true)
 
-        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/request-verification', {
+        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/users/request-verification', {
             email: email
         }).then(
             (result) => {
                 if (result) {
                     // redirect to login
-
+                    toast.success("Your verification mail sent. Please verify within an hour.",{duration:20000})
+                    navigate('/login')
                 }
             }
         ).catch(
             (error) => {
                 if (error) {
-                  
+                    toast.error("Your verification mail sending failed. " + error.message )
+                    setIsLoading(false)
                 }
                
             }
@@ -91,7 +96,7 @@ export default function VerifyEmail() {
                         <h2 className="text-5xl mb-4 text-gray-400  text-center">Verification Expired</h2>
 
                         <p className="text-gray-500 mb-4">Request a new verification link</p>
-                        <form action="" onSubmit={()=>{ handleVerificationRequest(e) }}>
+                        <form action="" onSubmit={(e)=>{ handleVerificationRequest(e) }}>
                             <div className="input-group flex items-center border-b border-gray-300 bg-gray-200 py-2 px-3 focus-within:bg-gray-50">
                                 <div className="icon text-3xl text-gray-500">
                                     <CiMail />
