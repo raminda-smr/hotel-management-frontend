@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 export default function LoggedUser(props) {
 
     const navigation = useNavigate()
-    const userImage = props.user.image != "" ? props.user.image : "/default-user.png"
+    const userImage = props.user.image != null ? props.user.image : "/default-user.png"
 
     function handleProfileClick(){
         if(props.user.type == "admin"){
