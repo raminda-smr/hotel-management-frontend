@@ -12,6 +12,7 @@ import Gallery from "./gallery/gallery";
 import ContactUs from "./contact-us/contactUs";
 import PageNotFound from "../404-page/pageNotFound";
 import VerifyEmail from "./verify/verifyEmail";
+import PasswordReset from "./password-reset/passwordReset";
 
 
 
@@ -58,8 +59,8 @@ export default function HomePage() {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/verify/:token" element={<VerifyEmail />} />
+                <Route path="/password-reset" element={<PasswordReset />} />
                 <Route path="/*" element={<PageNotFound />} />
-
             </Routes>
             
             <Footer />

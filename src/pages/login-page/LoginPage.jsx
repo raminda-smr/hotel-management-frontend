@@ -105,7 +105,7 @@ export default function LoginPage() {
                                     Remember Me
                                 </label>
 
-                                <Link className="text-sm text-gray-400">Forget Password?</Link>
+                                <Link to="/password-reset" className="text-sm text-gray-400">Forget Password?</Link>
 
                             </div>
 
