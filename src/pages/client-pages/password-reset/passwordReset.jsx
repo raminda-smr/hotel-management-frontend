@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { CiHome, CiMail } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function PasswordReset() {
+
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -34,10 +36,8 @@ export default function PasswordReset() {
             (error) => {
                 if (error) {
                     toast.error("Your password reset mail sending failed. " + error.message)
-                   
+                    setIsLoading(false)
                 }
-                
-                setIsLoading(false)
             }
         )
     }
