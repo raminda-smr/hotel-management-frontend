@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { CiHome, CiMail } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
@@ -23,7 +24,7 @@ export default function PasswordReset() {
                 if (result) {
                     // redirect to login
                     toast.success("Your password reset mail sent. Please reset within day.", { duration: 20000 })
-                    navigate('/login')
+                    navigate('/')
                 }
                 else{
                     setIsLoading(false)
