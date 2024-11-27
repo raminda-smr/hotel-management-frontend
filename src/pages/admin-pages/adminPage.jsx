@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import SidebarUserData from "../../components/admin/sidebar-user-data/sidebarUserData"
 import Sidebar from "../../components/admin/sidebar/sideBar"
 import TopMenu from "../../components/admin/top-menubar/topMenu"
@@ -23,16 +23,18 @@ import UserChagePassword from './users/userChagePassword'
 import BookingUpdate from './bookings/bookingUpdate'
 import BookingView from './bookings/bookingView'
 import Dashboard from './dashboard/dashboard'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import UserContext from '../../context/userContext'
 
 
 
 export default function AdminPage() {
 
-    const [user, setUser] = useState({})
+    const navigate = useNavigate()
+    const {user, setUser} = useContext(UserContext)
     const [userLogged, setUserLogged] = useState(true)
-    
+
     useEffect(()=>{
         
         const token = localStorage.getItem('token')
@@ -55,19 +57,19 @@ export default function AdminPage() {
                     }
                     else{
                         // if user is not admin redirect to home
-                        window.location.href ="/"
+                        navigate('/')
                     }
                 }
             ).catch(
                 (err)=>{
                     setUserLogged(false)
-                    window.location.href ="/"
+                    navigate('/')
                 }
             )
         }
         else{
             setUserLogged(false)
-            window.location.href ="/"
+            navigate('/')
         }
     },[userLogged])
 
@@ -78,7 +80,7 @@ export default function AdminPage() {
                 <Sidebar />
 
                 <div className='flex-1  '>
-                    <TopMenu user={user} setUserLogged={setUserLogged} />
+                    <TopMenu />
 
                     <div className="content-area bg-gray-200 overflow-y-scroll h-screen pb-[100px]">
                         <Routes path="/*" >

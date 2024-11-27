@@ -1,6 +1,6 @@
 import UserDropdown from "./userDropdown"
 
-function TopMenu(props){
+function TopMenu(){
 
 return(
     <div className="top-menu w-full bg-gray-800 flex justify-between items-center">
@@ -8,7 +8,7 @@ return(
             <h4 className="text-white pl-4">Welcome to Lionine Villa Backend!</h4>
         </div>
 
-        <UserDropdown user={props.user} setUserLogged={props.setUserLogged} />
+        <UserDropdown />
         
     </div>
 )
