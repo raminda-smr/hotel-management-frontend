@@ -6,20 +6,20 @@ import toast from "react-hot-toast"
 
 export default function LoginPage() {
 
-    const navigate  = useNavigate()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isLoading, setIsLoading] =useState(false);
- 
+    const [isLoading, setIsLoading] = useState(false);
+
     function handleLogin(e) {
 
         e.preventDefault()
 
-        if(isLoading){
+        if (isLoading) {
             return
         }
-        else{
+        else {
             setIsLoading(true)
         }
 
@@ -40,15 +40,26 @@ export default function LoginPage() {
         ).catch(
             (err) => {
 
-                if(err.status == 402){
+                if (err.status == 402) {
                     navigate('/verify/verification-failed')
                 }
-                else{
+                else {
                     toast.error(err.message)
                 }
                 setIsLoading(false)
             }
         )
+    }
+
+
+    function loadAdmin(){
+        setEmail('admin@email.com')
+        setPassword('123')
+    }
+
+    function loadCustomer(){
+        setEmail('customer@email.com')
+        setPassword('123')
     }
 
     return (
@@ -61,7 +72,7 @@ export default function LoginPage() {
                         <h2 className="text-3xl mt-5 mb-2 text-gray-500" >Login</h2>
                         <p className="text-sm text-gray-400 mb-10">To keep connected with us please login with your personal information</p>
 
-                        <form action="" onSubmit={(e)=>{handleLogin(e)}}>
+                        <form action="" onSubmit={(e) => { handleLogin(e) }}>
                             <div className="input-group flex items-center border-b border-gray-300 bg-gray-200 py-2 px-3 focus-within:bg-gray-50">
                                 <div className="icon text-3xl text-gray-500">
                                     <CiMail />
@@ -99,7 +110,7 @@ export default function LoginPage() {
                             </div>
 
 
-                            <div className="flex items-center my-5 mb-10 justify-between">
+                            <div className="flex items-center my-5 mb-5 justify-between">
                                 <label htmlFor="remember" className="text-sm text-gray-400 flex items-center select-none cursor-pointer">
                                     <input type="checkbox" name="remember" id="remember" className="border-gray-400 mr-1" />
                                     Remember Me
@@ -116,6 +127,54 @@ export default function LoginPage() {
                                 <Link to="/register" className="bg-white font-medium text-gray-400 px-5 py-2 rounded-full shadow-md text-sm ml-3 hover:bg-gray-300" >Create Account</Link>
 
                             </div>
+
+                            <div className="mt-5">
+                                <h5 className="text-lg font-semibold mb-3">Demo Logins</h5>
+                                <div className="overflow-x-auto">
+                                    <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+                                        <thead className="bg-gray-100 text-gray-700">
+                                            <tr>
+                                                <th className="px-2 py-2 text-left text-xs font-medium border-b">User</th>
+                                                <th className="px-2 py-2 text-center text-xs font-medium border-b">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr className="hover:bg-gray-50">
+                                                <td className="px-2 py-1 border-b text-xs text-gray-800">
+                                                    <div>
+                                                        <p className="font-medium">Email: admin@email.com</p>
+                                                        <p>Password: 123</p>
+
+                                                    </div>
+                                                </td>
+                                                <td className="px-2 py-1 border-b text-center">
+                                                    <p className="mb-1 text-xs">Admin</p>
+                                                    <button type="button" className="px-3 py-1 text-xs text-white bg-blue-500 hover:bg-blue-600 rounded" onClick={loadAdmin}>
+                                                        Load
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr className="hover:bg-gray-50">
+                                                <td className="px-2 py-1 border-b text-xs text-gray-800">
+                                                    <div>
+                                                        <p className="font-medium">Email: customer@email.com</p>
+                                                        <p>Password: 123</p>
+
+                                                    </div>
+                                                </td>
+                                                <td className="px-2 py-1 border-b text-center">
+                                                    <p className="mb-1 text-xs">Customer</p>
+                                                    <button type="button" className="px-3 py-1 text-xs text-white bg-blue-500 hover:bg-blue-600 rounded" onClick={loadCustomer}>
+                                                        Load
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
 
 
                             <div className="back-link  mt-5 mb-5">
