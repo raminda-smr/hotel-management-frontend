@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { CiHome, CiLock, CiMail, CiUser } from "react-icons/ci"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FaRegCheckCircle, FaRegTimesCircle } from "react-icons/fa"
 import toast from "react-hot-toast"
+import UserContext from "../../context/userContext"
 
 export default function RegisterPage() {
+
+    const navigate = useNavigate()
+    const {user} = useContext(UserContext)
 
     const initialUser = { firstName: "", lastName: "", email: "", password: "", confirmPassword: "" }
     const [registerUser, setRegisterUser] = useState(initialUser);
@@ -15,6 +19,18 @@ export default function RegisterPage() {
 
     const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "" })
 
+
+    useEffect(()=>{
+        // if user exist
+        if(user != null){
+            if(user.type == 'admin'){
+                navigate('/admin/dashboard')
+            }
+            else if(user.type == 'customer'){
+                navigate('/');
+            }
+        }
+    },[user])
 
     // Validate Email
     useEffect(() => {
