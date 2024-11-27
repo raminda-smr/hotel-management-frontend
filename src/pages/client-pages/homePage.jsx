@@ -19,39 +19,11 @@ import SetNewPassword from "./set-new-password/setNewPassword";
 
 export default function HomePage() {
 
-    const [user, setUser] = useState({})
-    const [userLogged, setUserLogged] = useState(false)
-    
-    useEffect(()=>{
-        
-        const token = localStorage.getItem('token')
 
-        if(token != null){
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/logged',{
-                headers:{
-                    "Authorization" : 'Bearer ' + token,
-                    "Content-Type" : "application/json"
-                }
-            })
-            .then(
-                (res)=>{
-                    setUser(res.data.user)
-                    setUserLogged(true)
-                }
-            ).catch(
-                (err)=>{
-                    setUserLogged(false)
-                }
-            )
-        }
-        else{
-            setUserLogged(false)
-        }
-    },[userLogged])
 
     return (
         <>
-            <Header user={user} userLogged={userLogged} setUserLogged={setUserLogged} />
+            <Header />
 
             <Routes path="/*">
                 <Route path="/" element={<IndexPage />} />

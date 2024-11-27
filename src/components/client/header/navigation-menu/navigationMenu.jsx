@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom"
 import { RxHamburgerMenu } from "react-icons/rx"
 import NavigationLink from "./navigationLink"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import LoggedUser from "./logged-user/loggedUser";
 import { CiHome, CiImageOn, CiLocationOn, CiLogin, CiMedal, CiSaveDown1, CiSearch } from "react-icons/ci";
+import UserContext from "../../../../context/userContext";
 
 export default function NavigationMenu(props) {
+
+    const {user} = useContext(UserContext)
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isMenuMobile, setIsMenuMobile] = useState(true)
@@ -54,8 +57,8 @@ export default function NavigationMenu(props) {
                             <NavigationLink icon={<CiImageOn />} onClick={toggleMenuOpen} to="/gallery">Gallery</NavigationLink>
                             <NavigationLink icon={<CiLocationOn />} onClick={toggleMenuOpen} to="/contact-us">Contact Us</NavigationLink>
                             {
-                                props.userLogged ? (
-                                    <LoggedUser user={props.user} userLogged={props.userLogged} setUserLogged={props.setUserLogged} />
+                                user != null ? (
+                                    <LoggedUser  />
                                 ) : (
                                     <>
                                         <NavigationLink icon={<CiLogin />} to="/login">Login</NavigationLink>
