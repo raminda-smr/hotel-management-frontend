@@ -13,6 +13,7 @@ import ContactUs from "./contact-us/contactUs";
 import PageNotFound from "../404-page/pageNotFound";
 import VerifyEmail from "./verify/verifyEmail";
 import PasswordReset from "./password-reset/passwordReset";
+import SetNewPassword from "./set-new-password/setNewPassword";
 
 
 
@@ -60,6 +61,7 @@ export default function HomePage() {
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/verify/:token" element={<VerifyEmail />} />
                 <Route path="/password-reset" element={<PasswordReset />} />
+                <Route path="/set-new-password/:token" element={<SetNewPassword />} />
                 <Route path="/*" element={<PageNotFound />} />
             </Routes>
             
