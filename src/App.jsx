@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AdminPage from './pages/admin-pages/adminPage'
 import HomePage from './pages/client-pages/homePage'
@@ -6,6 +6,7 @@ import LoginPage from './pages/login-page/LoginPage'
 import { Toaster } from 'react-hot-toast'
 import RegisterPage from './pages/register-page/RegisterPage'
 import UserContext from './context/userContext'
+import axios from 'axios'
 
 
 function App() {

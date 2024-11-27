@@ -8,7 +8,7 @@ export function UserProvider(props) {
 
     return (
         <UserContext.Provider value={{ user, setUser }}>
-            {children}
+            {props.children}
         </UserContext.Provider>
     )
 
