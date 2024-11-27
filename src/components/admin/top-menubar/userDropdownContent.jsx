@@ -1,12 +1,19 @@
 import UserDropdownItem from "./userDropdownItem"
 import { LiaUser, LiaUserEditSolid } from "react-icons/lia"
 import { IoLogOutOutline } from "react-icons/io5"
+import { useContext } from "react"
+import UserContext from "../../../context/userContext"
+import { useNavigate } from "react-router-dom"
 
 export default function UserDropdownContent(props) {
 
+    const navigate = useNavigate()
+    const {user, setUser} = useContext(UserContext)
+
     function logout(){
         localStorage.removeItem('token')
-        props.setUserLogged(false)
+        setUser(null)
+        navigate('/')
     }
 
     return (
