@@ -2,13 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import SearchRooms from "../../components/client/search-rooms/searchRooms";
-import AboutUs from "../../components/client/about-us/aboutUs";
-import ContactUs from "../../components/client/contact-us/contactUs";
 import Login from "../../components/client/login/login";
 import Register from "../../components/client/register/register";
 import Header from "../../components/client/header/header";
 import IndexPage from "./index/indexPage";
 import Footer from "../../components/client/footer/footer";
+import AboutUs from "./about-us/aboutUs";
+import Gallery from "./gallery/gallery";
+import ContactUs from "./contact-us/contactUs";
+import PageNotFound from "../404-page/pageNotFound";
+import VerifyEmail from "./verify/verifyEmail";
+import PasswordReset from "./password-reset/passwordReset";
+import SetNewPassword from "./set-new-password/setNewPassword";
 
 
 
@@ -52,10 +57,12 @@ export default function HomePage() {
                 <Route path="/" element={<IndexPage />} />
                 <Route path="/search-rooms" element={<SearchRooms />} />
                 <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-
+                <Route path="/verify/:token" element={<VerifyEmail />} />
+                <Route path="/password-reset" element={<PasswordReset />} />
+                <Route path="/set-new-password/:token" element={<SetNewPassword />} />
+                <Route path="/*" element={<PageNotFound />} />
             </Routes>
             
             <Footer />
