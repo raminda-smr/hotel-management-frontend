@@ -13,7 +13,7 @@ export default function UserDropdownContent(props) {
     function logout(){
         localStorage.removeItem('token')
         setUser(null)
-        navigate('/')
+        // window.location.href="/"
     }
 
     return (

@@ -22,10 +22,17 @@ import UserChagePassword from './users/userChagePassword'
 import BookingUpdate from './bookings/bookingUpdate'
 import BookingView from './bookings/bookingView'
 import Dashboard from './dashboard/dashboard'
+import { useContext, useEffect } from 'react'
+import UserContext from '../../context/userContext'
 
 
 export default function AdminPage() {
 
+    const token = localStorage.getItem("token")
+    if (token == null) {
+        window.location.href = "/login"
+    }
+    
     return (
         <>
             <div className="w-full h-screen flex overflow-hidden">
