@@ -1,18 +1,15 @@
 import React, { useContext } from 'react'
 import UserContext from '../../../context/userContext'
-import { useNavigate } from 'react-router-dom'
-import { CiUser } from 'react-icons/ci'
+import { Link, useNavigate } from 'react-router-dom'
+import { CiBookmark, CiBookmarkCheck, CiBookmarkMinus, CiBookmarkPlus, CiGrid41, CiUser } from 'react-icons/ci'
 
 export default function Sidebar() {
 
-    const navigate  = useNavigate()
-    const {user, setUser} = useContext(UserContext)
-    
+    const { user, setUser } = useContext(UserContext)
 
-    function logout(){
+    function logout() {
         localStorage.removeItem('token')
         setUser(null)
-        navigate('/')
     }
 
     return (
@@ -34,37 +31,42 @@ export default function Sidebar() {
             <nav className="flex-1 px-4">
                 <ul>
                     <li className="mb-2">
-                        <a
-                            href="#"
-                            className="block px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            Overview
-                        </a>
+                        <Link to="/customer" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                            <CiGrid41 className='text-2xl mr-2' /> <span>Dashboard</span>
+                        </Link>
                     </li>
+
                     <li className="mb-2">
-                        <a
-                            href="#"
-                            className="block px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            Orders
-                        </a>
+                        <Link to="/customer/booking/requests" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                            <CiBookmark className='text-2xl mr-2' /> <span>Booking Requests</span>
+                        </Link>
                     </li>
+
                     <li className="mb-2">
-                        <a
-                            href="#"
-                            className="block px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            Settings
-                        </a>
+                        <Link to="/customer/booking/rejected" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                            <CiBookmarkMinus className='text-2xl mr-2' /> <span>Rejected Requests</span>
+                        </Link>
                     </li>
+
                     <li className="mb-2">
-                        <a
-                            href="#"
-                            className="block px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            Support
-                        </a>
+                        <Link to="/customer/booking/accepted" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                            <CiBookmarkPlus className='text-2xl mr-2' /> <span>Upcoming Bookings</span>
+                        </Link>
                     </li>
+
+                    <li className="mb-2">
+                        <Link to="/customer/booking/completed" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                            <CiBookmarkCheck className='text-2xl mr-2' /> <span>Completed Bookings</span>
+                        </Link>
+                    </li>
+
+                    <li className="mb-2 ">
+                        <Link to="/customer/profile" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                            <CiUser className='text-2xl mr-2' /> <span>Edit Profile</span>
+                        </Link>
+                    </li>
+
+
                 </ul>
             </nav>
             <div className="p-4">

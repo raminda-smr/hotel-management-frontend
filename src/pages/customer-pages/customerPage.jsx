@@ -10,6 +10,11 @@ import UserContext from "../../context/userContext";
 
 export default function CustomerPage() {
 
+    const token = localStorage.getItem("token")
+    if (token == null) {
+        window.location.href = "/login"
+    }
+
     const { user } = useContext(UserContext);
     if (!user) return <div>Loading...</div>;
 
@@ -18,7 +23,6 @@ export default function CustomerPage() {
             <Header />
 
             <section className="customer-area py-20">
-
 
                 <div className="max-w-[1200px] mx-auto">
 
