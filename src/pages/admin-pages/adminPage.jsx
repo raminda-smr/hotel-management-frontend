@@ -1,5 +1,4 @@
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import SidebarUserData from "../../components/admin/sidebar-user-data/sidebarUserData"
 import Sidebar from "../../components/admin/sidebar/sideBar"
 import TopMenu from "../../components/admin/top-menubar/topMenu"
 import Bookings from './bookings/bookings'
@@ -23,56 +22,17 @@ import UserChagePassword from './users/userChagePassword'
 import BookingUpdate from './bookings/bookingUpdate'
 import BookingView from './bookings/bookingView'
 import Dashboard from './dashboard/dashboard'
-import { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
+import { useContext, useEffect } from 'react'
 import UserContext from '../../context/userContext'
-
 
 
 export default function AdminPage() {
 
-    const navigate = useNavigate()
-    const {user, setUser} = useContext(UserContext)
-    const [userLogged, setUserLogged] = useState(true)
-
-    useEffect(()=>{
-        
-        const token = localStorage.getItem('token')
-
-        if(token != null){
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/logged',{
-                headers:{
-                    "Authorization" : 'Bearer ' + token,
-                    "Content-Type" : "application/json"
-                }
-            })
-            .then(
-                (res)=>{
-
-                    // if user is admin keep 
-                    if(res.data.user.type == "admin"){
-                        setUser(res.data.user)
-                        setUserLogged(true)
-                       
-                    }
-                    else{
-                        // if user is not admin redirect to home
-                        navigate('/')
-                    }
-                }
-            ).catch(
-                (err)=>{
-                    setUserLogged(false)
-                    navigate('/')
-                }
-            )
-        }
-        else{
-            setUserLogged(false)
-            navigate('/')
-        }
-    },[userLogged])
-
+    const token = localStorage.getItem("token")
+    if (token == null) {
+        window.location.href = "/login"
+    }
+    
     return (
         <>
             <div className="w-full h-screen flex overflow-hidden">
