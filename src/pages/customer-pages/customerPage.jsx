@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Footer from "../../components/client/footer/footer";
 import Header from "../../components/client/header/header";
 import PageNotFound from "../404-page/pageNotFound";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "./dashboard/dashboard";
 import Sidebar from "../../components/customer/sidebar/sidebar";
 import { useContext } from "react";
 import UserContext from "../../context/userContext";
