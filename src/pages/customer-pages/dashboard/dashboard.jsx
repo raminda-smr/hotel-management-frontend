@@ -8,7 +8,7 @@ export default function Dashboard() {
     return (
         <>
             <header className="mb-6">
-                <h4 className="text-lg text-gray-400">Hi , {user.firstName}</h4>
+                <h4 className="text-lg text-gray-400">Hi, {user.firstName}</h4>
                 <h1 className="text-3xl font-bold text-gray-600">
                     Welcome to Your Dashboard
                 </h1>

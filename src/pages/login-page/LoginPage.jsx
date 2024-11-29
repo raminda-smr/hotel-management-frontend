@@ -20,7 +20,7 @@ export default function LoginPage() {
                 navigate('/admin/dashboard')
             }
             else if(user.type == 'customer'){
-                navigate('/');
+                navigate('/customer/dashboard');
             }
         }
     },[user])
@@ -44,10 +44,10 @@ export default function LoginPage() {
                 localStorage.setItem('token', res.data.token)
 
                 if (res.data.user.type == 'customer') {
-                    navigate("/")
+                    window.location.href ="/customer"
                 }
                 else if (res.data.user.type == 'admin') {
-                    navigate("/admin")
+                    window.location.href = "/admin"
                 }
             }
         ).catch(

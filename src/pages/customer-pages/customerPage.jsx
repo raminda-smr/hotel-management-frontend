@@ -9,7 +9,7 @@ import UserContext from "../../context/userContext";
 
 
 export default function CustomerPage() {
-    
+
     const { user } = useContext(UserContext);
     if (!user) return <div>Loading...</div>;
 
@@ -26,7 +26,7 @@ export default function CustomerPage() {
 
                         <Sidebar />
 
-                        <div className="content px-4">
+                        <div className="content px-8">
                             <Routes path="/*">
                                 <Route path="/" element={<Dashboard />} />
 
