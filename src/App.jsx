@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast'
 import RegisterPage from './pages/register-page/RegisterPage'
 import UserContext from './context/userContext'
 import axios from 'axios'
+import CustomerPage from './pages/customer-pages/customerPage'
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
             <Routes path="/*">
                 <Route path="/*" element={<HomePage />} />
                 <Route path="/admin/*" element={<AdminPage />} />
+                <Route path="/customer/*" element={<CustomerPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
