@@ -1,12 +1,15 @@
-import Sidebar from "../../../components/customer/sidebar/sidebar";
+import { useContext } from "react";
+import UserContext from "../../../context/userContext";
 
 export default function Dashboard() {
     
+    const {user} = useContext(UserContext)
+
     return (
         <>
             <header className="mb-6">
-                <h4>Hi </h4>
-                <h1 className="text-2xl font-bold text-gray-800">
+                <h4 className="text-lg text-gray-400">Hi , {user.firstName}</h4>
+                <h1 className="text-3xl font-bold text-gray-600">
                     Welcome to Your Dashboard
                 </h1>
                 <p className="text-gray-600">

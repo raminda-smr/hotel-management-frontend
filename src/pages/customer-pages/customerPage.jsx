@@ -4,9 +4,15 @@ import Header from "../../components/client/header/header";
 import PageNotFound from "../404-page/pageNotFound";
 import Dashboard from "./dashboard/Dashboard";
 import Sidebar from "../../components/customer/sidebar/sidebar";
+import { useContext } from "react";
+import UserContext from "../../context/userContext";
 
 
 export default function CustomerPage() {
+    
+    const { user } = useContext(UserContext);
+    if (!user) return <div>Loading...</div>;
+
     return (
         <>
             <Header />
