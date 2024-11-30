@@ -4,8 +4,10 @@ import { CiCalendar, CiCalendarDate, CiGrid41 } from "react-icons/ci"
 import { useNavigate } from "react-router-dom";
 
 
-export default function RoomSearchBar() {
+export default function RoomSearchBar(props) {
     
+    const specialClass = props.className ? props.className : ""
+
     const navigate = useNavigate()
 
     const initialSearchData = {start:"", end:"", category:"" }
@@ -27,7 +29,7 @@ export default function RoomSearchBar() {
             }
         )
        
-    }, [categories])
+    }, [])
 
     function handleChange(e){
         const { name, value } = e.target; 
@@ -47,10 +49,10 @@ export default function RoomSearchBar() {
 
     return (
         <>
-        <form className='bg-blue-500 flex flex-col lg:flex-row rounded-lg justify-center items-center py-2 px-1 min-w-[260px]'  onSubmit={(e) => {handleSearch(e)}}  >
+        <form className={`bg-blue-500 flex flex-col lg:flex-row rounded-lg justify-center items-center py-2 px-1 min-w-[260px] ${specialClass}`  }  onSubmit={(e) => {handleSearch(e)}}  >
             <div className="flex flex-col w-full md:flex-row">
 
-                <div className="input-group flex items-center border-b border-gray-300 bg-white py-2 px-3 mb-2 mx-1 focus-within:bg-gray-50">
+                <div className="input-group flex items-center border-b border-gray-300 bg-white py-2 px-3 mb-2 mx-1 lg:mb-0 focus-within:bg-gray-50">
                     <div className="icon text-3xl text-gray-500">
                         <CiCalendarDate />
                     </div>
@@ -60,7 +62,7 @@ export default function RoomSearchBar() {
                     </div>
                 </div>
 
-                <div className="input-group flex items-center border-b border-gray-300 bg-white py-2 px-3 mb-2 mx-1 focus-within:bg-gray-50">
+                <div className="input-group flex items-center border-b border-gray-300 bg-white py-2 px-3 mb-2 mx-1 lg:mb-0 focus-within:bg-gray-50">
                     <div className="icon text-3xl text-gray-500">
                         <CiCalendar />
                     </div>
@@ -73,7 +75,7 @@ export default function RoomSearchBar() {
             </div>
 
             <div className="flex w-full">
-                <div className="input-group flex w-full items-center border-b border-gray-300 bg-white py-2 px-3 mb-2 mx-1 focus-within:bg-gray-50">
+                <div className="input-group flex w-full items-center border-b border-gray-300 bg-white py-2 px-3 mb-2 mx-1 lg:mb-0 focus-within:bg-gray-50">
                     <div className="icon text-3xl text-gray-500">
                         <CiGrid41 />
                     </div>
@@ -92,7 +94,7 @@ export default function RoomSearchBar() {
             </div>
             <div className="flex w-full">
 
-                <button type="submit" className="bg-amber-400 px-6 py-4 w-full min-w-[200px] lg:mb-2 lg:rounded-none mx-1 font-medium uppercase  rounded-lg transition-all duration-300 overflow-hidden hover:bg-amber-500 hover:text-white ">Book Now</button>
+                <button type="submit" className="bg-amber-400 px-6 py-4 w-full min-w-[200px] lg:rounded-none mx-1 font-medium uppercase  rounded-lg transition-all duration-300 overflow-hidden hover:bg-amber-500 hover:text-white ">Book Now</button>
 
             </div>
         </form>

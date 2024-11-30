@@ -11,6 +11,8 @@ export default function RoomSearch() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    const localdata = JSON.parse(localStorage.getItem("searchData"));
+
     useEffect(() => {
         const searchData = JSON.parse(localStorage.getItem("searchData"));
 
@@ -34,15 +36,13 @@ export default function RoomSearch() {
                     setLoading(false); // Stop loading spinner
                 });
         }
-    }, [navigate]);
+    }, [localdata]);
 
     if (loading) {
         return <div>Loading...</div>; // Simple loading indicator
     }
 
-    if (rooms.length === 0) {
-        return <div>No rooms available for the selected search criteria.</div>;
-    }
+
 
     return (
         <>
@@ -51,12 +51,12 @@ export default function RoomSearch() {
 
             <section className="search-area bg-gray-100 py-4">
                 <div className="w-full max-w-[1200px] mx-auto flex justify-center ">
-                    <RoomSearchBar />
+                    <RoomSearchBar className="w-full" />
                 </div>
             </section>
 
             <section className="search-result bg-gray-100 py-4">
-                <div className="w-full max-w-[1200px] mx-auto flex justify-center ">
+                <div className="w-full max-w-[1200px] mx-auto flex justify-center gap-4">
                     <div className="room-list lg:w-2/3">
                         <div className="rooms-list">
                             {rooms.map((room, index) => (
