@@ -14,6 +14,7 @@ import PageNotFound from "../404-page/pageNotFound";
 import VerifyEmail from "./verify/verifyEmail";
 import PasswordReset from "./password-reset/passwordReset";
 import SetNewPassword from "./set-new-password/setNewPassword";
+import RoomSearch from "./room-search/roomSearch";
 
 
 
@@ -27,7 +28,8 @@ export default function HomePage() {
 
             <Routes path="/*">
                 <Route path="/" element={<IndexPage />} />
-                <Route path="/search-rooms" element={<SearchRooms />} />
+                <Route path="/room-search" element={<RoomSearch />} />
+                <Route path="/rooms" element={<SearchRooms />} />
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />

@@ -9,6 +9,14 @@ export default function RoomSearchBar() {
     const navigate = useNavigate()
 
     const initialSearchData = {start:"", end:"", category:"" }
+
+    const localdata = JSON.parse(localStorage.getItem("searchData"));
+    if(localdata && localdata.start && localdata.end && localdata.category){
+        initialSearchData.start = localdata.start
+        initialSearchData.end = localdata.end
+        initialSearchData.category = localdata.category
+    }
+
     const [searchData, setSearchData] = useState(initialSearchData)
     const [categories, setCategories] = useState([])
 

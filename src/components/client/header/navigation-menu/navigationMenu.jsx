@@ -52,7 +52,7 @@ export default function NavigationMenu(props) {
                     <div className="menu-content absolute right-0 top-[64px] z-40 lg:relative lg:top-0 ">
                         <div className="menu-body bg-white text-gray-500 flex flex-col rounded-lg shadow-2xl overflow-hidden lg:flex-row lg:bg-transparent lg:text-white lg:shadow-none lg:rounded-none ">
                             <NavigationLink icon={<CiHome />} onClick={toggleMenuOpen} to="/">Home</NavigationLink>
-                            <NavigationLink icon={<CiSearch />} onClick={toggleMenuOpen} to="/search-rooms">Search Rooms</NavigationLink>
+                            <NavigationLink icon={<CiSearch />} onClick={toggleMenuOpen} to="/room-search">Search Rooms</NavigationLink>
                             <NavigationLink icon={<CiMedal />} onClick={toggleMenuOpen} to="/about-us">About Us</NavigationLink>
                             <NavigationLink icon={<CiImageOn />} onClick={toggleMenuOpen} to="/gallery">Gallery</NavigationLink>
                             <NavigationLink icon={<CiLocationOn />} onClick={toggleMenuOpen} to="/contact-us">Contact Us</NavigationLink>
