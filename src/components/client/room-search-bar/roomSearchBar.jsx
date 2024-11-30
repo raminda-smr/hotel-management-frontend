@@ -49,7 +49,7 @@ export default function RoomSearchBar(props) {
 
     return (
         <>
-        <form className={`bg-blue-500 flex flex-col lg:flex-row rounded-lg justify-center items-center py-2 px-1 min-w-[260px] ${specialClass}`  }  onSubmit={(e) => {handleSearch(e)}}  >
+        <form className={`bg-sky-600 flex flex-col lg:flex-row rounded-lg justify-center items-center py-2 px-1 min-w-[260px] ${specialClass}`  }  onSubmit={(e) => {handleSearch(e)}}  >
             <div className="flex flex-col w-full md:flex-row">
 
                 <div className="input-group flex items-center border-b border-gray-300 bg-white py-2 px-3 mb-2 mx-1 lg:mb-0 focus-within:bg-gray-50">

@@ -18,9 +18,10 @@ export default function Room(props) {
                         </h3>
                     </div>
                     <div className="price">
-                    <h3 className="text-2xl uppercase  text-gray-500">
+                    <h3 className="text-2xl  text-gray-500">
                         <span className="text-sm">LKR</span> 
-                        <span className="text-red-500">{room.category.price}</span>
+                        <span className="text-red-500">{room.category.price}</span> 
+                        <span className="text-sm text-amber-600">/night</span>
                     </h3>
                     </div>
                 </div>
