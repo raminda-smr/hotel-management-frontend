@@ -12,6 +12,7 @@ export default function RoomSearch() {
     const navigate = useNavigate()
 
     const [refresh, setRefresh] = useState(false)
+    const [cartChanged, setCartChanged] = useState(0)
 
     useEffect(() => {
         const searchData = JSON.parse(localStorage.getItem("searchData"))
@@ -36,6 +37,9 @@ export default function RoomSearch() {
                     setLoading(false) // Stop loading spinner
                 })
         }
+        
+        setCartChanged(cartChanged + 1)
+
     }, [refresh])
 
     if (loading) {
@@ -60,12 +64,12 @@ export default function RoomSearch() {
                     <div className="room-list lg:w-2/3">
                         <div className="rooms-list">
                             {rooms.map((room, index) => (
-                                <Room key={index} room={room} />
+                                <Room key={index} room={room} cartChanged={cartChanged} setCartChanged={setCartChanged} />
                             ))}
                         </div>
                     </div>
                     <div className="selected-rooms lg:w-1/3">
-                        <Cart />
+                        <Cart cartChanged={cartChanged} setCartChanged={setCartChanged} />
                     </div>
                 </div>
             </section>

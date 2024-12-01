@@ -5,7 +5,6 @@ import { CiShoppingCart } from "react-icons/ci"
 export default function Room(props) {
 
     const { user } = useContext(UserContext)
-    const [refresh, setRefresh] = useState(false);
 
     const room = props.room
     let addButton = ""
@@ -30,7 +29,7 @@ export default function Room(props) {
         }
 
         localStorage.setItem('cart', JSON.stringify(cart))
-        setRefresh(!refresh)
+        props.setCartChanged(props.cartChanged + 1)
     }
 
 
