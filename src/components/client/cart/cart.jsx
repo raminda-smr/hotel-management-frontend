@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { CiShoppingCart, CiUnlock } from 'react-icons/ci'
+import { CiLocationArrow1, CiShoppingCart, CiUnlock } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
 import UserContext from '../../../context/userContext';
 
@@ -8,6 +8,7 @@ export default function Cart(props) {
     const { user } = useContext(UserContext)
     const [dateCount, setDateCount] = useState(0)
     const [total, setTotal] = useState(0)
+    const cartDate = JSON.parse(localStorage.getItem("searchData"));
         
     let myCart = JSON.parse(localStorage.getItem('cart')) || [];
    
@@ -50,7 +51,17 @@ export default function Cart(props) {
     }
 
     function calculateTotal(){
-        
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let totalAmount = 0;
+
+        if(cart.length > 0){
+            for(let i=0; i < cart.length; i++){
+                totalAmount += cart[i].category.price * dateCount
+            }
+        }
+
+        setTotal(totalAmount);
+
     }
 
     useEffect(()=>{
@@ -62,19 +73,20 @@ export default function Cart(props) {
         <div className="cart bg-gray-200 border border-gray-300 rounded-lg p-4">
             <h3 className="text-gray-500  flex items-center justify-center pb-4">
                 <CiShoppingCart className="text-4xl mr-2" />
-                <span className="uppercase text-2xl">Your Cart</span>
+                <span className="uppercase text-2xl font-bold">Your Cart</span>
             </h3>
 
             <div className="cart-body w-full border-t border-gray-300 ">
 
                 {user ? (
-                    <div className="cart-data mt-3">
+                    <div className="cart-data mt-4">
                       { myCart && myCart.length > 0 && (
                             myCart.map((item, index)=> (
                                 <div key={index} className='p-4 bg-gray-50 mb-2 flex justify-between rounded'>
                                     <div className="product">
                                         <div className="title font-semibold text-gray-500">{item.category.name} Room</div>
                                         <div className="room text-sm text-gray-500 ">Room No: {item.roomNumber}</div>
+                                        <div className="dates text-xs text-gray-400 ">{cartDate.start} to {cartDate.end}</div>
                                     </div>
                                     <div className="per-night text-right">
                                         <div className="unit-cost font-semibold text-gray-500">LKR {item.category.price} X {dateCount}</div>
@@ -85,13 +97,20 @@ export default function Cart(props) {
                             ))
                       )}  
 
-                        <div className="total flex justify-between bg-white p-2">
+                        <div className="total flex justify-between bg-white p-4 rounded">
                             <div className="title">
-                                <h5 className='text-lg font-semibold'>Total</h5>
+                                <h5 className='text-lg font-semibold text-gray-700'>Total</h5>
                             </div>
                             <div className="price">
-                                <h5 className='text-lg font-semibold'>Total</h5>
+                                <h5 className='text-lg font-semibold text-gray-700'>LKR {total}</h5>
                             </div>
+                        </div>
+
+                        <div className="submit flex justify-end mt-2">
+                            <button className="submit-request flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-amber-500">
+                                <CiLocationArrow1 className='text-2xl font-semibold mr-1' /> 
+                                <span>Submit Request</span>
+                            </button>
                         </div>
                     </div>
                 ) : (
