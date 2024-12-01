@@ -70,13 +70,13 @@ export default function Cart(props) {
     }, [props.cartChanged])
 
     return (
-        <div className="cart bg-gray-200 border border-gray-300 rounded-lg p-4">
-            <h3 className="text-gray-500  flex items-center justify-center pb-4">
+        <div className="cart bg-gray-700 border border-gray-300 rounded-lg p-4">
+            <h3 className="text-gray-50  flex items-center justify-center pb-4">
                 <CiShoppingCart className="text-4xl mr-2" />
                 <span className="uppercase text-2xl font-bold">Your Cart</span>
             </h3>
 
-            <div className="cart-body w-full border-t border-gray-300 ">
+            <div className="cart-body w-full border-t border-gray-600 ">
 
                 {user ? (
                     <div className="cart-data mt-4">
@@ -120,7 +120,7 @@ export default function Cart(props) {
                             <CiUnlock />
                         </div>
 
-                        <p className="text-gray-500 mb-4">Please <Link to="/login" className="underline text-red-700">login</Link> or <Link to="/register" className="underline text-red-700">register</Link> in order to continue </p>
+                        <p className="text-gray-300 mb-4">Please <Link to="/login" className="underline text-red-400">login</Link> or <Link to="/register" className="underline text-red-400">register</Link> in order to continue </p>
 
                     </div>
                 )}
