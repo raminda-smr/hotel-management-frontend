@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from "axios"
 import { useEffect, useState } from "react"
 import { CiCalendar, CiCalendarDate, CiGrid41 } from "react-icons/ci"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 
 export default function RoomSearchBar(props) {
@@ -12,7 +12,7 @@ export default function RoomSearchBar(props) {
 
     const initialSearchData = {start:"", end:"", category:"" }
 
-    const localdata = JSON.parse(localStorage.getItem("searchData"));
+    const localdata = JSON.parse(localStorage.getItem("searchData"))
     if(localdata && localdata.start && localdata.end && localdata.category){
         initialSearchData.start = localdata.start
         initialSearchData.end = localdata.end
@@ -32,18 +32,22 @@ export default function RoomSearchBar(props) {
     }, [])
 
     function handleChange(e){
-        const { name, value } = e.target; 
-        const updatedSearchData = { ...searchData, [name]: value }; 
-        setSearchData(updatedSearchData); 
+        const { name, value } = e.target 
+        const updatedSearchData = { ...searchData, [name]: value } 
+        setSearchData(updatedSearchData)
        
-    };
+    }
 
     function handleSearch(e){
         e.preventDefault()
         
         if(searchData.start != "" &&  searchData.end != "" && searchData.category != ""){
-            localStorage.setItem("searchData", JSON.stringify(searchData)); // Save to localStorage
-            navigate("/room-search");
+            localStorage.setItem("searchData", JSON.stringify(searchData)) // Save to localStorage
+            navigate("/room-search")
+            if(props.setRefresh){
+                props.setRefresh(!props.refresh)
+            }
+            
         }
     }
 

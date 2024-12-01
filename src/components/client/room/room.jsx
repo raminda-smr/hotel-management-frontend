@@ -1,10 +1,12 @@
-import { useContext } from "react"
+import { useContext,  useState } from "react"
 import UserContext from "../../../context/userContext"
 import { CiShoppingCart } from "react-icons/ci"
 
 export default function Room(props) {
 
     const { user } = useContext(UserContext)
+    const [refresh, setRefresh] = useState(false);
+
     const room = props.room
     let addButton = ""
     let myCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -18,21 +20,25 @@ export default function Room(props) {
     }
 
     function toggleCart(room) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const roomIndex = cart.indexOf(room.roomNumber);
+        let cart = JSON.parse(localStorage.getItem('cart')) || []
+        const roomIndex = cart.findIndex(cartRoom => cartRoom.roomNumber === room.roomNumber)
 
         if (roomIndex !== -1) {
-            cart.splice(roomIndex, 1);
+            cart.splice(roomIndex, 1)
         } else {
-            cart.push(room.roomNumber);
+            cart.push(room)
         }
 
-        localStorage.setItem('cart', JSON.stringify(cart));
+        localStorage.setItem('cart', JSON.stringify(cart))
+        setRefresh(!refresh)
     }
 
 
 
-    if (user && user.type == "customer" && !myCart.includes(room.roomNumber)) {
+    if (user && 
+        user.type == "customer" && 
+        (myCart.findIndex(cartRoom => cartRoom.roomNumber == room.roomNumber) === -1)
+    ) {
         addButton = (
             <div className="flex justify-end">
                 <button className="bg-blue-500 text-white px-4 py-2 flex items-center rounded hover:bg-amber-500" onClick={(e) => { toggleCart(room) }}>
@@ -54,7 +60,7 @@ export default function Room(props) {
     }
 
 
-    
+
 
     return (
         <div className="room flex border bg-slate-200 border-gray-300 rounded-lg mb-3 ">
