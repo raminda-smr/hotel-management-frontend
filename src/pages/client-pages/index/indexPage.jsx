@@ -3,8 +3,12 @@ import ImageSlider from "../../../components/client/image-slider/imageSlider";
 import GalleryItem from "../../../components/client/gallery-item/galleryItem";
 import FeedbackItem from "../../../components/client/feedback-item/feedbackItem";
 import RoomSearchBar from "../../../components/client/room-search-bar/roomSearchBar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function IndexPage() {
+
+    const [roomCategories, setRoomCategories] = useState([])
 
     const slides = [
         { "url": "/slides/slide-1.jpg", "title": "Welcome Lionion Vila Resort", "subtitle": "Beach Resort" },
@@ -39,6 +43,19 @@ export default function IndexPage() {
         {email: "emilyjohnson@example.com", username: "EmilyJohnson", title: "User-Friendly Interface", description: "The app is very user-friendly and intuitive. I had no issues navigating through different sections.", date: "2023-11-10T18:45:00Z", approved: true}
     ]
 
+    // get room categories 
+    useEffect(()=>{
+        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories', {}).then(
+            
+            (res) => {
+                if(res){
+                    // console.log(res)
+                    setRoomCategories(res.data.list)
+                }
+            } 
+            
+        )
+    },[])
 
 
     return (
@@ -71,16 +88,7 @@ export default function IndexPage() {
 
                     <div className="room-categories grid gap-4 px-4 lg:grid-cols-3">
 
-                        <div className="room-category bg-white rounded-lg overflow-hidden flex flex-col md:flex-row md:items-center lg:flex-col">
-                            <div className="image md:max-w-[50%] lg:max-w-full">
-                                <img src="https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg" alt="" className="w-full" />
-                            </div>
-                            <div className="content flex flex-col">
-                                <h2 className="pt-3 pb-2 text-center text-3xl">Standard</h2>
-                                <p className="px-4 pb-4 text-center">Cozy and comfortable, ideal for couples or solo travelers.</p>
-                                <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mb-4 hover:bg-blue-500' to="/">Book Now</Link>
-                            </div>
-                        </div>
+                        
 
                         <div className="room-category bg-white rounded-lg overflow-hidden flex flex-col md:flex-row md:items-center lg:flex-col">
                             <div className="image md:max-w-[50%] lg:max-w-full">
