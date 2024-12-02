@@ -1,39 +1,38 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react'
 import { CiLocationArrow1, CiShoppingCart, CiUnlock } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
-import UserContext from '../../../context/userContext';
+import UserContext from '../../../context/userContext'
 
 export default function Cart(props) {
 
     const { user } = useContext(UserContext)
     const [dateCount, setDateCount] = useState(0)
     const [total, setTotal] = useState(0)
-    const cartDate = JSON.parse(localStorage.getItem("searchData"));
+    const cartDate = JSON.parse(localStorage.getItem("searchData"))
         
-    let myCart = JSON.parse(localStorage.getItem('cart')) || [];
+    let myCart = JSON.parse(localStorage.getItem('cart')) || []
    
 
     function getSelectedDatesCount() {
-        const searchData = JSON.parse(localStorage.getItem("searchData"));
+        const searchData = JSON.parse(localStorage.getItem("searchData"))
     
         if (!searchData || !searchData.start || !searchData.end) {
-            console.error("Invalid searchData or missing dates.");
-            return 0; 
+            console.error("Invalid searchData or missing dates.")
+            return 0 
         }
     
-        const startDate = new Date(searchData.start);
-        const endDate = new Date(searchData.end);
+        const startDate = new Date(searchData.start)
+        const endDate = new Date(searchData.end)
     
         if (isNaN(startDate) || isNaN(endDate)) {
-            console.error("Invalid date format in searchData.");
-            return 0;
+            console.error("Invalid date format in searchData.")
+            return 0
         }
     
-        const differenceInTime = endDate - startDate;
+        const differenceInTime = endDate - startDate
+        const differenceInDays = Math.floor(differenceInTime / (1000 * 60 * 60 * 24))
     
-        const differenceInDays = Math.floor(differenceInTime / (1000 * 60 * 60 * 24));
-    
-        return differenceInDays > 0 ? differenceInDays : 0;
+        return differenceInDays > 0 ? differenceInDays : 0
     }
 
     function toggleCart(room) {
@@ -51,8 +50,8 @@ export default function Cart(props) {
     }
 
     function calculateTotal(){
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let totalAmount = 0;
+        const cart = JSON.parse(localStorage.getItem('cart')) || []
+        let totalAmount = 0
 
         if(cart.length > 0){
             for(let i=0; i < cart.length; i++){
@@ -60,14 +59,20 @@ export default function Cart(props) {
             }
         }
 
-        setTotal(totalAmount);
+        setTotal(totalAmount)
 
     }
 
     useEffect(()=>{
         setDateCount(getSelectedDatesCount())
         calculateTotal()
-    }, [props.cartChanged])
+    }, [props.cartChanged, dateCount])
+
+    function handleCartSubmit(e){
+        e.preventDefault()
+
+
+    }
 
     return (
         <div className="cart bg-gray-700 border border-gray-300 rounded-lg p-4">
@@ -107,7 +112,7 @@ export default function Cart(props) {
                         </div>
 
                         <div className="submit flex justify-end mt-2">
-                            <button className="submit-request flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-amber-500">
+                            <button className="submit-request flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-amber-500" onClick={(e)=> {handleCartSubmit(e)}}>
                                 <CiLocationArrow1 className='text-2xl font-semibold mr-1' /> 
                                 <span>Submit Request</span>
                             </button>
