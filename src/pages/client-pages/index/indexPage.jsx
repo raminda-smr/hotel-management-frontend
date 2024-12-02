@@ -15,6 +15,7 @@ export default function IndexPage() {
 
     const [roomCategories, setRoomCategories] = useState([])
     const [galleryItems, setGalleryItems] = useState([])
+    const [feedbacks, setFeedbacks] = useState([])
 
     const slides = [
         { "url": "/slides/slide-1.jpg", "title": "Welcome Lionion Vila Resort", "subtitle": "Beach Resort" },
@@ -47,19 +48,11 @@ export default function IndexPage() {
         { name: "Wi-Fi Access", description: "Complimentary high-speed internet throughout the property", icon: <FaWifi /> }
     ]
 
-    const feedbacks = [
-        { email: "johndoe@example.com", username: "JohnDoe", title: "Great Service!", description: "I had a wonderful experience with the customer service team. They were very helpful and resolved my issue quickly.", date: "2023-11-01T10:00:00Z", approved: true },
-        { email: "janedoe@example.com", username: "JaneDoe", title: "Improvement Needed", description: "The website is great, but it would be helpful to have more detailed FAQs for common issues.", date: "2023-11-05T14:30:00Z", approved: true },
-        { email: "alexsmith@example.com", username: "AlexSmith", title: "Satisfied Customer", description: "Overall, I am happy with my purchase. The delivery was fast, and the product quality is excellent.", date: "2023-11-08T09:00:00Z", approved: true },
-        { email: "emilyjohnson@example.com", username: "EmilyJohnson", title: "User-Friendly Interface", description: "The app is very user-friendly and intuitive. I had no issues navigating through different sections.", date: "2023-11-10T18:45:00Z", approved: true }
-    ]
-
     // get room categories 
     useEffect(() => {
         axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories/with-rooms', {}).then(
             (res) => {
                 if (res) {
-                    // console.log(res)
                     setRoomCategories(res.data.list)
                 }
             }
@@ -71,8 +64,19 @@ export default function IndexPage() {
         axios.get(import.meta.env.VITE_BACKEND_URL + '/api/gallery?limit=8', {}).then(
             (res) => {
                 if (res) {
-                    // console.log(res)
                     setGalleryItems(res.data.list)
+                }
+            }
+        )
+    }, [])
+
+
+    // get feedbacks
+    useEffect(() => {
+        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks?limit=4', {}).then(
+            (res) => {
+                if (res) {
+                    setFeedbacks(res.data.list)
                 }
             }
         )
@@ -146,6 +150,10 @@ export default function IndexPage() {
                         facilities.map((facility, index) => <VillaFacility key={index} facility={facility} />)
                     }
                 </div>
+
+                <div className="max-w-[1200px] mx-auto text-center mt-4">
+                        <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mt-3 mb-4 transition-all hover:bg-amber-500' to="/about-us"> View all facilities </Link>
+                    </div>
             </section>
 
 
@@ -173,22 +181,23 @@ export default function IndexPage() {
             )}
 
 
+            {feedbacks && feedbacks.length > 0 && (
+                <section className="our-feedbacks py-20 bg-gray-300">
 
-            <section className="our-feedbacks py-20 bg-gray-300">
-
-                <div className="max-w-[768px] mx-auto px-4 mb-8">
-                    <h2 className="text-gray-600 text-5xl text-center mb-3">Guest Experiences</h2>
-                    <p className="text-center text-gray-600 text-xl font-thin ">Hear from Our Guests – Your Stories Inspire Us to Serve Better</p>
-                </div>
-
-                <div className="max-w-[1200px] mx-auto">
-                    <div className="feedback-items grid gap-4 grid-cols-1 px-4 md:grid-cols-2 lg:grid-cols-4">
-
-                        {feedbacks.map((item, index) => <FeedbackItem key={index} item={item} />)}
-
+                    <div className="max-w-[768px] mx-auto px-4 mb-8">
+                        <h2 className="text-gray-600 text-5xl text-center mb-3">Guest Experiences</h2>
+                        <p className="text-center text-gray-600 text-xl font-thin ">Hear from Our Guests – Your Stories Inspire Us to Serve Better</p>
                     </div>
-                </div>
-            </section>
+
+                    <div className="max-w-[1200px] mx-auto">
+                        <div className="feedback-items grid gap-4 grid-cols-1 px-4 md:grid-cols-2 lg:grid-cols-4">
+
+                            {feedbacks.map((item, index) => <FeedbackItem key={index} item={item} />)}
+
+                        </div>
+                    </div>
+                </section>
+            )}
 
         </>
 
