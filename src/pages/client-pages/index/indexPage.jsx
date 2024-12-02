@@ -21,7 +21,7 @@ export default function IndexPage() {
         nav: true,
         showTitle: false,
         showSubTitle: false,
-        height: "500px",
+        height: "400px",
     }
 
 
@@ -46,7 +46,7 @@ export default function IndexPage() {
             <section className="search-rooms relative">
                 <ImageSlider slides={slides} settings={settings} />
 
-                <div className='absolute top-0 w-full h-full flex justify-center items-center z-20'>
+                <div className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] lg:top-auto lg:bottom-0 lg:translate-y-[50%]  flex justify-center items-center z-20'>
                     <RoomSearchBar />
 
                 </div>

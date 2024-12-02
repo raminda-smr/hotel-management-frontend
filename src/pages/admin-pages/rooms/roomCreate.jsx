@@ -33,7 +33,7 @@ export default function RoomCreate() {
         if (!isCategoriesLoaded) {
             axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories', {}).then(
                 (res) => {
-                    console.log(res)
+                    // console.log(res)
                     setCategories(res.data.list)
                     setIsCategoriesLoaded(true)
                 }

@@ -53,7 +53,7 @@ function Rooms() {
         const token = localStorage.getItem('token')
 
         if (token != null) {
-            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/rooms/' + roomNumber, {
+            axios.delete(import.meta.env.VITE_BACKEND_URL + '/api/rooms/room-number/' + roomNumber, {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
