@@ -6,6 +6,10 @@ import RoomSearchBar from "../../../components/client/room-search-bar/roomSearch
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RoomCategory from "../../../components/client/room-category/roomCategory";
+import { FaDumbbell, FaGlassCheers, FaSpa, FaSwimmer, FaUmbrellaBeach, FaUtensils, FaWifi } from "react-icons/fa";
+import { MdOutlineBeachAccess, MdOutlineRoomService } from "react-icons/md";
+import { GiPalmTree } from "react-icons/gi";
+import VillaFacility from "../../../components/client/villa-facility/villaFacility";
 
 export default function IndexPage() {
 
@@ -30,13 +34,18 @@ export default function IndexPage() {
         height: "400px",
     }
 
-
-    // const galleryItems = [
-    //     { "image": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name": "Gallery Item", "description": "Gallery description" },
-    //     { "image": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name": "Gallery Item", "description": "Gallery description" },
-    //     { "image": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name": "Gallery Item", "description": "Gallery description" },
-    //     { "image": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg", "name": "Gallery Item", "description": "Gallery description" }
-    // ]
+    const facilities = [
+        { name: "Beach Access", description: "Direct access to the beach or private beachfront", icon: <FaUmbrellaBeach /> },
+        { name: "Swimming Pool", description: "Private pool with loungers and umbrellas", icon: <FaSwimmer /> },
+        { name: "Bar and Lounge", description: "Onsite bar with indoor and outdoor seating", icon: <FaGlassCheers /> },
+        { name: "Dining Area", description: "Restaurant or dining space with a variety of cuisine options", icon: <FaUtensils /> },
+        { name: "Spa and Wellness Center", description: "Massage services, sauna, or hot tub", icon: <FaSpa /> },
+        { name: "Fitness Center", description: "Gym with modern equipment", icon: <FaDumbbell /> },
+        { name: "Sea-Facing Terrace", description: "Open area with seating to enjoy the view", icon: <MdOutlineBeachAccess /> },
+        { name: "Garden and Outdoor Spaces", description: "Landscaped garden, walking paths, and seating areas", icon: <GiPalmTree /> },
+        { name: "Room Service", description: "24/7 room service with a range of menu options", icon: <MdOutlineRoomService /> },
+        { name: "Wi-Fi Access", description: "Complimentary high-speed internet throughout the property", icon: <FaWifi /> }
+    ]
 
     const feedbacks = [
         { email: "johndoe@example.com", username: "JohnDoe", title: "Great Service!", description: "I had a wonderful experience with the customer service team. They were very helpful and resolved my issue quickly.", date: "2023-11-01T10:00:00Z", approved: true },
@@ -47,7 +56,7 @@ export default function IndexPage() {
 
     // get room categories 
     useEffect(() => {
-        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories', {}).then(
+        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories/with-rooms', {}).then(
             (res) => {
                 if (res) {
                     // console.log(res)
@@ -106,6 +115,39 @@ export default function IndexPage() {
                 </section>
             )}
 
+            {roomCategories && roomCategories.length > 0 && (
+                <section className="structure bg-gray-700 py-16">
+                    <h2 className="text-5xl text-gray-200 mb-4 text-center" >Room Structure</h2>
+                    <p className="text-center text-gray-100 text-xl font-thin ">Our rooms cater to every need, offering {roomCategories.length} categories for your comfort</p>
+
+                    <div className="categories w-full max-w-[1200px] mx-auto mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 ">
+                        {roomCategories.map((category, index) => (
+                            <div key={index} className="category bg-gray-200 rounded">
+                                <div className="head text-center p-4 pt-6 pb-0">
+                                    <h3 className="text-2xl text-gray-800 uppercase font-medium">{category.name}</h3>
+                                </div>
+                                <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
+                                    {category.rooms && category.rooms.length > 0 && category.rooms.map((room, rmIndex) => (
+                                        <div key={rmIndex} className="room w-1/3 p-1">
+                                            <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">{room.roomNumber}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            <section className="villa bg-gray-300 py-20">
+                <h2 className="text-6xl text-gray-500 mb-4 text-center" >Our Facilities</h2>
+                <div className="w-full max-w-[1200px] mx-auto grid grid-cols-2 p-4 gap-4  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
+                    {
+                        facilities.map((facility, index) => <VillaFacility key={index} facility={facility} />)
+                    }
+                </div>
+            </section>
+
 
 
             {galleryItems && galleryItems.length > 0 && (
@@ -129,7 +171,6 @@ export default function IndexPage() {
                     </div>
                 </section>
             )}
-
 
 
 
