@@ -125,7 +125,7 @@ export default function IndexPage() {
                     </div>
 
                     <div className="max-w-[1200px] mx-auto text-center mt-4">
-                        <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mt-3 mb-4 transition-all hover:bg-amber-500' to="/gallery"> View more</Link>
+                        <Link className='text-white bg-blue-600 px-5 py-2 rounded-full inline-block mx-auto mt-3 mb-4 transition-all hover:bg-amber-500' to="/gallery"> Go to Gallery</Link>
                     </div>
                 </section>
             )}
