@@ -2,36 +2,38 @@ import { useContext, useEffect, useState } from 'react'
 import { CiLocationArrow1, CiShoppingCart, CiUnlock } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
 import UserContext from '../../../context/userContext'
+import axios from 'axios'
 
 export default function Cart(props) {
 
     const { user } = useContext(UserContext)
     const [dateCount, setDateCount] = useState(0)
     const [total, setTotal] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
     const cartDate = JSON.parse(localStorage.getItem("searchData"))
-        
+
     let myCart = JSON.parse(localStorage.getItem('cart')) || []
-   
+
 
     function getSelectedDatesCount() {
         const searchData = JSON.parse(localStorage.getItem("searchData"))
-    
+
         if (!searchData || !searchData.start || !searchData.end) {
             console.error("Invalid searchData or missing dates.")
-            return 0 
+            return 0
         }
-    
+
         const startDate = new Date(searchData.start)
         const endDate = new Date(searchData.end)
-    
+
         if (isNaN(startDate) || isNaN(endDate)) {
             console.error("Invalid date format in searchData.")
             return 0
         }
-    
+
         const differenceInTime = endDate - startDate
         const differenceInDays = Math.floor(differenceInTime / (1000 * 60 * 60 * 24))
-    
+
         return differenceInDays > 0 ? differenceInDays : 0
     }
 
@@ -49,12 +51,12 @@ export default function Cart(props) {
         props.setCartChanged(props.cartChanged + 1)
     }
 
-    function calculateTotal(){
+    function calculateTotal() {
         const cart = JSON.parse(localStorage.getItem('cart')) || []
         let totalAmount = 0
 
-        if(cart.length > 0){
-            for(let i=0; i < cart.length; i++){
+        if (cart.length > 0) {
+            for (let i = 0; i < cart.length; i++) {
                 totalAmount += cart[i].category.price * dateCount
             }
         }
@@ -63,14 +65,59 @@ export default function Cart(props) {
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setDateCount(getSelectedDatesCount())
         calculateTotal()
     }, [props.cartChanged, dateCount])
 
-    function handleCartSubmit(e){
+    function handleCartSubmit(e) {
         e.preventDefault()
 
+        if (isLoading) {
+            return
+        }
+        else {
+            setIsLoading(true)
+        }
+
+        const dates = JSON.parse(localStorage.getItem("searchData")) || null
+        const cart = JSON.parse(localStorage.getItem('cart')) || []
+        const token = localStorage.getItem('token')
+
+        if (dates != null && cart.length > 0 && token != null) {
+
+            const roomNumbers = cart.map(item => item.roomNumber);
+
+            axios.post(import.meta.env.VITE_BACKEND_URL + '/api/bookings',
+                {
+                    startDate: dates.start,
+                    endDate: dates.end,
+                    cart: roomNumbers
+                },
+                {
+                    headers: {
+                        "Authorization": 'Bearer ' + token,
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+                .then(
+                    (res) => {
+                        if (res) {
+                            console.log(res.data)
+                        }
+                    }
+                )
+                .catch(
+                    err =>{
+                        if(err){
+                            if(err.status = 403){
+                                
+                            }
+                        }
+                    }
+                )
+        }
 
     }
 
@@ -85,8 +132,8 @@ export default function Cart(props) {
 
                 {user ? (
                     <div className="cart-data mt-4">
-                      { myCart && myCart.length > 0 && (
-                            myCart.map((item, index)=> (
+                        {myCart && myCart.length > 0 && (
+                            myCart.map((item, index) => (
                                 <div key={index} className='p-4 bg-gray-50 mb-2 flex justify-between rounded'>
                                     <div className="product">
                                         <div className="title font-semibold text-gray-500">{item.category.name} Room</div>
@@ -96,11 +143,11 @@ export default function Cart(props) {
                                     <div className="per-night text-right">
                                         <div className="unit-cost font-semibold text-gray-500">LKR {item.category.price} X {dateCount}</div>
                                         <div className="sub-total text-lg font-bold text-amber-500"> LKR {item.category.price * dateCount}  </div>
-                                        <div className="remove-item text-xs text-red-500 cursor-pointer" onClick={(e) => toggleCart(item) }>Remove</div>
+                                        <div className="remove-item text-xs text-red-500 cursor-pointer" onClick={(e) => toggleCart(item)}>Remove</div>
                                     </div>
                                 </div>
                             ))
-                      )}  
+                        )}
 
                         <div className="total flex justify-between bg-white p-4 rounded">
                             <div className="title">
@@ -112,8 +159,8 @@ export default function Cart(props) {
                         </div>
 
                         <div className="submit flex justify-end mt-2">
-                            <button className="submit-request flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-amber-500" onClick={(e)=> {handleCartSubmit(e)}}>
-                                <CiLocationArrow1 className='text-2xl font-semibold mr-1' /> 
+                            <button className="submit-request flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-amber-500" onClick={(e) => { handleCartSubmit(e) }}>
+                                <CiLocationArrow1 className='text-2xl font-semibold mr-1' />
                                 <span>Submit Request</span>
                             </button>
                         </div>
