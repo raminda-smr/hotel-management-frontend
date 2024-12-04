@@ -14,48 +14,22 @@ import PageNotFound from "../404-page/pageNotFound";
 import VerifyEmail from "./verify/verifyEmail";
 import PasswordReset from "./password-reset/passwordReset";
 import SetNewPassword from "./set-new-password/setNewPassword";
+import RoomSearch from "./room-search/roomSearch";
 
 
 
 export default function HomePage() {
 
-    const [user, setUser] = useState({})
-    const [userLogged, setUserLogged] = useState(false)
-    
-    useEffect(()=>{
-        
-        const token = localStorage.getItem('token')
 
-        if(token != null){
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/logged',{
-                headers:{
-                    "Authorization" : 'Bearer ' + token,
-                    "Content-Type" : "application/json"
-                }
-            })
-            .then(
-                (res)=>{
-                    setUser(res.data.user)
-                    setUserLogged(true)
-                }
-            ).catch(
-                (err)=>{
-                    setUserLogged(false)
-                }
-            )
-        }
-        else{
-            setUserLogged(false)
-        }
-    },[userLogged])
 
     return (
         <>
-            <Header user={user} userLogged={userLogged} setUserLogged={setUserLogged} />
+            <Header />
 
             <Routes path="/*">
                 <Route path="/" element={<IndexPage />} />
-                <Route path="/search-rooms" element={<SearchRooms />} />
+                <Route path="/room-search" element={<RoomSearch />} />
+                <Route path="/rooms" element={<SearchRooms />} />
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />

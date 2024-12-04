@@ -1,16 +1,29 @@
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { CiHome, CiLock, CiMail } from "react-icons/ci"
 import { Link, useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
+import UserContext from "../../context/userContext"
 
 export default function LoginPage() {
 
     const navigate = useNavigate()
-
+    const {user} = useContext(UserContext)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(()=>{
+        // if user exist
+        if(user != null){
+            if(user.type == 'admin'){
+                navigate('/admin/dashboard')
+            }
+            else if(user.type == 'customer'){
+                navigate('/customer/dashboard');
+            }
+        }
+    },[user])
 
     function handleLogin(e) {
 
@@ -31,10 +44,10 @@ export default function LoginPage() {
                 localStorage.setItem('token', res.data.token)
 
                 if (res.data.user.type == 'customer') {
-                    navigate("/")
+                    window.location.href ="/customer"
                 }
                 else if (res.data.user.type == 'admin') {
-                    navigate("/admin")
+                    window.location.href = "/admin"
                 }
             }
         ).catch(
