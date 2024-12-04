@@ -3,9 +3,9 @@ import { CiLocationArrow1, CiShoppingCart, CiUnlock } from 'react-icons/ci'
 import { Link } from 'react-router-dom'
 import UserContext from '../../../context/userContext'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export default function Cart(props) {
-
     const { user } = useContext(UserContext)
     const [dateCount, setDateCount] = useState(0)
     const [total, setTotal] = useState(0)
@@ -104,15 +104,32 @@ export default function Cart(props) {
                 .then(
                     (res) => {
                         if (res) {
-                            console.log(res.data)
+
+                            // remove cached data
+                            localStorage.removeItem("searchData")
+                            localStorage.removeItem("cart")
+
+                            // redirect with a message
+                            toast.success(res.data.message)
+                            window.location.href = "/customer/booking/requests"
                         }
                     }
                 )
                 .catch(
-                    err =>{
-                        if(err){
-                            if(err.status = 403){
-                                
+                    err => {
+                        if (err) {
+                            if (err.status = 403) {
+                                if(unavailableRooms.length > 0){
+                                    let newCart = cart.filter((room) => !unavailableRooms.includes(room));
+                                    localStorage.setItem('cart', JSON.stringify(newCart))
+                                }
+
+                                // redirect with a message
+                                toast.error(res.data.error)
+                                window.location.href = "/room-search"
+                            }
+                            else{
+                                toast.error(res.data.error)
                             }
                         }
                     }
