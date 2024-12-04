@@ -3,8 +3,13 @@ import { MdOutlineBeachAccess, MdOutlineRoomService } from "react-icons/md";
 import { GiPalmTree } from "react-icons/gi";
 import PageWrapper from "../../../components/client/page-wrapper/pageWrapper";
 import VillaFacility from "../../../components/client/villa-facility/villaFacility";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function AboutUs() {
+
+    const [roomCategories, setRoomCategories] = useState([])
+
 
     const facilities = [
         { name: "Beach Access", description: "Direct access to the beach or private beachfront", icon: <FaUmbrellaBeach /> },
@@ -29,6 +34,18 @@ export default function AboutUs() {
         { name: "Bicycle and Vehicle Rentals", description: "For guests to explore nearby attractions", icon: <FaBicycle /> },
     ]
 
+
+    // get room categories 
+    useEffect(() => {
+        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories/with-rooms', {}).then(
+            (res) => {
+                if (res) {
+                    setRoomCategories(res.data.list)
+                }
+            }
+        )
+    }, [])
+
     return (
         <>
             <PageWrapper title="About us" image="/images/wrappers/about-us.jpg" />
@@ -49,89 +66,34 @@ export default function AboutUs() {
                 </div>
             </section>
 
-            {/* Room Structure */}
+            
 
-            <section className="structure bg-gray-700 py-20">
-                <h2 className="text-6xl text-gray-200 mb-4 text-center" >Room Structure</h2>
-                <p className="text-center text-gray-100 text-xl font-thin ">Our rooms cater to every need, offering three categories for your comfort</p>
+            {roomCategories && roomCategories.length > 0 && (
+                <section className="structure bg-gray-700 py-16">
+                    <h2 className="text-5xl text-gray-200 mb-4 text-center" >Room Structure</h2>
+                    <p className="text-center text-gray-100 text-xl font-thin ">Our rooms cater to every need, offering {roomCategories.length} categories for your comfort</p>
 
-
-                <div className="categories w-full max-w-[1200px] mx-auto mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 ">
-                    <div className="category bg-gray-200 rounded">
-                        <div className="head text-center p-4 pt-6 pb-0">
-                            <h3 className="text-2xl text-gray-800 uppercase font-medium">Standard</h3>
-                            <p className="text-gray-700">Cozy and comfortable, ideal for couples or solo travelers.</p>
-                        </div>
-                        <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">102</div>
+                    <div className="categories w-full max-w-[1200px] mx-auto mt-10 grid grid-cols-1 gap-4 md:grid-cols-3 ">
+                        {roomCategories.map((category, index) => (
+                            <div key={index} className="category bg-gray-200 rounded">
+                                <div className="head text-center p-4 pt-6 pb-0">
+                                    <h3 className="text-2xl text-gray-800 uppercase font-medium">{category.name}</h3>
+                                    <p className="text-gray-700 text-sm">{category.description}</p>
+                                </div>
+                                <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
+                                    {category.rooms && category.rooms.length > 0 && category.rooms.map((room, rmIndex) => (
+                                        <div key={rmIndex} className="room w-1/3 p-1">
+                                            <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">{room.roomNumber}</div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">103</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">104</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">105</div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
-
-                    <div className="category bg-gray-200 rounded">
-                        <div className="head text-center p-4 pt-6 pb-0">
-                            <h3 className="text-2xl text-gray-800 uppercase font-medium">Deluxe</h3>
-                            <p className="text-gray-700">Spacious rooms with added amenities for a premium stay.</p>
-                        </div>
-                        <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">202</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">203</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">204</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">205</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">206</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">207</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">208</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">209</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="category bg-gray-200 rounded">
-                        <div className="head text-center p-4 pt-6 pb-0">
-                            <h3 className="text-2xl text-gray-800 uppercase font-medium">Luxury</h3>
-                            <p className="text-gray-700">The epitome of opulence, with spectacular views and the finest comforts.</p>
-                        </div>
-                        <div className="body flex flex-wrap py-4 px-3 justify-center text-center">
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">302</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">303</div>
-                            </div>
-                            <div className="room w-1/3 p-1">
-                                <div className="number bg-sky-600 text-white py-5 rounded hover:bg-sky-800 w-full">304</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
+                </section>
+            )}
+            
+            
 
             {/* Our facilities */}
             <section className="villa bg-gray-300 py-20">
