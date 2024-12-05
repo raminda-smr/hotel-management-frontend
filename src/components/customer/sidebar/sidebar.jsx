@@ -6,6 +6,7 @@ import { CiBookmark, CiBookmarkCheck, CiBookmarkMinus, CiBookmarkPlus, CiGrid41,
 export default function Sidebar() {
 
     const { user, setUser } = useContext(UserContext)
+    const userImage = user.image != null ? user.image : "/default-user.png"
 
     function logout() {
         localStorage.removeItem('token')
@@ -18,15 +19,20 @@ export default function Sidebar() {
                 Customer Dashboard
             </div>
 
-            <div className="user flex items-center mx-4 px-4 py-2 mb-4 bg-gray-300 rounded">
-                <div className="icon pr-3 text-gray-700">
-                    <CiUser className='text-2xl' />
+
+            <Link to="/customer/profile">
+                <div className="user flex items-center mx-4 px-4 py-2 mb-4 bg-gray-300 rounded">
+                    <div className="icon pr-3 text-gray-700">
+                        <img className="w-[40px] h-[40px] rounded-full" src={userImage} alt="User Image" />
+                        {/* <CiUser className='text-2xl' /> */}
+                    </div>
+                    <div className="data">
+                        <div className="text-gray-600">{user.firstName}  {user.lastName} </div>
+                        <div className="text-xs text-gray-500">{user.email}</div>
+                    </div>
                 </div>
-                <div className="data">
-                    <div className="text-gray-600">{user.firstName}  {user.lastName} </div>
-                    <div className="text-xs text-gray-500">{user.email}</div>
-                </div>
-            </div>
+            </Link>
+
 
             <nav className="flex-1 px-4">
                 <ul>
