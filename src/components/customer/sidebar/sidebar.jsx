@@ -14,7 +14,7 @@ export default function Sidebar() {
     }
 
     return (
-        <aside className="w-64 bg-gray-100 rounded flex flex-col">
+        <aside className="min-w-64 bg-gray-200 rounded flex flex-col">
             <div className="p-6 text-xl font-semibold text-gray-600">
                 Customer Dashboard
             </div>
@@ -23,7 +23,7 @@ export default function Sidebar() {
             <Link to="/customer/profile">
                 <div className="user flex items-center mx-4 px-4 py-2 mb-4 bg-gray-300 rounded">
                     <div className="icon pr-3 text-gray-700">
-                        <img className="w-[40px] h-[40px] rounded-full" src={userImage} alt="User Image" />
+                        <img className="w-[40px] h-[40px] rounded-full object-cover" src={userImage} alt="User Image" />
                         {/* <CiUser className='text-2xl' /> */}
                     </div>
                     <div className="data">

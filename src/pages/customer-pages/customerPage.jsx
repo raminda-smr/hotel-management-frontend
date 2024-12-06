@@ -6,6 +6,7 @@ import Dashboard from "./dashboard/dashboard";
 import Sidebar from "../../components/customer/sidebar/sidebar";
 import { useContext } from "react";
 import UserContext from "../../context/userContext";
+import Profile from "./profile/profile";
 
 
 export default function CustomerPage() {
@@ -22,7 +23,7 @@ export default function CustomerPage() {
         <>
             <Header />
 
-            <section className="customer-area py-20">
+            <section className="customer-area py-20 bg-gray-100">
 
                 <div className="max-w-[1200px] mx-auto">
 
@@ -30,9 +31,10 @@ export default function CustomerPage() {
 
                         <Sidebar />
 
-                        <div className="content px-8">
+                        <div className="content max-w-full w-full px-8">
                             <Routes path="/*">
                                 <Route path="/" element={<Dashboard />} />
+                                <Route path="/profile" element={<Profile />} />
 
                                 <Route path="/*" element={<PageNotFound />} />
                             </Routes>
