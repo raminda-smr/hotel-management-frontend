@@ -66,7 +66,7 @@ export default function BookingCompleted() {
                                                 <AdminTableTD>{booking.bookingId}</AdminTableTD>
                                                 <AdminTableTD>{booking.roomId}</AdminTableTD>
                                                 <AdminTableTD>
-                                                    <span className={  "text-white px-2 py-[2px] inline-block rounded bg-green-500"}>{booking.status}</span>
+                                                    <span className={  "text-white px-2 py-[2px] inline-block rounded bg-blue-500"}>{booking.status}</span>
                                                 </AdminTableTD>
                                                 <AdminTableTD>{booking.start.split('T')[0]}</AdminTableTD>
                                                 <AdminTableTD>{booking.end.split('T')[0]}</AdminTableTD>
