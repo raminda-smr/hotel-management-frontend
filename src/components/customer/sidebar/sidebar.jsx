@@ -56,7 +56,7 @@ export default function Sidebar() {
 
                     <li className="mb-2">
                         <Link to="/customer/booking/accepted" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
-                            <CiBookmarkPlus className='text-2xl mr-2' /> <span>Upcoming Bookings</span>
+                            <CiBookmarkPlus className='text-2xl mr-2' /> <span>Accepted Bookings</span>
                         </Link>
                     </li>
 
