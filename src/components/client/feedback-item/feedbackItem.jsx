@@ -5,19 +5,19 @@ export default function FeedbackItem(props) {
     const image = props.item.userImage || "/default-user.png"
 
     function renderStars(rating){
-        const stars = [];
+        const stars = []
         for (let i = 1; i <= 5; i++) {
             stars.push(
-                <FaStar key={i} className="mr-1 text-amber-400" />
+                <FaStar key={i} className={`mr-1 text-amber-400 ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`} />
             );
         }
-        return stars;
-    };
+        return stars
+    }
 
     return (
         <div className="bg-white rounded-lg p-4 shadow-md">
             <div className="user flex items-center mb-1">
-                <img src={image} alt="User" className="max-w-[60px] rounded-full z-10" />
+                <img src={image} alt="User" className="w-[60px] h-[60px] object-cover rounded-full z-10" />
                 <h5 className="name px-3 pl-6 -m-3 text-lg text-white bg-teal-600 rounded-r-lg ">{props.item.username}</h5>
             </div>
             <div className="content">

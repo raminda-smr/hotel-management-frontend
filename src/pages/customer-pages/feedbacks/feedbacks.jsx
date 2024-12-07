@@ -5,7 +5,7 @@ import AdminTable from "../../../components/admin/admin-table/adminTable";
 import AdminTableBody from "../../../components/admin/admin-table/adminTableBody";
 import AdminTableRow from "../../../components/admin/admin-table/adminTableRow";
 import AdminTableTD from "../../../components/admin/admin-table/adminTableTD";
-import { FaRegEye } from "react-icons/fa";
+import { FaRegEye, FaStar } from "react-icons/fa";
 
 export default function Feedbacks() {
 
@@ -40,6 +40,16 @@ export default function Feedbacks() {
         }
     }, [])
 
+    function renderStars(rating) {
+        const stars = []
+        for (let i = 1; i <= 5; i++) {
+            stars.push(
+                <FaStar key={i} className={`mr-1 text-amber-400 ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`} />
+            );
+        }
+        return stars
+    }
+
     if (feedbacks == null) {
         return <div>Loading...</div>
     }
@@ -71,7 +81,11 @@ export default function Feedbacks() {
                                             <AdminTableRow key={index}>
 
                                                 <AdminTableTD>{feedback.title}</AdminTableTD>
-                                                <AdminTableTD>{feedback.description.substring(0, 50)}...</AdminTableTD>
+                                                <AdminTableTD>
+                                                    <div className="flex">
+                                                        {renderStars(feedback.rating)}
+                                                    </div>
+                                                </AdminTableTD>
                                                 <AdminTableTD>{feedback.date.split('T')[0]}</AdminTableTD>
                                                 <AdminTableTD>{feedback.approved ? "Yes" : "No"}</AdminTableTD>
 
