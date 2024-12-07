@@ -73,7 +73,7 @@ export default function IndexPage() {
 
     // get feedbacks
     useEffect(() => {
-        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks?limit=4', {}).then(
+        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks/public?limit=4', {}).then(
             (res) => {
                 if (res) {
                     setFeedbacks(res.data.list)
