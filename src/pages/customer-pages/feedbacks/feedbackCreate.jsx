@@ -9,7 +9,7 @@ import Select from "../../../components/common/select/select"
 
 
 export default function FeedbackCreate(props) {
-    
+
     const token = localStorage.getItem("token")
     const navigate = useNavigate()
     const {user} = useContext(UserContext)
@@ -85,7 +85,7 @@ export default function FeedbackCreate(props) {
             <div className="form-container flex justify-center mt-8">
                 <form onSubmit={handleSubmit} className="bg-white min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
 
-                    <h3 className="text-lg font-medium mb-3">Update Feedback</h3>
+                    <h3 className="text-lg font-medium mb-3">Create Feedback</h3>
 
                     <Input name="email" required="required" value={feedback.email} label="Email*" onChange={handleChange} disabled />
                    
