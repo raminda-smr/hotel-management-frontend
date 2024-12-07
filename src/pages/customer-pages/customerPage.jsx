@@ -8,6 +8,7 @@ import { useContext } from "react";
 import UserContext from "../../context/userContext";
 import Profile from "./profile/profile";
 import EditProfile from "./profile/editProfile";
+import BookingRequests from "./booking/bookingRequests";
 
 
 export default function CustomerPage() {
@@ -37,6 +38,7 @@ export default function CustomerPage() {
                                 <Route path="/" element={<Dashboard />} />
                                 <Route path="/profile" element={<Profile />} />
                                 <Route path="/profile/edit" element={<EditProfile />} />
+                                <Route path="/booking/requests" element={<BookingRequests />} />
 
                                 <Route path="/*" element={<PageNotFound />} />
                             </Routes>
