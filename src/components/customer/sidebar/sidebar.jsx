@@ -67,7 +67,7 @@ export default function Sidebar() {
                     </li>
 
                     <li className="mb-2 ">
-                        <Link to="/customer/profile" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                        <Link to="/customer/profile/edit" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
                             <CiUser className='text-2xl mr-2' /> <span>Edit Profile</span>
                         </Link>
                     </li>

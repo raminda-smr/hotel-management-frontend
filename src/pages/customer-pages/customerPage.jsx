@@ -7,6 +7,7 @@ import Sidebar from "../../components/customer/sidebar/sidebar";
 import { useContext } from "react";
 import UserContext from "../../context/userContext";
 import Profile from "./profile/profile";
+import EditProfile from "./profile/editProfile";
 
 
 export default function CustomerPage() {
@@ -35,6 +36,7 @@ export default function CustomerPage() {
                             <Routes path="/*">
                                 <Route path="/" element={<Dashboard />} />
                                 <Route path="/profile" element={<Profile />} />
+                                <Route path="/profile/edit" element={<EditProfile />} />
 
                                 <Route path="/*" element={<PageNotFound />} />
                             </Routes>

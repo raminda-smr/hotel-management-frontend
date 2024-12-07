@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
 
@@ -84,6 +85,10 @@ export default function Profile() {
                         <h3 className="text-lg font-medium">Email Verified:</h3>
                         <p className="text-gray-700">{user.emailVerified ? "Yes" : "No"}</p>
                     </div>
+                </div>
+
+                <div className="edit-button w-full flex justify-end">
+                    <Link to="/customer/profile/edit" className="bg-blue-600 text-white px-10 py-2 -mb-10 rounded transition-all hover:bg-amber-500">Edit Profile</Link>
                 </div>
             </div>
 
