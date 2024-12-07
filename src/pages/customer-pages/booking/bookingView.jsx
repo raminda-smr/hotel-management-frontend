@@ -1,11 +1,7 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import AdminTable from "../../../components/admin/admin-table/adminTable";
-import AdminTableBody from "../../../components/admin/admin-table/adminTableBody";
-import AdminTableRow from "../../../components/admin/admin-table/adminTableRow";
-import AdminTableTD from "../../../components/admin/admin-table/adminTableTD";
-import { FaRegEye } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 
 export default function BookingView() {
 
