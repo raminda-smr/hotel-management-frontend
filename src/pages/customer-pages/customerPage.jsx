@@ -13,6 +13,8 @@ import BookingRejected from "./booking/bookingRejected";
 import BookingAccepted from "./booking/bookingAccepted";
 import BookingCompleted from "./booking/bookingCompleted";
 import BookingView from "./booking/bookingView";
+import Feedbacks from "./feedbacks/feedbacks";
+import FeedbackCreate from "./feedbacks/feedbackCreate";
 
 
 export default function CustomerPage() {
@@ -47,6 +49,8 @@ export default function CustomerPage() {
                                 <Route path="/booking/accepted" element={<BookingAccepted />} />
                                 <Route path="/booking/completed" element={<BookingCompleted />} />
                                 <Route path="/booking/view/:id" element={<BookingView />} />
+                                <Route path="/feedbacks" element={<Feedbacks />} />
+                                <Route path="/feedbacks/create" element={<FeedbackCreate />} />
 
                                 <Route path="/*" element={<PageNotFound />} />
                             </Routes>

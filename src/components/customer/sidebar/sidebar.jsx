@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import UserContext from '../../../context/userContext'
 import { Link, useNavigate } from 'react-router-dom'
-import { CiBookmark, CiBookmarkCheck, CiBookmarkMinus, CiBookmarkPlus, CiGrid41, CiUser } from 'react-icons/ci'
+import { CiBookmark, CiBookmarkCheck, CiBookmarkMinus, CiBookmarkPlus, CiChat1, CiGrid41, CiUser } from 'react-icons/ci'
 
 export default function Sidebar() {
 
@@ -63,6 +63,12 @@ export default function Sidebar() {
                     <li className="mb-2">
                         <Link to="/customer/booking/completed" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
                             <CiBookmarkCheck className='text-2xl mr-2' /> <span>Completed Bookings</span>
+                        </Link>
+                    </li>
+
+                    <li className="mb-2">
+                        <Link to="/customer/feedbacks" className="px-4 py-2 flex items-center rounded hover:bg-gray-300 text-gray-600">
+                            <CiChat1 className='text-2xl mr-2' /> <span>Feedbacks</span>
                         </Link>
                     </li>
 
