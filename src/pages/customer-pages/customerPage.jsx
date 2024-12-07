@@ -15,6 +15,7 @@ import BookingCompleted from "./booking/bookingCompleted";
 import BookingView from "./booking/bookingView";
 import Feedbacks from "./feedbacks/feedbacks";
 import FeedbackCreate from "./feedbacks/feedbackCreate";
+import FeedbackView from "./feedbacks/feedbackView";
 
 
 export default function CustomerPage() {
@@ -51,6 +52,7 @@ export default function CustomerPage() {
                                 <Route path="/booking/view/:id" element={<BookingView />} />
                                 <Route path="/feedbacks" element={<Feedbacks />} />
                                 <Route path="/feedbacks/create" element={<FeedbackCreate />} />
+                                <Route path="/feedbacks/view/:id" element={<FeedbackView />} />
 
                                 <Route path="/*" element={<PageNotFound />} />
                             </Routes>
