@@ -10,7 +10,7 @@ import { FaRegEye } from "react-icons/fa";
 export default function Feedbacks() {
 
     const [feedbacks, setFeedbacks] = useState(null)
-    const tableFields = ['Username', 'Email', 'Title', 'Description', 'Created at', 'Approved', 'Actions']
+    const tableFields = ['Title', 'Description', 'Created at', 'Approved', 'Actions']
 
     useEffect(() => {
 
@@ -70,21 +70,19 @@ export default function Feedbacks() {
                                         return (
                                             <AdminTableRow key={index}>
 
-                                            <AdminTableTD>{feedback.username}</AdminTableTD>
-                                            <AdminTableTD>{feedback.email}</AdminTableTD>
-                                            <AdminTableTD>{feedback.title}</AdminTableTD>
-                                            <AdminTableTD>{feedback.description.substring(0, 50)}</AdminTableTD>
-                                            <AdminTableTD>{feedback.date.split('T')[0]}</AdminTableTD>
-                                            <AdminTableTD>{feedback.approved ? "Yes" : "No"}</AdminTableTD>
+                                                <AdminTableTD>{feedback.title}</AdminTableTD>
+                                                <AdminTableTD>{feedback.description.substring(0, 50)}...</AdminTableTD>
+                                                <AdminTableTD>{feedback.date.split('T')[0]}</AdminTableTD>
+                                                <AdminTableTD>{feedback.approved ? "Yes" : "No"}</AdminTableTD>
 
-                                            <AdminTableTD>
-                                                <div className="flex items-center">
-                                                    <Link to={`/customer/feedbacks/view/${feedback._id}`} className="inline-block text-gray-500 rounded-full text-lg hover:text-blue-600">
-                                                        <FaRegEye />
-                                                    </Link>
-                                                </div>
-                                            </AdminTableTD>
-                                        </AdminTableRow>
+                                                <AdminTableTD>
+                                                    <div className="flex items-center">
+                                                        <Link to={`/customer/feedbacks/view/${feedback._id}`} className="inline-block text-gray-500 rounded-full text-lg hover:text-blue-600">
+                                                            <FaRegEye />
+                                                        </Link>
+                                                    </div>
+                                                </AdminTableTD>
+                                            </AdminTableRow>
                                         )
                                     }
                                 )
