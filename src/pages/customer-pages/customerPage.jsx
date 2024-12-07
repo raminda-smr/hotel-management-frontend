@@ -9,6 +9,7 @@ import UserContext from "../../context/userContext";
 import Profile from "./profile/profile";
 import EditProfile from "./profile/editProfile";
 import BookingRequests from "./booking/bookingRequests";
+import BookingRejected from "./booking/bookingRejected";
 
 
 export default function CustomerPage() {
@@ -39,6 +40,7 @@ export default function CustomerPage() {
                                 <Route path="/profile" element={<Profile />} />
                                 <Route path="/profile/edit" element={<EditProfile />} />
                                 <Route path="/booking/requests" element={<BookingRequests />} />
+                                <Route path="/booking/rejected" element={<BookingRejected />} />
 
                                 <Route path="/*" element={<PageNotFound />} />
                             </Routes>
