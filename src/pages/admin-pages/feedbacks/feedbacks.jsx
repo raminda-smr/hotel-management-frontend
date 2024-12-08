@@ -74,7 +74,7 @@ export default function Feedbacks() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setIsFeedbacksLoaded(false)
+                    setPagination(null)
                     setIsDeleteModalOpen(false)
                 }
             )

@@ -66,7 +66,7 @@ export default function Bookings() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setIsBookingsLoaded(false)
+                    setPagination(null)
                     setIsDeleteModalOpen(false)
                     toast.success('Booking deleted successfully')
                 }
