@@ -11,6 +11,7 @@ import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import Pagination from "../../../components/common/pagination/pagination"
+import toast from "react-hot-toast"
 
 
 export default function Gallery() {
@@ -66,6 +67,7 @@ export default function Gallery() {
                     setSelectedItem("")
                     setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
+                    toast.success('Gallery item deleted successfully')
                 }
             )
         }

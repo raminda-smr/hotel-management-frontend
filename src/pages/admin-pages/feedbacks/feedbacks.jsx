@@ -10,6 +10,7 @@ import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import Pagination from "../../../components/common/pagination/pagination"
+import toast from "react-hot-toast"
 
 export default function Feedbacks() {
 
@@ -77,6 +78,7 @@ export default function Feedbacks() {
                     setSelectedItem("")
                     setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
+                    toast.success('Feedback deleted successfully')
                 }
             )
         }

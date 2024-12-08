@@ -11,6 +11,7 @@ import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
 import Pagination from "../../../components/common/pagination/pagination"
+import toast from "react-hot-toast"
 
 
 
@@ -67,6 +68,7 @@ function Rooms() {
                     setSelectedItem("")
                     setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
+                    toast.success('Room deleted successfully')
                 }
             )
         }
