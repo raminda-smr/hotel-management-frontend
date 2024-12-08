@@ -1,6 +1,6 @@
 import axios from "axios"
 import toast from "react-hot-toast"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { FaEdit, FaRegEye, FaRegTrashAlt } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
@@ -10,25 +10,28 @@ import AdminTableBody from "../../../components/admin/admin-table/adminTableBody
 import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
+import Pagination from "../../../components/common/pagination/pagination"
 
 
 export default function Bookings() {
 
     const [bookings, setBookings] = useState([])
-    const [isBookingsLoaded, setIsBookingsLoaded] = useState(false)
-
+    const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
-
+    
     const tableFields = ['Booking ID', 'Room ID', 'Email', 'Phone', 'Status', 'Start Date', 'End Date', 'Actions']
+
+    const [searchParams] = useSearchParams();
+    const currentPage = parseInt(searchParams.get("page") || "1");
 
     useEffect(() => {
         // read bookings
         const token = localStorage.getItem('token')
 
-        if (token != null && !isBookingsLoaded) {
+        if (token) {
             // console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/bookings', {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/bookings?page=' + currentPage, {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
@@ -37,11 +40,11 @@ export default function Bookings() {
                 (res) => {
 
                     setBookings(res.data.list)
-                    setIsBookingsLoaded(true)
+                    setPagination(res.data.pagination)
                 }
             )
         }
-    }, [isBookingsLoaded])
+    }, [currentPage])
 
     function getDeleteConfirmation(id) {
 
@@ -117,6 +120,8 @@ export default function Bookings() {
                     </AdminTableBody>
                 </AdminTable>
             </div>
+
+            <Pagination base="/admin/bookings" paginateData={pagination} />
 
             {
                 isDeleteModalOpen && (

@@ -14,7 +14,7 @@ import Pagination from "../../../components/common/pagination/pagination"
 export default function Feedbacks() {
 
     const [feedbacks, setFeedbacks] = useState([])
-    const [pagination, setPagination] = useState(null);
+    const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
 
