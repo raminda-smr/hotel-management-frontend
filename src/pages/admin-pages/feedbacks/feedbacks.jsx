@@ -1,5 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link, useSearchParams } from "react-router-dom"
+import { FaEdit, FaRegEye, FaRegTrashAlt, FaStar } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import AdminTable from "../../../components/admin/admin-table/adminTable"
 import AdminTableRow from "../../../components/admin/admin-table/adminTableRow"
@@ -7,39 +9,39 @@ import AdminTableBody from "../../../components/admin/admin-table/adminTableBody
 import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
-import { Link } from "react-router-dom"
-import { FaEdit, FaRegEye, FaRegTrashAlt, FaStar } from "react-icons/fa"
+import Pagination from "../../../components/common/pagination/pagination"
 
 export default function Feedbacks() {
 
     const [feedbacks, setFeedbacks] = useState([])
-    const [isFeedbacksLoaded, setIsFeedbacksLoaded] = useState(false)
-
+    const [pagination, setPagination] = useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
 
     const tableFields = ['Username', 'Email', 'Title', 'Rating', 'Created at', 'Approved', 'Actions']
 
+    const [searchParams] = useSearchParams();
+    const currentPage = parseInt(searchParams.get("page") || "1");
+
+
     useEffect(() => {
         // read feedbacks
         const token = localStorage.getItem('token')
 
-        if (token != null && !isFeedbacksLoaded) {
-            // console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks', {
+        if (token) {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks?page=' + currentPage, {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
                 }
             }).then(
                 (res) => {
-
                     setFeedbacks(res.data.list)
-                    setIsFeedbacksLoaded(true)
+                    setPagination(res.data.pagination)
                 }
             )
         }
-    }, [isFeedbacksLoaded])
+    }, [currentPage])
 
 
     function renderStars(rating) {
@@ -129,6 +131,7 @@ export default function Feedbacks() {
                 </AdminTable>
             </div>
 
+            <Pagination base="/admin/feedbacks" paginateData={pagination} />
 
             {
                 isDeleteModalOpen && (
