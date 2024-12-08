@@ -50,7 +50,7 @@ export default function RoomSearch() {
 
     return (
         <>
-            <PageWrapper title="Room Search" image="/images/wrappers/about-us.jpg" />
+            <PageWrapper title="Room Search" image="/images/wrappers/room-search.jpg" />
 
 
             <section className="search-area bg-gray-100 py-4">
