@@ -19,8 +19,8 @@ export default function UserDropdownContent(props) {
     return (
         <div className="dropdown-body absolute right-4 w-full">
             <div className="dropdown-content bg-white shadow-2xl flex flex-col rounded-xl overflow-hidden ">
-                <UserDropdownItem icon={<LiaUser />} title="Profile" to="/admin/profile" />
-                <UserDropdownItem icon={<LiaUserEditSolid />} title="Edit Profile" to="/admin/profile/edit" />
+                <UserDropdownItem icon={<LiaUser />} title="Profile" to="/admin/profile"  onClick={props.toggle}/>
+                <UserDropdownItem icon={<LiaUserEditSolid />} title="Edit Profile" to="/admin/profile/edit" onClick={props.toggle} />
                 <UserDropdownItem icon={<IoLogOutOutline />} title="Log out" onClick={logout} />
             </div>
         </div>

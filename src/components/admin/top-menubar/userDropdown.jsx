@@ -6,13 +6,17 @@ export default function UserDropdown() {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     
+    function toggle(){
+        setIsDropdownOpen(!isDropdownOpen)
+    }
+
     return (
         <div className="user-drop-down relative">
 
             <UserDropdownButton setIsOpen={setIsDropdownOpen} isOpen={isDropdownOpen} />
 
             {
-                isDropdownOpen && <UserDropdownContent />
+                isDropdownOpen && <UserDropdownContent toggle={toggle} />
             }
             
 
