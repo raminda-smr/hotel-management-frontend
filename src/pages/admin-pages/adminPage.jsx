@@ -24,6 +24,7 @@ import BookingView from './bookings/bookingView'
 import Dashboard from './dashboard/dashboard'
 import { useContext, useEffect } from 'react'
 import UserContext from '../../context/userContext'
+import Profile from './profile/profile'
 
 
 export default function AdminPage() {
@@ -46,7 +47,7 @@ export default function AdminPage() {
                         <Routes path="/*" >
                             <Route path="/" element={<Dashboard />} />
                             <Route path="/dashboard" element={<Dashboard />} />
-                            <Route path="/profile" element={<Dashboard />} />
+                            <Route path="/profile" element={<Profile />} />
 
                             <Route path="/bookings" element={<Bookings />} />
                             <Route path="/bookings/view/:id" element={<BookingView />} />
