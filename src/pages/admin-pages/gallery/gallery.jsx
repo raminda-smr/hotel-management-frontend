@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { FaEdit, FaPlus, FaRegTrashAlt } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import AdminTable from "../../../components/admin/admin-table/adminTable"
@@ -10,13 +10,13 @@ import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
+import Pagination from "../../../components/common/pagination/pagination"
 
 
 export default function Gallery() {
 
     const [galleryItems, setGalleryItems] = useState([])
-    const [isGalleryItemsLoaded, setIsGalleryItemsLoaded] = useState(false)
-
+    const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
 
@@ -24,20 +24,24 @@ export default function Gallery() {
 
     const tableFields = ['Image', 'Name', 'Description', 'Actions']
 
+    const [searchParams] = useSearchParams()
+    const currentPage = parseInt(searchParams.get("page") || "1")
+
+
     useEffect(() => {
         const token = localStorage.getItem('token')
 
-        if (token != null && !isGalleryItemsLoaded) {
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/gallery', {}).then(
+        if (token) {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/gallery?page=' + currentPage, {}).then(
                 (res) => {
                     // console.log(cats)
                     setGalleryItems(res.data.list)
-                    setIsGalleryItemsLoaded(true)
+                    setPagination(res.data.pagination)
                 }
             )
         }
 
-    }, [isGalleryItemsLoaded])
+    }, [currentPage])
 
     function getDeleteConfirmation(id) {
 
@@ -59,7 +63,7 @@ export default function Gallery() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setIsGalleryItemsLoaded(false)
+                    setPagination(null)
                     setIsDeleteModalOpen(false)
                 }
             )
@@ -111,6 +115,8 @@ export default function Gallery() {
                     </AdminTableBody>
                 </AdminTable>
             </div>
+
+            <Pagination base="/admin/gallery" paginateData={pagination} />
 
             {
                 isDeleteModalOpen && (
