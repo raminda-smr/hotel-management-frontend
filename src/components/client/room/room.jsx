@@ -1,4 +1,4 @@
-import { useContext,  useState } from "react"
+import { useContext, useState } from "react"
 import UserContext from "../../../context/userContext"
 import { CiShoppingCart } from "react-icons/ci"
 
@@ -9,6 +9,8 @@ export default function Room(props) {
     const room = props.room
     let addButton = ""
     let myCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const description = room.description || room.category.description
 
 
     function truncateText(text, maxLength) {
@@ -32,29 +34,29 @@ export default function Room(props) {
         props.setCartChanged(props.cartChanged + 1)
     }
 
+    function openPageInNewTab(roomNumber){
+        window.open("/rooms/" + roomNumber, "_blank");
+    };
 
 
-    if (user && 
-        user.type == "customer" && 
+
+    if (user &&
+        user.type == "customer" &&
         (myCart.findIndex(cartRoom => cartRoom.roomNumber == room.roomNumber) === -1)
     ) {
         addButton = (
-            <div className="flex justify-end">
-                <button className="bg-blue-500 text-white px-4 py-2 flex items-center rounded hover:bg-amber-500" onClick={(e) => { toggleCart(room) }}>
-                    <CiShoppingCart className="text-2xl mr-1" />
-                    <span>Add to cart</span>
-                </button>
-            </div>
+            <button className="bg-blue-500 text-white px-4 py-1 ml-1 flex items-center rounded hover:bg-amber-500" onClick={(e) => { toggleCart(room) }}>
+                <CiShoppingCart className="text-2xl mr-1" />
+                <span>Add to cart</span>
+            </button>
         )
     }
     else if (user && user.type == "customer") {
         addButton = (
-            <div className="flex justify-end">
-                <button className="bg-amber-500 text-white px-4 py-2 flex items-center rounded hover:bg-sky-500" onClick={(e) => { toggleCart(room) }}>
-                    <CiShoppingCart className="text-2xl mr-1" />
-                    <span>Remove from cart</span>
-                </button>
-            </div>
+            <button className="bg-amber-500 text-white px-4 py-1 ml-1 flex items-center rounded hover:bg-sky-500" onClick={(e) => { toggleCart(room) }}>
+                <CiShoppingCart className="text-2xl mr-1" />
+                <span>Remove from cart</span>
+            </button>
         )
     }
 
@@ -84,13 +86,18 @@ export default function Room(props) {
                     </div>
                 </div>
 
-                <p className="text-sm mt-2 pt-2 border-t border-gray-300 text-gray-500">{truncateText(room.category.description, 100)}</p>
+                <p className="text-sm mt-2 pt-2 border-t border-gray-300 text-gray-500">Max Guests: {room.maxGuests}</p>
+                <p className="text-sm mt-2 text-gray-500">{truncateText(description, 100)}</p>
 
                 <p>
                     {room.category.features.map((feature, index) => (<span key={index} className="bg-gray-300 inline-block mr-1 mb-1 px-2 py-1 text-xs text-gray-500 rounded">{feature}</span>))}
                 </p>
 
-                {addButton}
+                <div className="flex justify-end">
+                    <div className="view bg-blue-500 text-white px-4 py-1 flex items-center rounded hover:bg-amber-500" onClick={(e)=>{openPageInNewTab(room.roomNumber)}}>View</div>
+                    {addButton}
+                </div>
+
 
             </div>
         </div>

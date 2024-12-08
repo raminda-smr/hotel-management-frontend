@@ -33,11 +33,11 @@ export default function Footer() {
                 <div>
                     <h2 className="text-xl font-medium mb-4">Quick Links</h2>
                     <ul className="space-y-2 font-medium">
-                        <li><Link to="#" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> Home</Link></li>
-                        <li><Link to="#" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> About Us</Link></li>
-                        <li><Link to="#" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> Services</Link></li>
-                        <li><Link to="#" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> Contact</Link></li>
-                        <li><Link to="#" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> FAQs</Link></li>
+                        <li><Link to="/" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> Home</Link></li>
+                        <li><Link to="/about-us" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> About Us</Link></li>
+                        <li><Link to="/gallery" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> Gallery</Link></li>
+                        <li><Link to="/contact-us" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> Contact</Link></li>
+                        <li><Link to="/feedbacks" className="text-gray-400 flex items-center hover:text-white"><FaChevronRight className="text-sm mr-2" /> Feedbacks</Link></li>
                     </ul>
                 </div>
 

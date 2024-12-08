@@ -1,8 +1,47 @@
 import { Link } from 'react-router-dom'
 import PageWrapper from '../../../components/client/page-wrapper/pageWrapper'
 import { CiBookmark, CiLocationOn, CiMail, CiPaperplane, CiPhone, CiUser } from 'react-icons/ci'
+import { useState } from 'react';
+import axios from 'axios';
 
 function ContactUs() {
+
+    const [formData, setFormData] = useState({ name: '', subject: '', email: '', phone: '', message: '', })
+    const [isLoading, setIsLoading] = useState(false)
+    const [successMessage, setSuccessMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+    };
+
+
+    function handleSubmit(e) {
+        e.preventDefault()
+
+        if (isLoading) {
+            return
+        }
+
+        setIsLoading(true)
+        setSuccessMessage('')
+        setErrorMessage('')
+
+        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/public/send-contact', formData)
+            .then((response) => {
+                setSuccessMessage('Your message has been sent successfully!')
+                setFormData({ name: '', subject: '', email: '', phone: '', message: '', })
+            })
+            .catch((error) => {
+                setErrorMessage(
+                    error.response?.data?.message || 'Failed to send the message. Please try again.'
+                )
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }
 
     return (
         <>
@@ -57,36 +96,49 @@ function ContactUs() {
                         <h2 className='text-3xl text-slate-500'>Send Your Message</h2>
                         <p className='text-slate-400 mb-5'>Connect, Communicate, Inspire.</p>
 
-                        <form action="" className='flex flex-col '>
+                        {successMessage && (
+                            <p className="text-green-600 text-sm mb-3">{successMessage}</p>
+                        )}
+                        {errorMessage && (
+                            <p className="text-red-600 text-sm mb-3">{errorMessage}</p>
+                        )}
+
+
+                        <form action="" className='flex flex-col ' onSubmit={(e)=>{handleSubmit(e)}}>
 
                             <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
                                 <CiUser className='text-2xl mx-3 text-gray-500 ' />
-                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="text" name="name" placeholder='Name' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="text" name="name" placeholder='Name' required value={formData.name} onChange={handleInputChange} />
                             </div>
 
                             <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
                                 <CiBookmark className='text-2xl mx-3 text-gray-500 ' />
-                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="text" name="subject" placeholder='Subject' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="text" name="subject" placeholder='Subject' required value={formData.subject} onChange={handleInputChange} />
                             </div>
 
                             <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
                                 <CiMail className='text-2xl mx-3 text-gray-500 ' />
-                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="email" name="email" placeholder='Email' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="email" name="email" placeholder='Email' required value={formData.email} onChange={handleInputChange} />
                             </div>
 
                             <div className="form-control flex items-center bg-gray-200 border border-gray-300 rounded-lg overflow-hidden mb-2 ">
                                 <CiPhone className='text-2xl mx-3 text-gray-500 ' />
-                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="telephone" name="phone" placeholder='Phone' />
+                                <input className='w-full px-4 py-3 outline-none focus-visible::outline-none ' type="telephone" name="phone" placeholder='Phone' value={formData.phone} onChange={handleInputChange} />
                             </div>
-                            
-                            <textarea className='border border-gray-300 mb-2 px-4 py-3 rounded-lg' name="message" id="" placeholder='Message' rows={5}></textarea>
 
-                            <button className='bg-blue-600 text-white px-4 py-2 flex items-center mr-0 ml-auto rounded hover:bg-blue-500'>
+                            <textarea className='border border-gray-300 mb-2 px-4 py-3 rounded-lg' name="message" id="" placeholder='Message' required rows={5} value={formData.message} onChange={handleInputChange} ></textarea>
+
+                            <button type='submit' className='bg-blue-600 text-white px-4 py-2 flex items-center mr-0 ml-auto rounded hover:bg-blue-500' disabled={isLoading}>
                                 <CiPaperplane className='text-2xl mr-1 -rotate-45 ' />
-                                Send Now
+                                {isLoading ? 'Sending...' : 'Send Now'}
                             </button>
                         </form>
 
+                    </div>
+
+                    <div className="message text-white">
+                        <h2 className="text-2xl">Get in Touch</h2>
+                        <p>We'd love to hear from you! Whether you have a question, feedback, or just want to say hello, feel free to reach out to us. Fill out the form below, and we’ll get back to you as soon as possible.</p>
                     </div>
 
 
