@@ -15,6 +15,7 @@ import VerifyEmail from "./verify/verifyEmail";
 import PasswordReset from "./password-reset/passwordReset";
 import SetNewPassword from "./set-new-password/setNewPassword";
 import RoomSearch from "./room-search/roomSearch";
+import Feedbacks from "./feedbacks/feedbacks";
 
 
 
@@ -33,6 +34,7 @@ export default function HomePage() {
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/feedbacks" element={<Feedbacks />} />
                 <Route path="/verify/:token" element={<VerifyEmail />} />
                 <Route path="/password-reset" element={<PasswordReset />} />
                 <Route path="/set-new-password/:token" element={<SetNewPassword />} />
