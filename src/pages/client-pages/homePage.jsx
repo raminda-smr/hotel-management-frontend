@@ -16,6 +16,7 @@ import PasswordReset from "./password-reset/passwordReset";
 import SetNewPassword from "./set-new-password/setNewPassword";
 import RoomSearch from "./room-search/roomSearch";
 import Feedbacks from "./feedbacks/feedbacks";
+import Room from "./rooms/room";
 
 
 
@@ -31,6 +32,7 @@ export default function HomePage() {
                 <Route path="/" element={<IndexPage />} />
                 <Route path="/room-search" element={<RoomSearch />} />
                 <Route path="/rooms" element={<SearchRooms />} />
+                <Route path="/rooms/:id" element={<Room />} />
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact-us" element={<ContactUs />} />
