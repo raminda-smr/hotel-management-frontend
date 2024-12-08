@@ -164,7 +164,7 @@ export default function EditProfile() {
 
                     <Input name="phone" required="required" value={customer.phone} label="Phone" onChange={handleChange} ></Input>
 
-                    <Input name="phone" required="required" value={customer.whatsapp} label="Whatsapp" onChange={handleChange} ></Input>
+                    <Input name="whatsapp" required="required" value={customer.whatsapp} label="Whatsapp" onChange={handleChange} ></Input>
                     
                 </div>
 

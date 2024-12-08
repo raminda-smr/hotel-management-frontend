@@ -41,7 +41,7 @@ export default function Profile() {
 
     return (
         <>
-             <PageHeader to="/admin/users" name="Profile" title="View Profile" />
+            <PageHeader to="/admin/users" name="User" title="View Profile" />
 
             <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
                 <div className="flex items-center space-x-4">
