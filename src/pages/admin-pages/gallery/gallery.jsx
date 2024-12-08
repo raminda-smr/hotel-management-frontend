@@ -19,6 +19,7 @@ export default function Gallery() {
     const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+    const [listUpdated, setListUpdated] = useState(0)
 
     const navigate = useNavigate()
 
@@ -41,7 +42,7 @@ export default function Gallery() {
             )
         }
 
-    }, [currentPage])
+    }, [currentPage,listUpdated])
 
     function getDeleteConfirmation(id) {
 
@@ -63,7 +64,7 @@ export default function Gallery() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setPagination(null)
+                    setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
                 }
             )

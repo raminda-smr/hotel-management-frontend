@@ -19,6 +19,7 @@ function Categories() {
     const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+    const [listUpdated, setListUpdated] = useState(0)
 
     const navigate = useNavigate()
 
@@ -67,7 +68,7 @@ function Categories() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setPagination(null)
+                    setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
                     toast.success("Category deleted successfully!")
                 }

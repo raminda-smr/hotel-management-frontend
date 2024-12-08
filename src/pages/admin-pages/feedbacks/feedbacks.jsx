@@ -17,6 +17,7 @@ export default function Feedbacks() {
     const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+    const [listUpdated, setListUpdated] = useState(0)
 
     const tableFields = ['Username', 'Email', 'Title', 'Rating', 'Created at', 'Approved', 'Actions']
 
@@ -74,7 +75,7 @@ export default function Feedbacks() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setPagination(null)
+                    setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
                 }
             )

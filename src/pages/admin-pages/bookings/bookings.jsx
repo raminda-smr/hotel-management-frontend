@@ -19,6 +19,7 @@ export default function Bookings() {
     const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+    const [listUpdated, setListUpdated] = useState(0)
     
     const tableFields = ['Booking ID', 'Room ID', 'Email', 'Phone', 'Status', 'Start Date', 'End Date', 'Actions']
 
@@ -66,7 +67,7 @@ export default function Bookings() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setPagination(null)
+                    setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
                     toast.success('Booking deleted successfully')
                 }
