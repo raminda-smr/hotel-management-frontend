@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { FaEdit, FaPlus, FaRegTrashAlt, FaUnlockAlt } from "react-icons/fa"
 import PageHeader from "../../../components/admin/page-header/pageHeader"
 import AdminTable from "../../../components/admin/admin-table/adminTable"
@@ -10,39 +10,42 @@ import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
+import toast from "react-hot-toast"
+import Pagination from "../../../components/common/pagination/pagination"
 
 export default function Users() {
 
     const navigate = useNavigate()
 
     const [users, setUsers] = useState([])
-    const [isUsersLoaded, setIsUsersLoaded] = useState(false)
-
+    const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+    const [listUpdated, setListUpdated] = useState(0)
 
     const tableFields = ['Image', 'Email', 'User Type', 'Whatsapp', 'Phone', 'Disabled', 'Email Verified', 'Actions']
+
+    const [searchParams] = useSearchParams()
+    const currentPage = parseInt(searchParams.get("page") || "1")
 
     useEffect(() => {
         // read users
         const token = localStorage.getItem('token')
 
-        if (token != null && !isUsersLoaded) {
-            // console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users', {
+        if (token) {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users?page=' + currentPage, {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
                 }
             }).then(
                 (res) => {
-
                     setUsers(res.data.list)
-                    setIsUsersLoaded(true)
+                    setPagination(res.data.pagination)
                 }
             )
         }
-    }, [isUsersLoaded])
+    }, [currentPage, listUpdated])
 
 
     function getDeleteConfirmation(email) {
@@ -66,8 +69,9 @@ export default function Users() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setIsUsersLoaded(false)
+                    setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
+                    toast.success('User deleted successfully')
                 }
             )
         }
@@ -88,48 +92,48 @@ export default function Users() {
             <div className="user-data p-4">
                 <AdminTable data={users} tableFields={tableFields}>
                     <AdminTableBody>
-                        {
-                            users.map(
-                                (user, index) => {
-                                    return (
-                                        <AdminTableRow key={index}>
-                                            <AdminTableTD>
-                                                <img src={user.img !="" ? user.img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} className="w-[50px]" alt="User" />
-                                            </AdminTableTD>
-                                            <AdminTableTD>
-                                                <p>{user.firstName} {user.lastName}</p>
-                                                {user.email}
-                                            </AdminTableTD>
-                                            <AdminTableTD>{user.type}</AdminTableTD>
-                                            <AdminTableTD>{user.whatsapp}</AdminTableTD>
-                                            <AdminTableTD>{user.phone}</AdminTableTD>
-                                            <AdminTableTD>{user.disabled ? "Yes" : "No"}</AdminTableTD>
-                                            <AdminTableTD>{user.emailVerified ? "Yes" : "No"}</AdminTableTD>
+                        {users.map(
+                            (user, index) => {
+                                return (
+                                    <AdminTableRow key={index}>
+                                        <AdminTableTD>
+                                            <img src={user.img != "" ? user.img : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} className="w-[50px]" alt="User" />
+                                        </AdminTableTD>
+                                        <AdminTableTD>
+                                            <p>{user.firstName} {user.lastName}</p>
+                                            {user.email}
+                                        </AdminTableTD>
+                                        <AdminTableTD>{user.type}</AdminTableTD>
+                                        <AdminTableTD>{user.whatsapp}</AdminTableTD>
+                                        <AdminTableTD>{user.phone}</AdminTableTD>
+                                        <AdminTableTD>{user.disabled ? "Yes" : "No"}</AdminTableTD>
+                                        <AdminTableTD>{user.emailVerified ? "Yes" : "No"}</AdminTableTD>
 
-                                            <AdminTableTD>
-                                                <div className="flex items-center">
-                                                
+                                        <AdminTableTD>
+                                            <div className="flex items-center">
 
-                                                    <Link to="/admin/users/update" state={user} className="inline-block text-gray-500 rounded-full text-lg hover:text-green-600">
-                                                        <FaEdit />
-                                                    </Link>
 
-                                                    <Link to="/admin/users/change-password" state={user} className="inline-block text-gray-500 rounded-full text-lg  ml-3 hover:text-green-600">
-                                                        <FaUnlockAlt />
-                                                    </Link>
+                                                <Link to="/admin/users/update" state={user} className="inline-block text-gray-500 rounded-full text-lg hover:text-green-600">
+                                                    <FaEdit />
+                                                </Link>
 
-                                                    <button className="text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(user.email) }}><FaRegTrashAlt /></button>
-                                                </div>
-                                            </AdminTableTD>
-                                        </AdminTableRow>
-                                    )
-                                }
-                            )
-                        }
+                                                <Link to="/admin/users/change-password" state={user} className="inline-block text-gray-500 rounded-full text-lg  ml-3 hover:text-green-600">
+                                                    <FaUnlockAlt />
+                                                </Link>
+
+                                                <button className="text-gray-500 text-lg ml-3 hover:text-red-600" onClick={() => { getDeleteConfirmation(user.email) }}><FaRegTrashAlt /></button>
+                                            </div>
+                                        </AdminTableTD>
+                                    </AdminTableRow>
+                                )
+                            }
+                        )}
 
                     </AdminTableBody>
                 </AdminTable>
             </div>
+
+            <Pagination base="/admin/users" paginateData={pagination} />
 
             {
                 isDeleteModalOpen && (

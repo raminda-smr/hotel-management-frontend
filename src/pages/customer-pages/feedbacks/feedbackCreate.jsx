@@ -1,29 +1,18 @@
 import axios from "axios"
 import toast from "react-hot-toast"
-import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
-import { MdOutlineArrowBack } from "react-icons/md"
-import PageHeader from "../../../components/admin/page-header/pageHeader"
-import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Input from "../../../components/common/input/input"
 import Textarea from "../../../components/common/textarea/textarea"
-import CheckBox from "../../../components/common/checkbox/checkbox"
+import UserContext from "../../../context/userContext"
 import Select from "../../../components/common/select/select"
 
 
-export default function FeedbackUpdate(props) {
+export default function FeedbackCreate(props) {
 
     const token = localStorage.getItem("token")
-    if (token == null) {
-        window.location.href = "/login"
-    }
-
-    const location = useLocation()
     const navigate = useNavigate()
-
-    if (location.state == null) {
-        window.location.href = "/admin/feedbacks"
-    }
+    const {user} = useContext(UserContext)
 
     const ratingData = [
         {"value": "1", "label": "1 Star"},
@@ -33,14 +22,7 @@ export default function FeedbackUpdate(props) {
         {"value": "5", "label": "5 Stars"},
     ] 
 
-    const initialFeedback = {
-        email: location.state.email,
-        username: location.state.username,
-        title: location.state.title,
-        description: location.state.description,
-        date: location.state.date.split("T")[0],
-        approved: location.state.approved
-    }
+    const initialFeedback = { email: user.email , rating: 5 , title: '', description: '' }
 
     const [feedback, setFeedback] = useState(initialFeedback)
     const [isLoading, setIsLoading] = useState(false);
@@ -51,27 +33,10 @@ export default function FeedbackUpdate(props) {
         setFeedback((prevData) => ({ ...prevData, [name]: value }))
     }
 
-    function handleCheckChange(e) {
-        const { name, checked } = e.target;
-        setFeedback((prevData) => ({
-            ...prevData,
-            [name]: checked
-        }));
-    }
-
-    // send back
-    function goBack() {
-        navigate("/admin/feedbacks")
-    }
 
     function updateFeedback() {
 
-        // prevent changing feedback date, username, email
-        setFeedback(feedback["date"] = initialFeedback.date)
-        setFeedback(feedback["username"] = initialFeedback.username)
-        setFeedback(feedback["email"] = initialFeedback.email)
-
-        axios.put(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks/' + location.state._id, feedback, {
+        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/feedbacks/' , feedback, {
             headers: {
                 "Authorization": 'Bearer ' + token,
                 "Content-Type": "application/json"
@@ -79,7 +44,7 @@ export default function FeedbackUpdate(props) {
         }).then(
             (res) => {
                 toast.success('Feedback successfully updated!')
-                goBack()
+                navigate("/customer/feedbacks")
             }
         ).catch(
             (error) => {
@@ -107,22 +72,23 @@ export default function FeedbackUpdate(props) {
 
     return (
         <>
-            <PageHeader to="/admin/feedbacks" name="Feedbacks" title="Update feedback" >
-                <PageHeaderButton onClick={goBack}>
-                    <MdOutlineArrowBack className='text-2xl ' />
-                    <span className='text-base pr-2'>Back</span>
-                </PageHeaderButton>
-            </PageHeader>
+            <header className="mb-6">
+                <h1 className="text-3xl font-bold text-gray-600">
+                    Create a Feedback
+                </h1>
+                <p className="text-gray-600">
+                    Explain your experience
+                </p>
+            </header>
+
 
             <div className="form-container flex justify-center mt-8">
                 <form onSubmit={handleSubmit} className="bg-white min-w-[450px] shadow-md p-5 rounded-md border-t-4 border-blue-500" action="">
 
-                    <h3 className="text-lg font-medium mb-3">Update Feedback</h3>
+                    <h3 className="text-lg font-medium mb-3">Create Feedback</h3>
 
                     <Input name="email" required="required" value={feedback.email} label="Email*" onChange={handleChange} disabled />
                    
-                    <Input name="username" required="required" value={feedback.username} label="Username*" onChange={handleChange} disabled />
-
                     <Select name="rating" required="required" label="Rating*" value={feedback.rating} onChange={handleChange} >
                         {ratingData.map((item, index) =>
                             <option key={index} value={item.value} >{item.label}</option>
@@ -133,16 +99,12 @@ export default function FeedbackUpdate(props) {
 
                     <Textarea name="description" required="required" value={feedback.description} label="Description*" onChange={handleChange} ></Textarea>
 
-                    <Input name="date" type="date" value={feedback.date} onChange={handleChange} label="Created at" disabled />
-
-                    <CheckBox name="approved" label="Approved" onChange={handleCheckChange} checked={feedback.approved} help="Only approved feedback will show on frontend" />
-
                     <button type="submit" className="w-full bg-blue-500 text-white rounded-md font-medium px-4 py-2 mt-2 flex justify-center hover:bg-blue-600" >
                         {
                             isLoading ?
                                 (<div className="border-2 border-t-white w-[20px] h-[20px] rounded-full animate-spin"></div>)
                                 :
-                                (<span> Update Feedback</span>)
+                                (<span> Create Feedback</span>)
                         }
                     </button>
                 </form>

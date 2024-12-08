@@ -1,16 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../../../context/userContext";
 import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AdminTable from "../../../components/admin/admin-table/adminTable";
 import AdminTableBody from "../../../components/admin/admin-table/adminTableBody";
 import AdminTableRow from "../../../components/admin/admin-table/adminTableRow";
 import AdminTableTD from "../../../components/admin/admin-table/adminTableTD";
 import { FaRegEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
-export default function Dashboard() {
-    
-    const {user} = useContext(UserContext)
+export default function BookingAccepted() {
 
     const [bookings, setBooking] = useState(null)
     const tableFields = ['Booking ID', 'Room ID', 'Status', 'Start Date', 'End Date', 'Actions']
@@ -43,21 +40,22 @@ export default function Dashboard() {
         }
     }, [])
 
+    if (bookings == null) {
+        return <div>Loading...</div>
+    }
+
     return (
         <>
             <header className="mb-6">
-                <h4 className="text-lg text-gray-400">Hi, {user.firstName}</h4>
                 <h1 className="text-3xl font-bold text-gray-600">
-                    Welcome to Your Dashboard
+                    Accepted Bookings
                 </h1>
                 <p className="text-gray-600">
-                    Here is an overview of your account and activities.
+                    Your approved or paid booking requests
                 </p>
             </header>
-
-            <section className="bg-white p-6 rounded shadow">
-                <h2 className="text-xl font-semibold mb-4">Accepted bookings</h2>
-                { bookings != null && bookings.length > 0 ? (
+            <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+                {bookings.length > 0 ? (
                     <AdminTable data={bookings} tableFields={tableFields}>
                         <AdminTableBody>
                             {
@@ -94,7 +92,8 @@ export default function Dashboard() {
                 ) : (
                     <span className="text-gray-500"> 0 bookings found!</span>
                 )}
-            </section>
+            </div>
+
 
         </>
     )
