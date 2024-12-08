@@ -8,6 +8,7 @@ import PageHeaderButton from "../../../components/admin/page-header/pageHeaderBu
 import Input from "../../../components/common/input/input"
 import Textarea from "../../../components/common/textarea/textarea"
 import CheckBox from "../../../components/common/checkbox/checkbox"
+import Select from "../../../components/common/select/select"
 
 
 export default function FeedbackUpdate(props) {
@@ -24,6 +25,13 @@ export default function FeedbackUpdate(props) {
         window.location.href = "/admin/feedbacks"
     }
 
+    const ratingData = [
+        {"value": "1", "label": "1 Star"},
+        {"value": "2", "label": "2 Stars"},
+        {"value": "3", "label": "3 Stars"},
+        {"value": "4", "label": "4 Stars"},
+        {"value": "5", "label": "5 Stars"},
+    ] 
 
     const initialFeedback = {
         email: location.state.email,
@@ -114,6 +122,12 @@ export default function FeedbackUpdate(props) {
                     <Input name="email" required="required" value={feedback.email} label="Email*" onChange={handleChange} disabled />
                    
                     <Input name="username" required="required" value={feedback.username} label="Username*" onChange={handleChange} disabled />
+
+                    <Select name="rating" required="required" label="Rating*" value={feedback.rating} onChange={handleChange} >
+                        {ratingData.map((item, index) =>
+                            <option key={index} value={item.value} >{item.label}</option>
+                        )}
+                    </Select>
 
                     <Input name="title" required="required" value={feedback.title} label="Title*" onChange={handleChange} />
 

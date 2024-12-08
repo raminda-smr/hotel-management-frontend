@@ -6,6 +6,7 @@ import uploadMedia from "../../../utils/mediaUpload";
 import { getDownloadURL } from "firebase/storage";
 import toast from "react-hot-toast";
 import UserContext from "../../../context/userContext"
+import PageHeader from "../../../components/admin/page-header/pageHeader";
 
 export default function EditProfile() {
 
@@ -128,14 +129,7 @@ export default function EditProfile() {
 
     return (
         <>
-            <header className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-600">
-                    Edit Your Profile
-                </h1>
-                <p className="text-gray-600">
-                    Update your profile details
-                </p>
-            </header>
+            <PageHeader to="/admin/users" name="User" title="Edit Your Profile" />
 
             <form className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg" onSubmit={(e) => handleSubmit(e)}>
                 <div className="flex items-center space-x-4 w-full">

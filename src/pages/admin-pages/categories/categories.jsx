@@ -8,42 +8,44 @@ import AdminTableTD from "../../../components/admin/admin-table/adminTableTD"
 import Modal from "../../../components/common/modal/modal"
 import ModalButton from "../../../components/common/modal/modalButton"
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import toast from "react-hot-toast"
 import { FaEdit, FaPlus, FaRegTrashAlt } from "react-icons/fa"
+import Pagination from "../../../components/common/pagination/pagination"
 
 function Categories() {
 
     const [categories, setCategories] = useState([])
-    const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false)
-
+    const [pagination, setPagination] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState("")
+    const [listUpdated, setListUpdated] = useState(0)
 
     const navigate = useNavigate()
 
     const tableFields = ['Image', 'Name', 'Price', 'Description', 'Action']
+    
+    const [searchParams] = useSearchParams()
+    const currentPage = parseInt(searchParams.get("page") || "1")
 
     useEffect(() => {
         // read categories
         const token = localStorage.getItem('token')
 
-        if (token != null && !isCategoriesLoaded) {
-            // console.log("started")
-            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories', {
+        if (token) {
+            axios.get(import.meta.env.VITE_BACKEND_URL + '/api/categories?page='+ currentPage, {
                 headers: {
                     "Authorization": 'Bearer ' + token,
                     "Content-Type": "application/json"
                 }
             }).then(
                 (cats) => {
-                    // console.log(cats)
                     setCategories(cats.data.list)
-                    setIsCategoriesLoaded(true)
+                    setPagination(cats.data.pagination)
                 }
             )
         }
-    }, [isCategoriesLoaded])
+    }, [currentPage])
 
     function getDeleteConfirmation(name) {
 
@@ -66,7 +68,7 @@ function Categories() {
             }).then(
                 (res) => {
                     setSelectedItem("")
-                    setIsCategoriesLoaded(false)
+                    setListUpdated(listUpdated + 1)
                     setIsDeleteModalOpen(false)
                     toast.success("Category deleted successfully!")
                 }
@@ -126,6 +128,8 @@ function Categories() {
                     </AdminTableBody>
                 </AdminTable>
             </div>
+
+            <Pagination base="/admin/categories" paginateData={pagination} />
 
             {
 

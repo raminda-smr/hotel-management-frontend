@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MdOutlineArrowBack } from "react-icons/md";
-import { FaRegEnvelope, FaRegUser} from "react-icons/fa";
+import { FaRegEnvelope, FaRegUser, FaStar} from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import PageHeader from "../../../components/admin/page-header/pageHeader";
 import PageHeaderButton from "../../../components/admin/page-header/pageHeaderButton";
@@ -46,6 +46,16 @@ export default function FeedbackView() {
         navigate("/admin/feedbacks")
     }
 
+    function renderStars(rating) {
+        const stars = []
+        for (let i = 1; i <= 5; i++) {
+            stars.push(
+                <FaStar key={i} className={`mr-1 text-amber-400 ${i <= rating ? 'text-yellow-400' : 'text-gray-300'}`} />
+            );
+        }
+        return stars
+    }
+
 
     return (
         <>
@@ -65,6 +75,11 @@ export default function FeedbackView() {
 
 
                         <h4 className="text-lg text-gray-700 text-center pb-2 mb-3 border-b border-gray-300">{feedback.title}</h4>
+                        
+                        <div className="flex justify-center mb-3">
+                            {renderStars(feedback.rating)}
+                        </div>
+                        
                         <p className="flex items-center text-sm mb-1">
                             <span className=" bg-teal-800 text-white px-3 py-1 rounded-l-md"><FaRegUser className="inline-block" /></span>
                             <span className="bg-teal-700 text-white py-1 px-3 rounded-r-md">{feedback.username}</span>
